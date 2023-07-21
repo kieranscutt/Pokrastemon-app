@@ -3,7 +3,7 @@ DROP TABLE IF EXISTS users, pokemon, users_pokemon;
 CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
     username VARCHAR NOT NULL,
-    hashed_password VARCHAR NOT NULL,
+    password VARCHAR NOT NULL,
     profile_image_url VARCHAR,
     keys INT,
     -- pomodoro settings

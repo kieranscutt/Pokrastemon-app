@@ -2,8 +2,8 @@ DROP TABLE IF EXISTS users, pokemon, users_pokemon, tokens;
 
 CREATE TABLE users (
     user_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    username VARCHAR NOT NULL,
-    password VARCHAR NOT NULL,
+    username VARCHAR(15) NOT NULL,
+    password VARCHAR(60) NOT NULL,
     profile_image_url VARCHAR,
     keys INT,
     -- pomodoro settings
@@ -18,7 +18,8 @@ CREATE TABLE pokemon (
     pokemon_name VARCHAR,
     front_image_url VARCHAR,
     back_image_url VARCHAR,
-    powers VARCHAR,
+    type VARCHAR,
+    moves VARCHAR,
     egg_image_url VARCHAR,
     keysNeeded INT
 );

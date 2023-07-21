@@ -6,7 +6,7 @@ async function authenticator(req, res, next) {
         if (userToken == "null") {
             throw new Error("User not authenticated.");
         } else {
-            const validToken = await Token.getOneByToken
+            req.tokenObj = await Token.getOneByToken(userToken)
             next();
         }
     } catch (error) {

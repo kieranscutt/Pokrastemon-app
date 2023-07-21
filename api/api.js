@@ -9,4 +9,8 @@ api.use(cors());
 api.use(express.json());
 api.use(logRoutes);
 
+api.get('/', (req,res) => {
+    res.status(200).send("Welcome to the Prokastimon App")
+})
+
 module.exports = api;

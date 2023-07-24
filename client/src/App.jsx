@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import PageWrapper from './components/PageWrapper';
-import { HomePage, LibraryPage, ProfilePage, StudyPage, LoginPage, RegisterPage } from './pages';import './App.css'
+import { HomePage, LibraryPage, ProfilePage, StudyPage, LoginPage, RegisterPage } from './pages';
 
 const App = () => {
   return <>

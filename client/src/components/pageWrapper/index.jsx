@@ -6,7 +6,7 @@ const PageWrapper = ({ children }) => {
     <div>
       {/* Add common elements here, such as header, navigation, etc. */}
       <header>
-        <h1>My App</h1>
+        <h1>Pokrastemon Adventures</h1>
       </header>
       <nav>
         {/* Add navigation links here */}

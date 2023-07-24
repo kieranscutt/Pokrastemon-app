@@ -33,11 +33,24 @@ class UserController {
     static async getUserById(req,res) {
         try {
             const user_id = req.tokenObj.user_id
+            // let user_id = 1
             const user = await User.getOneById(user_id)
             delete user.password
             res.status(200).send(user)
         } catch (err) {
             res.status(404).json({Error: err.message})
+        }
+    }
+
+    static async addKey(req,res) {
+        try{
+            const user_id = req.tokenObj.user_id
+            // let user_id = 1
+            const resp = await User.addKey(user_id)
+            res.status(200).send(resp)
+        } catch (err) {
+            console.log(err)
+            res.status(500).json({Error: err.message})
         }
     }
 }

@@ -35,6 +35,17 @@ class User {
         const newUser = await User.getOneById(id)
         return newUser
     }
+
+    static async addKey(id) {
+        let currentKeys = await db.query("SELECT keys FROM users WHERE user_id = $1", [id])
+        currentKeys = currentKeys.rows[0].keys
+        // let newKeys = currentKeys<4 ? currentKeys+1 : 0
+        let newKeys = currentKeys+1
+        await db.query("UPDATE users SET keys = $1 WHERE user_id = $2", [newKeys,id])
+    
+        const updatedUser = await User.getOneById(id)
+        return updatedUser
+    }
 }
 
 module.exports = User

@@ -35,12 +35,13 @@ describe("User route", () => {
     let short_break_mins = ""
     let long_break_mins = ""
 
+    const newUser = {
+        username: "test",
+        password: "test"
+    }
+
     //Register
     it("Should create a new user", async () => {
-        const newUser = {
-            username: "test",
-            password: "test"
-        }
         const response = await request(app)
             .post("/users/register")
             .send(newUser)
@@ -51,6 +52,18 @@ describe("User route", () => {
         const samePassword = await bcrypt.compare(newUser.password, password)
         expect(samePassword).toEqual(true)
     })
+
+    //Register repeat user
+    it("Should give an error if user tries to register again with the same details", async () => {
+        const response = await request(app)
+        .post("/users/register")
+        .send(newUser)
+        .expect(500);
+    
+        let { Error } = response.body;
+    
+        expect(Error).toBe(`duplicate key value violates unique constraint \"users_username_key\"`);
+      });
 
     //LOGIN
     it("should login the user", async () => {
@@ -77,6 +90,54 @@ describe("User route", () => {
         expect(response.body.username).toBe(username)
     })
 
+    //Keys
+    //Add a key
+    it("should add a key", async() => {
+        const response = await request(app)
+            .patch(`/users/keys`)
+            .set({"Authorization": token})
+            .expect(200)
+        
+        expect(response.body.keys).toBeGreaterThan(0)
+    })
+
+    //Subtract a key?
+
+    //pomodoro
+    //get
+    it("should get pomodoro settings", async () => {
+        const response = await request(app)
+            .get('/users/pomodoro')
+            .set({"Authorization": token})
+            .expect(200)
+        expect(response.body.block_mins).toBe(20)
+        expect(response.body.block_num).toBe(4)
+        expect(response.body.short_break_mins).toBe(5)
+        expect(response.body.long_break_mins).toBe(20)
+    })
+
+    //update
+    it("should update pomodoro settings", async () => {
+        const settings = {
+            block_mins: 15,
+            block_num: 5,
+            short_break_mins:4,
+            long_break_mins:25
+        }
+        const response = await request(app)
+            .patch(`/users/pomodoro`)
+            .set({"Authorization": token})
+            .send(settings)
+            .expect(200)
+            expect(response.body.block_mins).toBe(settings.block_mins)
+            expect(response.body.block_num).toBe(settings.block_num)
+            expect(response.body.short_break_mins).toBe(settings.short_break_mins)
+            expect(response.body.long_break_mins).toBe(settings.long_break_mins)
+    })
+
+    
 })
+
+
 
 

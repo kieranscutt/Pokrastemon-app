@@ -5,12 +5,12 @@ CREATE TABLE users (
     username VARCHAR(15) UNIQUE NOT NULL,
     password VARCHAR(60) NOT NULL,
     profile_image_url VARCHAR,
-    keys INT,
+    keys INT DEFAULT 0,
     -- pomodoro settings
-    block_num INT,
-    block_mins INT,
-    short_break_mins INT,
-    long_break_mins INT
+    block_num INT DEFAULT 4,
+    block_mins INT DEFAULT 20,
+    short_break_mins INT DEFAULT 5,
+    long_break_mins INT DEFAULT 20
 );
 
 CREATE TABLE pokemon (

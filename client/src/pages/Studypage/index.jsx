@@ -1,10 +1,11 @@
-import React from 'react'
-import {Timer} from '../../components'
+import React from 'react';
 
-export default function index() {
+const StudyPage = () => {
   return (
     <div>
-        <Timer/>
+      <h1>Study Page</h1>
     </div>
-  )
-}
+  );
+};
+
+export default StudyPage;

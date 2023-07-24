@@ -2,7 +2,7 @@ DROP TABLE IF EXISTS users, pokemon, users_pokemon, tokens;
 
 CREATE TABLE users (
     user_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    username VARCHAR(15) NOT NULL,
+    username VARCHAR(15) UNIQUE NOT NULL,
     password VARCHAR(60) NOT NULL,
     profile_image_url VARCHAR,
     keys INT,
@@ -16,6 +16,7 @@ CREATE TABLE users (
 CREATE TABLE pokemon (
     pokemon_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     pokemon_name VARCHAR,
+    pokedex_number INT UNIQUE NOT NULL,
     front_image_url VARCHAR,
     back_image_url VARCHAR,
     type VARCHAR,
@@ -34,4 +35,13 @@ CREATE TABLE tokens (
     token_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     token CHAR(36) NOT NULL,
     user_id INT NOT NULL REFERENCES users(user_id)
-)
+);
+
+INSERT INTO 
+    pokemon (pokemon_name) 
+VALUES 
+    ('pokemon1'),
+    ('pokemon2'),
+    ('pokemon3'),
+    ('pokemon4'),
+    ('pokemon5');

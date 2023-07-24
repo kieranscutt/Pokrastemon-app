@@ -28,7 +28,6 @@ class UserController {
                 data.password,
                 user["password"]
             )
-            console.log(user)
             if(!authenticated) {
                 throw new Error("Wrong username or password")
             } else {
@@ -73,6 +72,17 @@ class UserController {
             res.status(500).json({Error: err.message})
         }
     }
+
+    // static async addPokemon(req,res) {
+    //     try {
+    //         const user_id = req.tokenObj.user_id
+    //         const resp = await User.addPokemon(user_id)
+    //         res.status(200).send(resp)
+    //     } catch (err) {
+    //         console.log(err)
+    //         res.status(500).json({Error: err.message})
+    //     }
+    // }
 
     static async logout(req, res) {
         try {

@@ -59,6 +59,23 @@ class User {
         const updatedUser = await User.getOneById(id)
         return updatedUser
     }
+
+    // static async addPokemon(user_id) {
+    //     const allPokemon = await db.query("SELECT pokemon_id FROM pokemon")
+    //     let pokemonID = allPokemon.rows[Math.floor(Math.random()*5)].pokemon_id
+
+    //     const resp = await db.query("SELECT user_id FROM users_pokemon WHERE pokemon_id = $1",[pokemonID])
+    //     console.log("find: ",resp.rows.find((u) => u==user_id))
+
+    //     if (!resp.rows.find((u) => u==user_id)){
+    //         console.log('new')
+    //         const resp2 = await db.query("INSERT INTO users_pokemon(pokemon_id, user_id) VALUES ($1,$2) RETURNING *",[pokemonID, user_id])
+    //         return resp2.rows[0]
+    //     } else {
+    //         console.log('duplicate')
+    //         pokemonID = allPokemon.rows[Math.floor(Math.random()*5)].pokemon_id
+    //     }
+    // }
 }
 
 module.exports = User

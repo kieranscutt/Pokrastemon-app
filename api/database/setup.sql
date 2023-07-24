@@ -16,6 +16,7 @@ CREATE TABLE users (
 CREATE TABLE pokemon (
     pokemon_id INT NOT NULL PRIMARY KEY,
     pokemon_name VARCHAR,
+    pokedex_number INT UNIQUE NOT NULL,
     front_image_url VARCHAR,
     back_image_url VARCHAR,
     types VARCHAR ARRAY,

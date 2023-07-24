@@ -13,6 +13,24 @@ class User {
         this.short_break_mins = short_break_mins;
     }
 
+    static async getUsers() {
+        const resp = await db.query("SELECT user_id, username, profile_image_url, keys, block_num,block_mins,long_break_mins,short_break_mins FROM users")
+        if (resp.rows.length > 0) {
+            return resp.rows.map((u) => new User(u))
+        } else {
+            return new Error('There are no users')
+        }
+    }
+
+    static async getOneByUsername(username) {
+        const resp = await db.query("SELECT * FROM users WHERE username = $1", [username])
+        if (resp.rows.length == 0 ) {
+            throw new Error ("User with this username does not exist.")
+        } else {
+            return new User(resp.rows[0])
+        }
+    }
+
     static async getOneById(id) {
         const resp = await db.query(
             "SELECT * FROM users WHERE user_id = $1", [id]
@@ -26,10 +44,38 @@ class User {
             `INSERT INTO users (username,password)
             VALUES ($1, $2) RETURNING user_id`,[username,password]
         )
-        const id = resp.rows[0]
+        const id = resp.rows[0].user_id
         const newUser = await User.getOneById(id)
         return newUser
     }
+
+    static async addKey(id) {
+        let currentKeys = await db.query("SELECT keys FROM users WHERE user_id = $1", [id])
+        currentKeys = currentKeys.rows[0].keys
+        // let newKeys = currentKeys<4 ? currentKeys+1 : 0
+        let newKeys = currentKeys+1
+        await db.query("UPDATE users SET keys = $1 WHERE user_id = $2", [newKeys,id])
+    
+        const updatedUser = await User.getOneById(id)
+        return updatedUser
+    }
+
+    // static async addPokemon(user_id) {
+    //     const allPokemon = await db.query("SELECT pokemon_id FROM pokemon")
+    //     let pokemonID = allPokemon.rows[Math.floor(Math.random()*5)].pokemon_id
+
+    //     const resp = await db.query("SELECT user_id FROM users_pokemon WHERE pokemon_id = $1",[pokemonID])
+    //     console.log("find: ",resp.rows.find((u) => u==user_id))
+
+    //     if (!resp.rows.find((u) => u==user_id)){
+    //         console.log('new')
+    //         const resp2 = await db.query("INSERT INTO users_pokemon(pokemon_id, user_id) VALUES ($1,$2) RETURNING *",[pokemonID, user_id])
+    //         return resp2.rows[0]
+    //     } else {
+    //         console.log('duplicate')
+    //         pokemonID = allPokemon.rows[Math.floor(Math.random()*5)].pokemon_id
+    //     }
+    // }
 }
 
 module.exports = User

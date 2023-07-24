@@ -40,7 +40,7 @@ class Token {
         }
     }
 
-    static async deleteToken() {
+    async deleteToken() {
         await db.query("DELETE FROM tokens WHERE token = $1", [this.token])
         return "Token deleted."
     }

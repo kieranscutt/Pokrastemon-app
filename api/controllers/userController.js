@@ -75,14 +75,14 @@ class UserController {
     }
 
     static async logout(req, res) {
-        const tokenObj = req.tokenObj;
         try {
+          const tokenObj = req.tokenObj;
           const response = await tokenObj.deleteToken();
           res.status(202).json({ message: response });
-        } catch (error) {
-          res.status(403).json({ Error: error.message });
+        } catch (err) {
+          res.status(403).json({ Error: err.message });
         }
-      }
+    }
 }
 
 module.exports = UserController

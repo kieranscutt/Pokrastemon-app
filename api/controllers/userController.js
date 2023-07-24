@@ -86,7 +86,8 @@ class UserController {
     static async addPokemon(req,res) {
         try {
             const user_id = req.tokenObj.user_id
-            const resp = await User.addPokemon(user_id)
+            const pokemon_id = req.body.pokemon_id
+            const resp = await User.addPokemon(user_id,pokemon_id)
             res.status(200).send(resp)
         } catch (err) {
             console.log(err)

@@ -1,9 +1,11 @@
-import React from 'react'
+import React from 'react';
 
-export default function index() {
-  return (
-    <div>
-        <h1>Home</h1>
-    </div>
-  )
-}
+const HomePage = () => {
+    return <main>
+        <h1>Pokrastemon Adventures</h1>
+        <p>Welcome to Pokrastemon Adventures, a pokemon themed procasination app!</p>
+        <p>Collect pokemon, eggs and chests during study!</p>
+    </main>
+};
+
+export default HomePage;

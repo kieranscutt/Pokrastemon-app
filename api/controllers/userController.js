@@ -71,6 +71,17 @@ class UserController {
         }
     }
 
+    static async updatePomodoroSettings(req,res) {
+        try {
+            const user_id = req.tokenObj.user_id
+            const settings = req.body
+            const resp = await User.updatePomodoroSettings(user_id,settings)
+            res.status(200).send(resp)
+        } catch (err) {
+            res.status(500).json({Error: err.message})
+        }
+    }
+
     static async addKey(req,res) {
         try{
             const user_id = req.tokenObj.user_id
@@ -88,6 +99,29 @@ class UserController {
             const user_id = req.tokenObj.user_id
             const pokemon_id = req.body.pokemon_id
             const resp = await User.addPokemon(user_id,pokemon_id)
+            res.status(200).send(resp)
+        } catch (err) {
+            console.log(err)
+            res.status(500).json({Error: err.message})
+        }
+    }
+
+    static async getUsersPokemon(req,res) {
+        try{
+            const user_id = req.tokenObj.user_id
+            const resp = await User.getUsersPokemons(user_id)
+            res.status(200).send(resp)
+        } catch (err) {
+            console.log(err)
+            res.status(500).json({Error: err.message})   
+        }
+    }
+
+    static async deletePokemon(req,res) {
+        try{
+            const user_id = req.tokenObj.user_id
+            const pokemon_id = req.body.pokemon_id
+            const resp = await User.deletePokemon(pokemon_id,user_id)
             res.status(200).send(resp)
         } catch (err) {
             console.log(err)

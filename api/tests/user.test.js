@@ -135,7 +135,67 @@ describe("User route", () => {
             expect(response.body.long_break_mins).toBe(settings.long_break_mins)
     })
 
-    
+    //pokemon
+    //Add pokemon
+    it("should add a pokemon to a user", async () => {
+        const id = {
+            pokemon_id: 94
+        }
+        const response = await request(app)
+            .patch(`/users/pokemon`)
+            .set({"Authorization": token})
+            .send(id)
+            .expect(200)
+        expect(response.body.pokemon_id).toBe(id.pokemon_id)  
+    })
+
+    //Display all pokemon
+    it("should display all user pokemon", async () => {
+        const id = {
+            pokemon_id: 149
+        }
+        const addOneMore = await request(app)
+            .patch(`/users/pokemon`)
+            .set({"Authorization": token})
+            .send(id)
+
+        const response = await request(app)
+            .get(`/users/pokemon`)
+            .set({"Authorization": token})
+            .expect(200)
+
+        console.log(response.body)
+        expect(response.body.length).toBeGreaterThan(1)
+        expect(response.body[0]).toBe('gengar')
+    })
+
+    //Delete a pokemon
+    it("should delete a pokemon by id", async () => {
+        const id = {
+            pokemon_id:94
+        }
+        const response = await request(app)
+            .delete(`/users/pokemon`)
+            .set({"Authorization": token})
+            .send(id)
+            .expect(200)
+        const checkDel = await request(app)
+            .get(`/users/pokemon`)
+            .set({"Authorization": token})
+
+        expect(checkDel.body[0]).toBe('dragonite')
+    })
+
+    //Logout
+    it("should logout the user", async () => {
+        const response = await request(app)
+            .delete(`/users/logout`)
+            .set({"Authorization": token})
+            .expect(202)
+        expect(response.body.message).toBe('Token deleted.')
+    })
+
+    //Delete user
 })
 
 

@@ -1,0 +1,47 @@
+DROP TABLE IF EXISTS users, pokemon, users_pokemon, tokens;
+
+CREATE TABLE users (
+    user_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    username VARCHAR(15) UNIQUE NOT NULL,
+    password VARCHAR(60) NOT NULL,
+    profile_image_url VARCHAR,
+    keys INT,
+    -- pomodoro settings
+    block_num INT,
+    block_mins INT,
+    short_break_mins INT,
+    long_break_mins INT
+);
+
+CREATE TABLE pokemon (
+    pokemon_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    pokemon_name VARCHAR,
+    pokedex_number INT UNIQUE NOT NULL,
+    front_image_url VARCHAR,
+    back_image_url VARCHAR,
+    type VARCHAR,
+    moves VARCHAR,
+    egg_image_url VARCHAR,
+    keysNeeded INT
+);
+
+CREATE TABLE users_pokemon (
+    users_pokemon_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    user_id INT REFERENCES users(user_id) NOT NULL,
+    pokemon_id INT REFERENCES pokemon(pokemon_id) NOT NULL
+);
+
+CREATE TABLE tokens (
+    token_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    token CHAR(36) NOT NULL,
+    user_id INT NOT NULL REFERENCES users(user_id)
+);
+
+INSERT INTO 
+    pokemon (pokemon_name) 
+VALUES 
+    ('pokemon1'),
+    ('pokemon2'),
+    ('pokemon3'),
+    ('pokemon4'),
+    ('pokemon5');

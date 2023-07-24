@@ -1,11 +1,6 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import './index.css';
-
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+export {default as HomePage} from './HomePage'
+export {default as LibraryPage} from './LibraryPage'
+export {default as ProfilePage} from './ProfilePage'
+export {default as StudyPage} from './StudyPage'
+export {default as LoginPage} from './LoginPage'
+export {default as RegisterPage} from './RegisterPage'

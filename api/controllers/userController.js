@@ -1,7 +1,7 @@
 require('dotenv').config()
 const bcrypt = require('bcrypt')
 const User = require('../models/User')
-const Token = require('../models/Token')
+// const Token = require('../models/Token')
 
 class UserController {
     static async register(req,res) {
@@ -20,11 +20,21 @@ class UserController {
         }
     }
 
-    static async getUserById(req,res) {
-        const user_id = req.tokenObj.user_id
+    static async getUsers(req,res) {
         try {
+            const users = await User.getUsers()
+            res.status(200).json(users)
+        } catch (err) {
+            console.log(err)
+            res.status(500).json({Error: err.message})
+        }
+    }
+
+    static async getUserById(req,res) {
+        try {
+            const user_id = req.tokenObj.user_id
             const user = await User.getOneById(user_id)
-            // delete user.password
+            delete user.password
             res.status(200).send(user)
         } catch (err) {
             res.status(404).json({Error: err.message})

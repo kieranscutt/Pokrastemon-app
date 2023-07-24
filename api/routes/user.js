@@ -5,6 +5,7 @@ const userController = require('../controllers/userController')
 const userRouter = Router()
 
 userRouter.post("/register", userController.register)
-userRouter.length("/user", userController.getUserById)
+userRouter.get("/user", userController.getUserById)
+userRouter.get("/", userController.getUsers)
 
 module.exports = userRouter

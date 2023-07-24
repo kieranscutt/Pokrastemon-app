@@ -13,6 +13,11 @@ class User {
         this.short_break_mins = short_break_mins;
     }
 
+    static async getUsers() {
+        const resp = await db.query("SELECT user_id, username, profile_image_url, keys, block_num,block_mins,long_break_mins,short_break_mins FROM users")
+        return resp.rows.map((u) => new User(u))
+    }
+
     static async getOneById(id) {
         const resp = await db.query(
             "SELECT * FROM users WHERE user_id = $1", [id]

@@ -33,7 +33,6 @@ class Pokemon {
         pokemon = await Pokemon.getPokemonByID(pokemon.pokemon_id)
         return pokemon
     }
-
 }
 
 module.exports = Pokemon

@@ -24,10 +24,10 @@ class User {
 
     static async getOneByUsername(username) {
         const resp = await db.query("SELECT * FROM users WHERE username = $1", [username])
-        if (resp.rows.length = 0 ) {
+        if (resp.rows.length == 0 ) {
             throw new Error ("User with this username does not exist.")
         } else {
-            return User.getOneById(resp.rows[0].user_id)
+            return new User(resp.rows[0])
         }
     }
 

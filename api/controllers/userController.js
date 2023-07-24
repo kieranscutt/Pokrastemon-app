@@ -28,10 +28,11 @@ class UserController {
                 data.password,
                 user["password"]
             )
+            console.log(user)
             if(!authenticated) {
                 throw new Error("Wrong username or password")
             } else {
-                const token = await Token.create(user["id"])
+                const token = await Token.create(user["user_id"])
                 res.status(201).json({authenticated: true, token: token.token})
             }
         } catch (err) {

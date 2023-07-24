@@ -14,13 +14,13 @@ CREATE TABLE users (
 );
 
 CREATE TABLE pokemon (
-    pokemon_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    pokemon_id INT NOT NULL PRIMARY KEY,
     pokemon_name VARCHAR,
     pokedex_number INT UNIQUE NOT NULL,
     front_image_url VARCHAR,
     back_image_url VARCHAR,
-    type VARCHAR,
-    moves VARCHAR,
+    types VARCHAR ARRAY,
+    moves VARCHAR ARRAY,
     egg_image_url VARCHAR,
     keysNeeded INT
 );
@@ -36,12 +36,3 @@ CREATE TABLE tokens (
     token CHAR(36) NOT NULL,
     user_id INT NOT NULL REFERENCES users(user_id)
 );
-
-INSERT INTO 
-    pokemon (pokemon_name) 
-VALUES 
-    ('pokemon1'),
-    ('pokemon2'),
-    ('pokemon3'),
-    ('pokemon4'),
-    ('pokemon5');

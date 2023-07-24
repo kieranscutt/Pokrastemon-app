@@ -2,7 +2,7 @@ DROP TABLE IF EXISTS users, pokemon, users_pokemon, tokens;
 
 CREATE TABLE users (
     user_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    username VARCHAR(15) NOT NULL,
+    username VARCHAR(15) UNIQUE NOT NULL,
     password VARCHAR(60) NOT NULL,
     profile_image_url VARCHAR,
     keys INT,

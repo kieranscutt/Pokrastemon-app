@@ -1,9 +1,10 @@
 import React from 'react'
+import {Timer} from '../../components'
 
 export default function index() {
   return (
     <div>
-        <h1>Study Now!</h1>
+        <Timer/>
     </div>
   )
 }

@@ -61,6 +61,16 @@ class UserController {
         }
     }
 
+    static async getPomodoroSettings(req,res) {
+        try {
+            const user_id = req.tokenObj.user_id
+            const settings = await User.getPomodoroSettings(user_id)
+            res.status(200).send(settings)
+        } catch (err) {
+            res.status(500).json({Error: err.message})
+        }
+    }
+
     static async addKey(req,res) {
         try{
             const user_id = req.tokenObj.user_id
@@ -73,16 +83,16 @@ class UserController {
         }
     }
 
-    // static async addPokemon(req,res) {
-    //     try {
-    //         const user_id = req.tokenObj.user_id
-    //         const resp = await User.addPokemon(user_id)
-    //         res.status(200).send(resp)
-    //     } catch (err) {
-    //         console.log(err)
-    //         res.status(500).json({Error: err.message})
-    //     }
-    // }
+    static async addPokemon(req,res) {
+        try {
+            const user_id = req.tokenObj.user_id
+            const resp = await User.addPokemon(user_id)
+            res.status(200).send(resp)
+        } catch (err) {
+            console.log(err)
+            res.status(500).json({Error: err.message})
+        }
+    }
 
     static async logout(req, res) {
         try {

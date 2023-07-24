@@ -12,7 +12,8 @@ userRouter.use(authenticator)
 
 userRouter.get("/user", userController.getUserById)
 userRouter.patch("/keys", userController.addKey)
-// userRouter.patch("/pokemon", userController.addPokemon )
+userRouter.get("/pomodoro", userController.getPomodoroSettings)
+userRouter.patch("/pokemon", userController.addPokemon )
 userRouter.delete("/logout", userController.logout)
 
 module.exports = userRouter

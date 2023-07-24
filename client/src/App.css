@@ -4,43 +4,65 @@ nav {
   padding:10px;
 }
 
-nav ul {
-  list-style: none;
+/* LOGIN AND REGISTER */
+
+.forms {
+  min-height: 90vh;
   display: flex;
-  justify-content: space-around;
-}
-
-nav li {
-  cursor: pointer;
-}
-
-/* signup page */
-
-/* Signup.css */
-form {
-  display: flex;
-  flex-direction: column;
-  max-width: 300px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  width: 50%;
   margin: 0 auto;
 }
 
+.auth-form-container, .auth-form-login, .auth-form-register{
+   display: flex;
+   flex-direction: column;
+}
+
+.auth-form-container {
+  padding: 4rem;
+  border: 1px solid white;
+  border-radius: 10px;
+  margin: 0.5 rem;
+  background-image: linear-gradient(79deg, #7439db, #c66fcb 48%, #f7944d);
+  width: 100%;
+}
+
 label {
-  margin-bottom: 5px;
+  text-align: left;
+  padding: 0.25rem 0;
+  color: white;
 }
 
 input {
-  padding: 8px;
-  margin-bottom: 15px;
+  margin: 0.5rem 0;
+  padding: 1rem;
+  border: none;
+  border-radius: 10px;
+  color: #7439db
+}
+
+input:focus {
+  outline: #f7944d;
 }
 
 button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
   border: none;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
   cursor: pointer;
+  color: #7439db;
 }
 
-button:hover {
-  background-color: #0056b3;
+.link-btn {
+   background: none;
+   color: white;
+   text-decoration: underline;
+}
+
+.form-title {
+  color: white;
 }

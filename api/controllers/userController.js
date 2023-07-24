@@ -71,6 +71,17 @@ class UserController {
         }
     }
 
+    static async updatePomodoroSettings(req,res) {
+        try {
+            const user_id = req.tokenObj.user_id
+            const settings = req.body
+            const resp = await User.updatePomodoroSettings(user_id,settings)
+            res.status(200).send(resp)
+        } catch (err) {
+            res.status(500).json({Error: err.message})
+        }
+    }
+
     static async addKey(req,res) {
         try{
             const user_id = req.tokenObj.user_id

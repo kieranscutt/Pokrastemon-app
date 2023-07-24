@@ -56,6 +56,14 @@ class User {
         return resp.rows[0]
     }
 
+    static async updatePomodoroSettings(id,settings) {
+        const { block_mins, block_num, short_break_mins, long_break_mins } = settings
+        const resp = await db.query('UPDATE users SET block_mins = $1, block_num=$2,short_break_mins=$3,long_break_mins=$4 WHERE user_id = $5', 
+        [block_mins,block_num,short_break_mins,long_break_mins,id])
+        const updatedUser = await User.getOneById(id)
+        return updatedUser
+    }
+
     static async getUsersPokemons(id){
         const resp = await db.query(
             "SELECT pokemon_name FROM pokemon p LEFT JOIN users_pokemon u ON p.pokemon_id = u.pokemon_id WHERE u.user_id = $1",[id]

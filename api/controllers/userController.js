@@ -1,7 +1,7 @@
 require('dotenv').config()
 const bcrypt = require('bcrypt')
 const User = require('../models/User')
-// const Token = require('../models/Token')
+const Token = require('../models/Token')
 
 class UserController {
     static async register(req,res) {
@@ -17,6 +17,25 @@ class UserController {
         } catch (err) {
             console.log(err)
             res.status(500).json({ Error: err.message})
+        }
+    }
+
+    static async login(req,res) {
+        try {
+            const data = req.body
+            const user = await User.getOneByUsername(data.username)
+            const authenticated = await bcrypt.compare(
+                data.password,
+                user["password"]
+            )
+            if(!authenticated) {
+                throw new Error("Wrong username or password")
+            } else {
+                const token = await Token.create(user["id"])
+                res.status(201).json({authenticated: true, token: token.token})
+            }
+        } catch (err) {
+            res.status(403).json({Error: err.message})
         }
     }
 
@@ -53,6 +72,16 @@ class UserController {
             res.status(500).json({Error: err.message})
         }
     }
+
+    static async logout(req, res) {
+        const tokenObj = req.tokenObj;
+        try {
+          const response = await tokenObj.deleteToken();
+          res.status(202).json({ message: response });
+        } catch (error) {
+          res.status(403).json({ Error: error.message });
+        }
+      }
 }
 
 module.exports = UserController

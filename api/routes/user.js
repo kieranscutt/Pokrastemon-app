@@ -6,7 +6,9 @@ const userRouter = Router()
 
 userRouter.get("/", userController.getUsers)
 userRouter.post("/register", userController.register)
+userRouter.post("/login", userController.login)
 userRouter.get("/user", userController.getUserById)
 userRouter.patch("/keys", userController.addKey)
+userRouter.delete("/logout", userController.logout)
 
 module.exports = userRouter

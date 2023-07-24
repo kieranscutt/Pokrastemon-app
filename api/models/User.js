@@ -15,7 +15,20 @@ class User {
 
     static async getUsers() {
         const resp = await db.query("SELECT user_id, username, profile_image_url, keys, block_num,block_mins,long_break_mins,short_break_mins FROM users")
-        return resp.rows.map((u) => new User(u))
+        if (resp.rows.length > 0) {
+            return resp.rows.map((u) => new User(u))
+        } else {
+            return new Error('There are no users')
+        }
+    }
+
+    static async getOneByUsername(username) {
+        const resp = await db.query("SELECT * FROM users WHERE username = $1", [username])
+        if (resp.rows.length = 0 ) {
+            throw new Error ("User with this username does not exist.")
+        } else {
+            return User.getOneById(resp.rows[0].user_id)
+        }
     }
 
     static async getOneById(id) {
@@ -31,7 +44,7 @@ class User {
             `INSERT INTO users (username,password)
             VALUES ($1, $2) RETURNING user_id`,[username,password]
         )
-        const id = resp.rows[0]
+        const id = resp.rows[0].user_id
         const newUser = await User.getOneById(id)
         return newUser
     }

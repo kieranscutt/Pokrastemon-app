@@ -12,9 +12,25 @@ class Pokemon {
         this.keysNeeded = keysNeeded
     }
 
+    static async getAllPokemon(){
+        const resp = await db.query("SELECT * FROM pokemon")
+        if (resp.rows.length > 0){
+            return resp.rows.map((p) => new Pokemon(p))
+        } else {
+            throw new Error ('There are no pokemon')
+        }
+    }
+
+    static async getPokemonByID(id){
+        const resp = await db.query("SELECT * FROM pokemon WHERE pokemon_id = $1",[id])
+        const pokemon = new Pokemon(resp.rows[0])
+        return pokemon
+    }
+
     static async getRandomPokemon(){
         const allPokemon = await db.query("SELECT * FROM pokemon")
-        const pokemon = allPokemon.rows[Math.floor(Math.random()*151)]
+        let pokemon = allPokemon.rows[Math.floor(Math.random()*151)]
+        pokemon = await Pokemon.getPokemonByID(pokemon.pokemon_id)
         return pokemon
     }
 

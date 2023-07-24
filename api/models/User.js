@@ -56,6 +56,17 @@ class User {
         return resp.rows[0]
     }
 
+    static async getUsersPokemons(id){
+        const resp = await db.query(
+            "SELECT pokemon_name FROM pokemon p LEFT JOIN users_pokemon u ON p.pokemon_id = u.pokemon_id WHERE u.user_id = $1",[id]
+        )
+        if (resp.rows.length > 0){
+            return resp.rows.map((p) => p.pokemon_name)
+        } else {
+            throw new Error('User does not have any pokemon')
+        }
+    }
+
     static async addKey(id) {
         let currentKeys = await db.query("SELECT keys FROM users WHERE user_id = $1", [id])
         currentKeys = currentKeys.rows[0].keys
@@ -71,6 +82,11 @@ class User {
         const resp = await db.query("INSERT INTO users_pokemon(pokemon_id, user_id) VALUES ($1,$2) RETURNING *",
             [pokemon_id, user_id])
         return resp.rows[0]
+    }
+
+    static async deletePokemon(pokemon_id,user_id) {
+        const resp = await db.query("DELETE FROM users_pokemon WHERE pokemon_id=$1 AND user_id=$2",[pokemon_id,user_id])
+        return 'Pokemon removed from user'
     }
 }
 

@@ -95,6 +95,29 @@ class UserController {
         }
     }
 
+    static async getUsersPokemon(req,res) {
+        try{
+            const user_id = req.tokenObj.user_id
+            const resp = await User.getUsersPokemons(user_id)
+            res.status(200).send(resp)
+        } catch (err) {
+            console.log(err)
+            res.status(500).json({Error: err.message})   
+        }
+    }
+
+    static async deletePokemon(req,res) {
+        try{
+            const user_id = req.tokenObj.user_id
+            const pokemon_id = req.body.pokemon_id
+            const resp = await User.deletePokemon(pokemon_id,user_id)
+            res.status(200).send(resp)
+        } catch (err) {
+            console.log(err)
+            res.status(500).json({Error: err.message})
+        }
+    }
+
     static async logout(req, res) {
         try {
           const tokenObj = req.tokenObj;

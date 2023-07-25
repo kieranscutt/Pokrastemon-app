@@ -1,0 +1,31 @@
+  .nav-link.active {
+    text-decoration: underline;
+    color: #fff !important;
+  }
+
+  .navbar {
+    background-color: #0A6EBD;
+    margin-bottom: 20px;
+    height: 100px;
+    font-size: 1.3rem;
+  }
+
+  #navbar-nav {
+    background-color: #0A6EBD;
+
+  }
+
+  #root.navbar {
+    margin: 0 auto;
+    text-align: center;  
+  }
+
+  .navbar-brand {
+    color: #fff;
+    font-size: 2rem;
+  }
+
+  .navbar-brand:hover {
+    color: #fff;
+  }
+

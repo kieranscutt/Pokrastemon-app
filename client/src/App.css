@@ -1,4 +1,8 @@
-nav {
+.Navbar .Nav.Link.active {
+    text-decoration: underline;
+  }
+
+  nav {
   background-color: red;
   color: white;
   padding:10px;

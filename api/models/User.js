@@ -39,10 +39,10 @@ class User {
     }
 
     static async createUser(data) {
-        const { username, password } = data
+        const { username, password, firstName, lastName } = data
         const resp = await db.query(
-            `INSERT INTO users (username,password)
-            VALUES ($1, $2) RETURNING user_id`,[username,password]
+            `INSERT INTO users (username,password,firstName,lastName)
+            VALUES ($1, $2,$3,$4) RETURNING user_id`,[username,password,firstName,lastName]
         )
         const id = resp.rows[0].user_id
         const newUser = await User.getOneById(id)

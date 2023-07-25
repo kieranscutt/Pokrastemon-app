@@ -5,22 +5,22 @@ CREATE TABLE users (
     username VARCHAR(15) UNIQUE NOT NULL,
     password VARCHAR(60) NOT NULL,
     profile_image_url VARCHAR,
-    keys INT,
+    keys INT DEFAULT 0,
     -- pomodoro settings
-    block_num INT,
-    block_mins INT,
-    short_break_mins INT,
-    long_break_mins INT
+    block_num INT DEFAULT 4,
+    block_mins INT DEFAULT 20,
+    short_break_mins INT DEFAULT 5,
+    long_break_mins INT DEFAULT 20
 );
 
 CREATE TABLE pokemon (
-    pokemon_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    pokemon_id INT NOT NULL PRIMARY KEY,
     pokemon_name VARCHAR,
     pokedex_number INT UNIQUE NOT NULL,
     front_image_url VARCHAR,
     back_image_url VARCHAR,
-    type VARCHAR,
-    moves VARCHAR,
+    types VARCHAR ARRAY,
+    moves VARCHAR ARRAY,
     egg_image_url VARCHAR,
     keysNeeded INT
 );
@@ -36,12 +36,3 @@ CREATE TABLE tokens (
     token CHAR(36) NOT NULL,
     user_id INT NOT NULL REFERENCES users(user_id)
 );
-
-INSERT INTO 
-    pokemon (pokemon_name) 
-VALUES 
-    ('pokemon1'),
-    ('pokemon2'),
-    ('pokemon3'),
-    ('pokemon4'),
-    ('pokemon5');

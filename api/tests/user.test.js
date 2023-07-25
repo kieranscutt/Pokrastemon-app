@@ -1,9 +1,3 @@
-describe("Jest Test", () => {
-    it('Should work', () => {
-        const result = 1 + 1
-        expect(result).toBe(2)
-    })
-})
 
 const request = require("supertest")
 const app = require("../api.js")
@@ -11,18 +5,10 @@ const db = require("../database/connect")
 const bcrypt = require('bcrypt')
 
 describe("User route", () => {
-    let api
-
-    beforeAll(() => {
-        api = app.listen(8080, () => {
-            console.log("Test server running on port 8080")
-        })
-    })
 
     afterAll((done) => {
         console.log("Stopping test server")
-        db.end()
-        api.close(done)
+        db.end(done)
     })
 
     let username = ""
@@ -105,6 +91,25 @@ describe("User route", () => {
             .expect(200)
 
         expect(response.body.username).toBe(username)
+    })
+
+    //Quick auth tests
+    //null
+    it("does not like null", async () => {
+        const response = await request(app)
+            .get(`/users/user`)
+            .set({"Authorization": null})
+            .expect(403)
+        
+        expect(response.body.error).toBe('User not authenticated.')
+    })
+    //bad token
+    it("does not like bad tokens", async () => {
+        const response = await request(app)
+            .get(`/users/user`)
+            .set({"Authorization": "cheeseburger"})
+            .expect(403)
+        expect(response.body.error).toBe('Unable to find token.')
     })
 
     //Keys

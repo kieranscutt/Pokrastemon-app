@@ -15,7 +15,7 @@ class UserController {
             const result = await User.createUser(data)
             res.status(201).send(result)
         } catch (err) {
-            console.log(err)
+            //console.log(err)
             res.status(500).json({ Error: err.message})
         }
     }

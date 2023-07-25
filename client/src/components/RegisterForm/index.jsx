@@ -18,6 +18,8 @@ export default function RegisterForm(props) {
         body: JSON.stringify({
           username: username,
           password: password,
+          firstName: firstName,
+          lastName: lastName
         }),
       }
       const resp = await fetch('http://localhost:3000/users/register', options)
@@ -26,7 +28,8 @@ export default function RegisterForm(props) {
         console.log(data)
         window.location.href = '/login'
       } else {
-        alert('This username is already taken')
+        console.log(data)
+        alert('Username already exists')
       }
    }
 
@@ -35,13 +38,13 @@ export default function RegisterForm(props) {
             <h2 className="form-title">Register</h2>
         <form className="auth-form-register" onSubmit={handleSubmit}>
           <label htmlFor="firstName">First Name:</label>
-          <input type="text" id='firstName' value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+          <input type="text" id='firstName' value={firstName} required onChange={(e) => setFirstName(e.target.value)} />
           <label htmlFor="lastName">Last name:</label>
-          <input type="text" id='lastName' value={lastName} onChange={(e) => setLastName(e.target.value)} />
+          <input type="text" id='lastName' value={lastName} required onChange={(e) => setLastName(e.target.value)} />
           <label htmlFor="username">Username:</label>
-            <input type="username" id="username" value={username} onChange={(e) => setUsername(e.target.value)} />
+            <input type="username" id="username" value={username} required onChange={(e) => setUsername(e.target.value)} />
           <label htmlFor="password">Password:</label>
-          <input type="password" id='password' value={password} onChange={(e) => setPassword(e.target.value)} />
+          <input type="password" id='password' value={password} required onChange={(e) => setPassword(e.target.value)} />
           <button type='submit'>Register</button>
         </form>
          <button className="link-btn" onClick={() => props.onFormSwitch('LoginForm')}>Have an account? Log in here.</button>

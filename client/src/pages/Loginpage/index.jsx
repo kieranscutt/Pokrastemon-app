@@ -1,10 +1,10 @@
 import { LoginForm, RegisterForm } from "../../components";
 import React, {useState} from "react";
-import '../../App.css'
+import './styles.css';
 
 
 
-export default function Loginpage() {
+export default function LoginPage() {
     const [currentForm, setCurrentForm] = useState("LoginForm")
 
     const toggleForm = (formName) => {
@@ -19,3 +19,4 @@ export default function Loginpage() {
         </div>
     )
 }
+

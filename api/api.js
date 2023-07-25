@@ -12,7 +12,7 @@ api.use(express.json());
 api.use(logRoutes);
 
 api.get('/', (req,res) => {
-    res.status(200).send("Welcome to the Prokastimon App")
+    res.status(200).send("Welcome to the Prokrastimon App")
 })
 
 api.use('/users', userRouter)

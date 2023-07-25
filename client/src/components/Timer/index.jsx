@@ -1,70 +1,45 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-// import {TimerButton} from './TimerButton'
+import Display from './TimerDisplay'
 
 export default function Timer() {
-    const startTime= {
-        seconds: 2,
-        minutes: 0,
-        hours: 1
-    }
-    const [timer, setTimer] = useState(startTime)
-
-    useEffect(()=>{
-        const intervalId= setInterval(()=>{
-            updateTimer()
-        }, 1000)
-        return () => clearInterval(intervalId)
-    }, [timer])
-
-    const updateTimer = () =>{
-        let nextTimer = {
-            seconds: timer.seconds,
-            minutes: timer.minutes,
-            hours: timer.hours
-        }
-        if (timer.seconds == 0 && timer.minutes==0 && timer.hours ==0){
-            endTimer()
+    const [start, setStart] = useState(false)
+    const [pause, setPause] = useState(false)
+    const [timer, setTimer] = useState({})
+    const handleStart = (e) =>{
+        if (start ==false){     //checks if running for the first time and sets up states
+            setStart(true)
+            setPause(false)
+            e.preventDefault()
+            const startTime= {
+                seconds: 3,
+                minutes: 0,
+                hours: 0
+            }
+            setTimer(startTime)
             
-
-        }else if (timer.minutes==0 && timer.seconds == 0){
-            const updatedTimer = {
-                seconds: 59,
-                minutes: 59,
-                hours: nextTimer.hours -1 
-            }
-            setTimer(updatedTimer)
-        } else if (timer.seconds == 0){
-            const updatedTimer = {
-                seconds: 59,
-                minutes: nextTimer.minutes -1,
-                hours: nextTimer.hours 
-            }
-            setTimer(updatedTimer)
-        }else{
-            const updatedTimer = {
-                seconds: (nextTimer.seconds)-1,
-                minutes: nextTimer.minutes,
-                hours: nextTimer.hours 
-            }
-            setTimer(updatedTimer)
-            nextTimer=updatedTimer
+            return <Display timer={timer} setTimer={setTimer} start={start} setStart={setStart} pause={pause}/>
+        } else {    //if start button is pushed when it wasn't started for 
+            setPause(false)
+            return <Display timer={timer} setTimer={setTimer} start={start} setStart={setStart} pause={pause}/>
         }
-        
-        
     }
-    const endTimer=()=>{
-        console.log("timer ended")
+    const handlePause = () => {
+        
+        setPause(true)
+        setTimer(timer)
+        
+        return <Display timer={timer} setTimer={setTimer} start={start} setStart={setStart} pause={pause}/>
     }
 
   return (
-    <div>
+    <div className='timer_div'>
 
         <h3>Timer</h3>
+        <Display timer={timer} setTimer={setTimer} start={start}  setStart={setStart} pause={pause}/>
+        <button onClick={handleStart}>Start Timer</button>
+        <button onClick={handlePause}>Pause</button>
         
-        <span>{timer.hours}: </span>
-        <span>{timer.minutes}: </span>
-        <span>{timer.seconds}</span>
     </div>
   )
 }

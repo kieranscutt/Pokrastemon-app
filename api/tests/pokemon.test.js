@@ -25,8 +25,8 @@ describe("Pokemon route", () => {
         const venusaur = {
             pokemon_id: 3,
             pokemon_name: 'venusaur',
-            front_image_url: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png',
-            back_image_url: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/3.png',
+            front_image_url: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/3.gif',
+            back_image_url: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/back/3.gif',
             moves: [
               'swords-dance',     'cut',            'bind',
               'vine-whip',        'headbutt',       'tackle',
@@ -65,6 +65,15 @@ describe("Pokemon route", () => {
             .get(`/pokemon/${id}`)
             .expect(200)
         expect(response.body).toMatchObject(venusaur)
+    })
+
+    //Get one by id but bad id
+    it("should return not found", async () => {
+        const id = 300
+        const response = await request(app)
+            .get(`/pokemon/${id}`)
+            .expect(404)
+        expect(response.body.Error).toBe('unable to locate pokemon')
     })
 
     //Get random pokemon

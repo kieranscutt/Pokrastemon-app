@@ -45,7 +45,7 @@ class UserController {
             res.status(200).json(users)
         } catch (err) {
             console.log(err)
-            res.status(500).json({Error: err.message})
+            res.status(404).json({Error: err.message})
         }
     }
 
@@ -114,7 +114,7 @@ class UserController {
             res.status(200).send(resp)
         } catch (err) {
             console.log(err)
-            res.status(500).json({Error: err.message})   
+            res.status(404).json({Error: err.message})   
         }
     }
 

@@ -23,8 +23,12 @@ class Pokemon {
 
     static async getPokemonByID(id){
         const resp = await db.query("SELECT * FROM pokemon WHERE pokemon_id = $1",[id])
-        const pokemon = new Pokemon(resp.rows[0])
-        return pokemon
+        if(resp.rows.length ==1){
+            const pokemon = new Pokemon(resp.rows[0])
+            return pokemon
+        } else {
+            throw new Error("unable to locate pokemon")
+        }
     }
 
     static async getRandomPokemon(){

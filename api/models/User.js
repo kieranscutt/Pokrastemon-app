@@ -15,10 +15,10 @@ class User {
 
     static async getUsers() {
         const resp = await db.query("SELECT user_id, username, profile_image_url, keys, block_num,block_mins,long_break_mins,short_break_mins FROM users")
-        if (resp.rows.length > 0) {
-            return resp.rows.map((u) => new User(u))
+        if (resp.rows.length == 0) {
+            throw new Error('There are no users')
         } else {
-            return new Error('There are no users')
+            return resp.rows.map((u) => new User(u))
         }
     }
 

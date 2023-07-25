@@ -4,7 +4,7 @@ import './styles.css';
 const LoginPage = () => {
 
   const [formData, setFormData] = useState({
-    email: '',
+    username: '',
     password: '',
   });
 
@@ -26,12 +26,12 @@ const LoginPage = () => {
       <h2>Sign In</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="email">Email:</label>
+          <label htmlFor="username">Username:</label>
           <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
+            type="username"
+            id="username"
+            name="username"
+            value={formData.username}
             onChange={handleChange}
             required
           />

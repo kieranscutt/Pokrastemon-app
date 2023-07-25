@@ -6,8 +6,28 @@ export default function LoginForm(props) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
+    const options = {
+      method: 'POST',
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: username,
+        password: password
+      })
+    }
+    const resp = await fetch('http://localhost:3000/users/login', options)
+    const data = await resp.json()
+    if (resp.ok) {
+      console.log(data)
+      localStorage.setItem("token", data.token);
+      window.location.href = '/profile'
+    } else {
+      alert('Incorrect username or password')
+    }
   }
 
 

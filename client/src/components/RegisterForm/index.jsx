@@ -5,10 +5,29 @@ export default function RegisterForm(props) {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('')
     const [password, setPassword] = useState('');
-    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
 
-   const handleSubmit = (e) => {
+   const handleSubmit = async (e) => {
       e.preventDefault()
+      const options = {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: username,
+          password: password,
+        }),
+      }
+      const resp = await fetch('http://localhost:3000/users/register', options)
+      const data = await resp.json()
+      if (resp.ok) {
+        console.log(data)
+        window.location.href = '/login'
+      } else {
+        alert('This username is already taken')
+      }
    }
 
     return (
@@ -19,8 +38,8 @@ export default function RegisterForm(props) {
           <input type="text" id='firstName' value={firstName} onChange={(e) => setFirstName(e.target.value)} />
           <label htmlFor="lastName">Last name:</label>
           <input type="text" id='lastName' value={lastName} onChange={(e) => setLastName(e.target.value)} />
-          <label htmlFor="email">Email:</label>
-            <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <label htmlFor="username">Username:</label>
+            <input type="username" id="username" value={username} onChange={(e) => setUsername(e.target.value)} />
           <label htmlFor="password">Password:</label>
           <input type="password" id='password' value={password} onChange={(e) => setPassword(e.target.value)} />
           <button type='submit'>Register</button>

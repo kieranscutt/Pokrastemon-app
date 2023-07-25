@@ -3,12 +3,19 @@
 const request = require("supertest")
 const app = require("../api.js")
 const db = require("../database/connect")
+const fs = require('fs');
+const sql = fs.readFileSync('/Users/Guy 1/Desktop/liskov/lap3/project/Pokrastemon-app/api/database/setup.sql').toString();
+const fetchPokemon = require('../database/fetchPokemon')
 
 describe("Pokemon route", () => {
 
     afterAll((done) => {
-        db.end(done)
-    })
+        fetchPokemon()
+        .then(data => {
+            console.log('Pokemon added')
+            db.end(done);
+        })
+    },30000)
 
     //Get all pokemon
     it("should get all pokemon", async () => {
@@ -84,6 +91,20 @@ describe("Pokemon route", () => {
         const id = response.body.pokemon_id
         const checkPokemon = await request(app)
             .get(`/pokemon/${id}`)
-        expect(response.body).toMatchObject(checkPokemon.body)
+        expect(response.body).toMatchObject(checkPokemon.body) 
     })
+    
+    describe("database with no pokemon", () => {
+        
+        //Test database if no pokemon
+        it("should return an error", async() => {
+        await new Promise((r) => setTimeout(r, 4000));
+        await db.query(sql)
+        const response = await request(app)
+            .get(`/pokemon`)
+            .expect(404)
+        expect(response.body.Error).toBe('There are no pokemon')
+        },30000)
+    })
+    
 })

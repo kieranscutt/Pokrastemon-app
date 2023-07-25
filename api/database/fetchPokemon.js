@@ -13,8 +13,7 @@ const fetchPokemon = async() => {
             const moveNames = moves.map((m) => m.move.name)
             await db.query("INSERT INTO pokemon(pokemon_id,pokemon_name,front_image_url,back_image_url,moves,types) VALUES ($1,$2,$3,$4,$5,$6)",[id,name,front_default,back_default,moveNames,typeNames])
         } catch (err) {
-            console.log(err)
-            return err
+
         }
     }
 }

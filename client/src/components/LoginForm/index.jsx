@@ -19,7 +19,7 @@ export default function LoginForm(props) {
         password: password
       })
     }
-    const resp = await fetch('http://localhost:3000/users/login', options)
+    const resp = await fetch('https://pokrastemon-api.onrender.com/users/login', options)
     const data = await resp.json()
     if (resp.ok) {
       console.log(data)

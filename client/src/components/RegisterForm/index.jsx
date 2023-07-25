@@ -22,7 +22,7 @@ export default function RegisterForm(props) {
           lastName: lastName
         }),
       }
-      const resp = await fetch('http://localhost:3000/users/register', options)
+      const resp = await fetch('https://pokrastemon-api.onrender.com/users/register', options)
       const data = await resp.json()
       if (resp.ok) {
         console.log(data)

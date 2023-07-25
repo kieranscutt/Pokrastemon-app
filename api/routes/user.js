@@ -18,8 +18,9 @@ userRouter.patch('/pomodoro',userController.updatePomodoroSettings)
 
 userRouter.get('/pokemon', userController.getUsersPokemon)
 userRouter.patch("/pokemon", userController.addPokemon )
-userRouter.delete('/pokemon', userController.deletePokemon)
+userRouter.delete('/pokemon', userController.removePokemon)
 
+userRouter.delete('/delete',userController.deleteUser)
 userRouter.delete("/logout", userController.logout)
 
 module.exports = userRouter

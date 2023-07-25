@@ -92,9 +92,15 @@ class User {
         return resp.rows[0]
     }
 
-    static async deletePokemon(pokemon_id,user_id) {
+    static async removePokemon(pokemon_id,user_id) {
         const resp = await db.query("DELETE FROM users_pokemon WHERE pokemon_id=$1 AND user_id=$2",[pokemon_id,user_id])
         return 'Pokemon removed from user'
+    }
+
+    async deleteUser() {
+        const resp = await db.query("DELETE FROM users_pokemon WHERE user_id = $1",[this.user_id])
+        const resp2 = await db.query("DELETE FROM users WHERE user_id = $1 RETURNING *",[this.user_id])
+        return new User(resp2.rows[0])
     }
 }
 

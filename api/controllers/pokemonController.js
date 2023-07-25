@@ -28,8 +28,8 @@ class PokemonController{
             const pokemon = await Pokemon.getPokemonByID(id)
             res.status(200).send(pokemon)
         } catch (err) {
-            console.log(err)
-            res.status(500).json({Error: err.message})
+            //console.log(err)
+            res.status(404).json({Error: err.message})
         }
     }
 }

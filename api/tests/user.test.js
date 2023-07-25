@@ -15,7 +15,7 @@ describe("User route", () => {
 
     beforeAll(() => {
         api = app.listen(8080, () => {
-            console.log("Test server running on port 5000")
+            console.log("Test server running on port 8080")
         })
     })
 
@@ -80,7 +80,24 @@ describe("User route", () => {
         expect(token).toBeTruthy()
     })
 
-    //GET ONE BY ID
+    //Get all users
+    it("should get all users", async () => {
+        const newUser2 = {
+            username: "test2",
+            password: "test2"
+        }
+        const addAnother = await request(app)
+            .post("/users/register")
+            .send(newUser2)
+
+        const response = await request(app)
+            .get("/users")
+            .expect(200)
+        expect(response.body.length).toBeGreaterThan(1)
+        expect(response.body[1].username).toBe(newUser2.username)
+    })
+
+    //Get one by id
     it("should get user by id", async() => {
         const response = await request(app)
             .get(`/users/user`)
@@ -164,7 +181,6 @@ describe("User route", () => {
             .set({"Authorization": token})
             .expect(200)
 
-        console.log(response.body)
         expect(response.body.length).toBeGreaterThan(1)
         expect(response.body[0]).toBe('gengar')
     })

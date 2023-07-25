@@ -23,7 +23,9 @@ describe("User route", () => {
 
     const newUser = {
         username: "test",
-        password: "test"
+        password: "test",
+        firstName: "cheese",
+        lastName: "burger"
     }
     let token = ""
     let token2 = ""
@@ -81,7 +83,9 @@ describe("User route", () => {
     it("should get all users", async () => {
         const newUser2 = {
             username: "test2",
-            password: "test2"
+            password: "test2",
+            firstName: "dragon",
+            lastName: "deez"
         }
         const addAnother = await request(app)
             .post("/users/register")
@@ -123,7 +127,6 @@ describe("User route", () => {
             .send(wrongUser)
             .expect(403)
         
-        console.log(response.body)
         expect(response.body.Error).toBe("User with this username does not exist.")
     })
 

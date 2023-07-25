@@ -7,7 +7,7 @@ class PokemonController{
             const pokemon = await Pokemon.getAllPokemon()
             res.status(200).send(pokemon)
         } catch (err) {
-            console.log(err)
+            //console.log(err)
             res.status(500).json({Error: err.message})
         }
     }

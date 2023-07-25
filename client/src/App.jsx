@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import PageWrapper from './components/pageWrapper';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './components/Nav/styles.css';
+import './components/nav/styles.css';
 import { HomePage, LibraryPage, ProfilePage, StudyPage, LoginPage } from './pages';
 // import './App.css';
 import NavBar from './components/nav/index';

@@ -8,7 +8,7 @@ class PokemonController{
             res.status(200).send(pokemon)
         } catch (err) {
             //console.log(err)
-            res.status(500).json({Error: err.message})
+            res.status(404).json({Error: err.message})
         }
     }
 

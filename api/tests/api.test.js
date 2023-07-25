@@ -13,7 +13,7 @@ const db = require("../database/connect")
 describe("base route", () => {
     let api
 
-    beforeAll(() => {
+    beforeAll(async () => {
         api = app.listen(8080, () => {
             console.log("Test server running on port 8080")
         })

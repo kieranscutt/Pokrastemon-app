@@ -44,7 +44,7 @@ class UserController {
             const users = await User.getUsers()
             res.status(200).json(users)
         } catch (err) {
-            console.log(err)
+            //console.log(err)
             res.status(404).json({Error: err.message})
         }
     }
@@ -90,7 +90,7 @@ class UserController {
             const resp = await User.addKey(user_id)
             res.status(200).send(resp)
         } catch (err) {
-            console.log(err)
+            //console.log(err)
             res.status(500).json({Error: err.message})
         }
     }
@@ -102,7 +102,7 @@ class UserController {
             const resp = await User.addPokemon(user_id,pokemon_id)
             res.status(200).send(resp)
         } catch (err) {
-            console.log(err)
+            //console.log(err)
             res.status(500).json({Error: err.message})
         }
     }
@@ -113,7 +113,7 @@ class UserController {
             const resp = await User.getUsersPokemons(user_id)
             res.status(200).send(resp)
         } catch (err) {
-            console.log(err)
+            //console.log(err)
             res.status(404).json({Error: err.message})   
         }
     }
@@ -125,7 +125,7 @@ class UserController {
             const resp = await User.removePokemon(pokemon_id,user_id)
             res.status(200).send(resp)
         } catch (err) {
-            console.log(err)
+            //console.log(err)
             res.status(500).json({Error: err.message})
         }
     }

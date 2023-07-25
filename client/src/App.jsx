@@ -1,6 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import PageWrapper from './components/PageWrapper';
+import { Route, Routes } from 'react-router-dom';
+import PageWrapper from './components/pageWrapper';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './components/Nav/styles.css';
 import { HomePage, LibraryPage, ProfilePage, StudyPage, LoginPage } from './pages';
@@ -10,8 +10,7 @@ import NavBar from './components/Nav';
 const App = () => {
   return (
     <>
-      <Router>
-        <NavBar />
+        <NavBar/>
         <PageWrapper>
           <Routes>
             <Route path="/" element={<HomePage />} />
@@ -23,7 +22,6 @@ const App = () => {
             {/* <Route path="*" element={<NotFoundPage />} /> */}
           </Routes>
         </PageWrapper>
-      </Router>
     </>
   );
 };

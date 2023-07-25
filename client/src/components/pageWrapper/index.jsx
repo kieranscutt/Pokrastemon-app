@@ -1,7 +1,8 @@
 // PageWrapper.jsx
 import React from 'react';
-import NavBar from '../Nav/index';
-// import '../Nav/styles.css'
+import NavBar from '../nav/index';
+import '../nav/styles.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { Outlet } from 'react-router';
 
 const PageWrapper = () => {

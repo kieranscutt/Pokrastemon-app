@@ -4,6 +4,7 @@ import PageWrapper from './components/PageWrapper';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import { HomePage, LibraryPage, ProfilePage, StudyPage, LoginPage, RegisterPage } from './pages';
+import './App.css'
 
 const App = () => {
   return (

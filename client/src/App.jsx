@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './components/Nav/styles.css';
 import { HomePage, LibraryPage, ProfilePage, StudyPage, LoginPage } from './pages';
 // import './App.css';
-import NavBar from './components/Nav';
+import NavBar from './components/nav';
 
 const App = () => {
   return (

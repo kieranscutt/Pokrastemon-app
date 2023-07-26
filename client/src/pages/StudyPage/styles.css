@@ -26,3 +26,24 @@
   .display-none {
     display: none;
   }
+
+  .study-page{
+    display: flex;
+    justify-content: center;
+  }
+
+  .study-page .pomodoro-timer {
+    display: block;
+  }
+
+  .study-page .todo {
+    display: block;
+  }
+
+  .todo-form{
+    display: inline;
+  }
+
+  .completed {
+    text-decoration: line-through;
+}

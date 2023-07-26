@@ -77,10 +77,10 @@ class User {
 
     static async getUsersPokemons(id){
         const resp = await db.query(
-            "SELECT pokemon_name FROM pokemon p LEFT JOIN users_pokemon u ON p.pokemon_id = u.pokemon_id WHERE u.user_id = $1",[id]
+            "SELECT * FROM pokemon p LEFT JOIN users_pokemon u ON p.pokemon_id = u.pokemon_id WHERE u.user_id = $1",[id]
         )
         if (resp.rows.length > 0){
-            return resp.rows.map((p) => p.pokemon_name)
+            return resp.rows.map((p) => p)
         } else {
             throw new Error('User does not have any pokemon')
         }

@@ -11,7 +11,6 @@ const PageWrapper = () => {
       {/* Add common elements here, such as header, navigation, etc. */}
       <NavBar/>
       <header>
-      <h1>Pokrastemon Adventures</h1>
       </header>
       {/* Content of the specific page */}
       <Outlet/>

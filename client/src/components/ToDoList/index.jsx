@@ -1,26 +1,14 @@
 import React, {useState, useEffect} from "react";
+import ToDoItem from "../ToDoItem";
 
-const ToDoList = () => {
+const ToDoList = ({todos, setTodos}) => {
 
-    const [inputText, setInputText] = useState('')
-    const [todoList, setTodoList] = useState([])
-
-    function handleInput(e) {
-        setInputText(e.target.value)
-    }
-
-    function handleSubmit(e) {
-        e.preventDefault()
-        setTodoList([...todoList,{text:inputText}])
-        setInputText('')
-    }
-
-    return (
-        <div className="todo-form">
-        <form onSubmit={handleSubmit}>
-            <input type="text" className='todo-input' value={inputText} onChange={handleInput}/>
-            <button type="submit" className="todo-btn">Add</button>
-        </form>
+    return(
+        <div className="todo-container">
+        <ul className="todo-list">
+            {todos.map((task,i) => <ToDoItem setTodos={setTodos} todos={todos} task={task} key={i}/>
+            )}
+        </ul>
         </div>
     )
 }

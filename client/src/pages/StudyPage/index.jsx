@@ -26,7 +26,6 @@ const StudyPage = () => {
     </div>
     <div className="todo">
       <ToDoForm />
-      <ToDoList />
     </div>
     </div>
     </>

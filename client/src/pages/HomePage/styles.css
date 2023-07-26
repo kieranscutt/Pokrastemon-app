@@ -121,7 +121,8 @@ h3 {
   transition: transform 0.3s ease;
   color: #fff;
   position: relative; /* Add this line */
-}
+
+
 
 .inner-box-chest.opened {
   animation: chestOpenAnimation 1s forwards;
@@ -175,7 +176,7 @@ h3 {
 
 .pokeball {
   max-width: 70%;
-} */
+} 
 
 .study {
   max-width: 70%;

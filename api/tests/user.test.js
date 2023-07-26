@@ -79,6 +79,19 @@ describe("User route", () => {
         expect(token).toBeTruthy()
     })
 
+    //login with wrong password
+    it("should say wrong credentials", async () => {
+        const user = {
+            username: username,
+            password: "balls"
+        }
+        const response = await request(app)
+            .post("/users/login")
+            .send(user)
+            .expect(403)
+        expect(response.body.Error).toBe('Wrong username or password')
+    })
+
     //Get all users
     it("should get all users", async () => {
         const newUser2 = {
@@ -194,10 +207,22 @@ describe("User route", () => {
             expect(response.body.long_break_mins).toBe(settings.long_break_mins)
     })
 
+    //update with stupid settings
+    it("should fail to update settings", async () => {
+        const settings = {
+            cheeseBurger: "beans"
+        }
+        const response = await request(app)
+            .patch(`/users/pomodoro`)
+            .set({"Authorization": token})
+            .send(settings)
+            .expect(500)
+        expect(response.body.Error).toBe("Invalid settings")
+    })
+
     //pokemon
     //Add pokemon
     it("should add a pokemon to a user", async () => {
-        //await fetchPokemon()
         const id = {
             pokemon_id: 94
         }
@@ -208,6 +233,19 @@ describe("User route", () => {
             .expect(200)
         expect(response.body.pokemon_id).toBe(id.pokemon_id)  
     }, 20000)
+
+    //add a pokemon that isn't there
+    it("should fail to add a pokemon", async () => {
+        const id = {
+            pokemon_id: "cheese"
+        }
+        const response = await request(app)
+            .patch(`/users/pokemon`)
+            .set({"Authorization": token})
+            .send(id)
+            .expect(500)
+        expect(response.body.Error).toBe('invalid input syntax for type integer: "cheese"')
+    })
 
     //Display all pokemon
     it("should display all user pokemon", async () => {
@@ -252,6 +290,19 @@ describe("User route", () => {
             .set({"Authorization": token})
 
         expect(checkDel.body[0]).toBe('dragonite')
+    })
+
+    //Delete a pokemon that doesn't exist
+    it("should return an error", async () => {
+        const id = {
+            pokemon_id: "burger"
+        }
+        const response = await request(app)
+            .delete(`/users/pokemon`)
+            .set({"Authorization": token})
+            .send(id)
+            .expect(500)
+        expect(response.body.Error).toBe('invalid input syntax for type integer: "burger"')
     })
 
     //Logout

@@ -2,9 +2,9 @@
 
 const request = require("supertest")
 const app = require("../api.js")
-const db = require("../database/connect")
+const db = require("../database/connect.js")
 const fs = require('fs');
-const sql = fs.readFileSync('/Users/Guy 1/Desktop/liskov/lap3/project/Pokrastemon-app/api/database/setup.sql').toString();
+const sql = fs.readFileSync('/Users/Guy 1/Desktop/liskov/lap3/project/Pokrastemon-app/api/tests/mockDatabase/setupMock.sql').toString();
 const fetchPokemon = require('../database/fetchPokemon')
 
 describe("Pokemon route", () => {

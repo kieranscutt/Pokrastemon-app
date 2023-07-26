@@ -4,7 +4,7 @@ const app = require("../api.js")
 const db = require("../database/connect")
 const bcrypt = require('bcrypt')
 const fs = require('fs');
-const tokenSql = fs.readFileSync('/Users/Guy 1/Desktop/liskov/lap3/project/Pokrastemon-app/api/tests/userTest.sql').toString()
+const tokenSql = fs.readFileSync('/Users/Guy 1/Desktop/liskov/lap3/project/Pokrastemon-app/api/tests/mockDatabase/userTest.sql').toString()
 
 describe("User route", () => {
 

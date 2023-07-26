@@ -1,10 +1,12 @@
 const db = require('../database/connect')
 
 class User {
-    constructor({ user_id, username, password, profile_image_irl, keys, block_num, block_mins, short_break_mins, long_break_mins }) {
+    constructor({ user_id, username, password, firstName, lastName, profile_image_irl, keys, block_num, block_mins, short_break_mins, long_break_mins }) {
         this.user_id = user_id;
         this.username = username;
         this.password = password;
+        this.firstName = firstName
+        this.lastName = lastName
         this.profile_image_irl = profile_image_irl;
         this.keys = keys;
         this.block_num = block_num
@@ -15,10 +17,10 @@ class User {
 
     static async getUsers() {
         const resp = await db.query("SELECT user_id, username, profile_image_url, keys, block_num,block_mins,long_break_mins,short_break_mins FROM users")
-        if (resp.rows.length > 0) {
-            return resp.rows.map((u) => new User(u))
+        if (resp.rows.length == 0) {
+            throw new Error('There are no users')
         } else {
-            return new Error('There are no users')
+            return resp.rows.map((u) => new User(u))
         }
     }
 
@@ -39,10 +41,10 @@ class User {
     }
 
     static async createUser(data) {
-        const { username, password } = data
+        const { username, password, firstName, lastName } = data
         const resp = await db.query(
-            `INSERT INTO users (username,password)
-            VALUES ($1, $2) RETURNING user_id`,[username,password]
+            `INSERT INTO users (username,password,firstName,lastName)
+            VALUES ($1, $2,$3,$4) RETURNING user_id`,[username,password,firstName,lastName]
         )
         const id = resp.rows[0].user_id
         const newUser = await User.getOneById(id)

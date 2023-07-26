@@ -4,6 +4,8 @@ CREATE TABLE users (
     user_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     username VARCHAR(15) UNIQUE NOT NULL,
     password VARCHAR(60) NOT NULL,
+    firstName VARCHAR NOT NULL,
+    lastName VARCHAR NOT NULL,
     profile_image_url VARCHAR,
     keys INT DEFAULT 0,
     -- pomodoro settings

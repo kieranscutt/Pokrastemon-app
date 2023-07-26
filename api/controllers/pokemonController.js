@@ -7,9 +7,20 @@ class PokemonController{
             const pokemon = await Pokemon.getAllPokemon()
             res.status(200).send(pokemon)
         } catch (err) {
-            console.log(err)
+            //console.log(err)
+            res.status(404).json({Error: err.message})
+        }
+    }
+
+    static async addPokemon(req,res) {
+        try{
+            const data = req.body
+            const pokemon = await Pokemon.addPokemon(data)
+            res.status(201).send(pokemon)
+        } catch (err){
             res.status(500).json({Error: err.message})
         }
+        
     }
 
     static async getRandomPokemon(req,res) {
@@ -17,7 +28,7 @@ class PokemonController{
             const pokemon = await Pokemon.getRandomPokemon()
             res.status(200).send(pokemon)
         } catch (err) {
-            console.log(err)
+            //console.log(err)
             res.status(500).json({Error: err.message})
         }
     }
@@ -28,8 +39,8 @@ class PokemonController{
             const pokemon = await Pokemon.getPokemonByID(id)
             res.status(200).send(pokemon)
         } catch (err) {
-            console.log(err)
-            res.status(500).json({Error: err.message})
+            //console.log(err)
+            res.status(404).json({Error: err.message})
         }
     }
 }

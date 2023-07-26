@@ -1,10 +1,9 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import PageWrapper from './components/pageWrapper';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './components/nav/styles.css';
+import NavBar from './components/nav';
 import { HomePage, LibraryPage, ProfilePage, StudyPage, LoginPage } from './pages';
-// import './App.css';
 
 const App = () => {
   return (
@@ -19,7 +18,6 @@ const App = () => {
               <Route path='/library/:id' element={<LibraryPage />} />
               <Route path='*' element={<HomePage />} />
             </Route>
-            {/* <Route path="*" element={<NotFoundPage />} /> */}
           </Routes>
     </>
   );

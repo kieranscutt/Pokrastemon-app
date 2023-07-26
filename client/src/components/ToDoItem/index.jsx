@@ -15,15 +15,16 @@ const ToDoItem = ({task, setTodos, todos}) => {
             }
             return el
         }))
+        console.log(task.completed)
     }
 
     return(
         <li className="todo">
-        <span className={`todo-item ${task.completed} ? "completed" : ""}`}>
+        <span className={`todo-item ${task.completed ? "completed" : ""}`}>
         {task.text}
         </span>
-        <button className="delete-btn" onClick={deleteTask(task)}>Delete</button>
-        <button className="complete-btn" onClick={completeTask(task)}>
+        <button className="delete-btn" >Delete</button>
+        <button className="complete-btn" onClick={()=>completeTask(task)}>
         Complete
         </button>
         </li>

@@ -11,8 +11,10 @@ const ToDoForm = () => {
 
     function handleSubmit(e) {
         e.preventDefault()
-        setTodos([...todos,{text:inputText, completed: false}])
-        setInputText('')
+        if (inputText != ""){
+            setTodos([...todos,{text:inputText, completed: false}])
+            setInputText('')
+        }
     }
 
     return (

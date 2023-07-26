@@ -1,10 +1,12 @@
 const db = require('../database/connect')
 
 class User {
-    constructor({ user_id, username, password, profile_image_irl, keys, block_num, block_mins, short_break_mins, long_break_mins }) {
+    constructor({ user_id, username, password, firstName, lastName, profile_image_irl, keys, block_num, block_mins, short_break_mins, long_break_mins }) {
         this.user_id = user_id;
         this.username = username;
         this.password = password;
+        this.firstName = firstName
+        this.lastName = lastName
         this.profile_image_irl = profile_image_irl;
         this.keys = keys;
         this.block_num = block_num
@@ -15,10 +17,10 @@ class User {
 
     static async getUsers() {
         const resp = await db.query("SELECT user_id, username, profile_image_url, keys, block_num,block_mins,long_break_mins,short_break_mins FROM users")
-        if (resp.rows.length > 0) {
-            return resp.rows.map((u) => new User(u))
+        if (resp.rows.length == 0) {
+            throw new Error('There are no users')
         } else {
-            return new Error('There are no users')
+            return resp.rows.map((u) => new User(u))
         }
     }
 
@@ -39,10 +41,10 @@ class User {
     }
 
     static async createUser(data) {
-        const { username, password } = data
+        const { username, password, firstName, lastName } = data
         const resp = await db.query(
-            `INSERT INTO users (username,password)
-            VALUES ($1, $2) RETURNING user_id`,[username,password]
+            `INSERT INTO users (username,password,firstName,lastName)
+            VALUES ($1, $2,$3,$4) RETURNING user_id`,[username,password,firstName,lastName]
         )
         const id = resp.rows[0].user_id
         const newUser = await User.getOneById(id)
@@ -92,9 +94,15 @@ class User {
         return resp.rows[0]
     }
 
-    static async deletePokemon(pokemon_id,user_id) {
+    static async removePokemon(pokemon_id,user_id) {
         const resp = await db.query("DELETE FROM users_pokemon WHERE pokemon_id=$1 AND user_id=$2",[pokemon_id,user_id])
         return 'Pokemon removed from user'
+    }
+
+    async deleteUser() {
+        const resp = await db.query("DELETE FROM users_pokemon WHERE user_id = $1",[this.user_id])
+        const resp2 = await db.query("DELETE FROM users WHERE user_id = $1 RETURNING *",[this.user_id])
+        return new User(resp2.rows[0])
     }
 }
 

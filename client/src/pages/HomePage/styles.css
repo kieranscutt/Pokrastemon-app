@@ -28,11 +28,7 @@
     place-items: center;
     min-width: 320px;
     min-height: 100vh;
-  }
-  
-  h1 {
-    font-size: 3.2em;
-    line-height: 1.1;
+    background-color: #F6F4EB;
   }
   
   button {
@@ -67,3 +63,219 @@
     }
   }
   
+
+
+.home-page {
+  text-align: center;
+  padding: 5px 50px;
+}
+
+h3 {
+  padding-bottom: 20px;
+}
+
+
+.home-page p {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.home-page-links {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.outermost-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh; 
+  background-color: #749BC2; 
+  border-radius: 10px;
+  padding: 100px;
+  margin-bottom: 50px;
+}
+
+
+.outer-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 65vh;
+  width: 190vh;
+  background-color: #91C8E4; 
+  border-radius: 10px;
+  padding: 10px;
+
+}
+
+/* .inner-box-chest {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 200px;
+  border-radius: 10px;
+  margin: 10px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  color: #fff;
+  position: relative; /* Add this line */
+
+
+
+.inner-box-chest.opened {
+  animation: chestOpenAnimation 1s forwards;
+}
+
+.chest-container {
+  position: relative;
+  perspective: 1000px;
+}
+
+.chest-wrapper,
+.pokeball-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  backface-visibility: hidden;
+  transition: opacity 1s ease;
+  display: flex; /* Add this line */
+  justify-content: center; /* Add this line */
+  align-items: center; /* Add this line */
+}
+
+
+.opened .chest-wrapper {
+  opacity: 0;
+}
+
+.opened .pokeball-wrapper {
+  opacity: 1;
+}
+
+.pokeball-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1s ease;
+}
+
+.opened .pokeball-container {
+  opacity: 1;
+  pointer-events: initial;
+}
+
+.pokeball {
+  max-width: 70%;
+} 
+
+.study {
+  max-width: 70%;
+}
+
+.box-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.box-content {
+  padding: 20px; /* Add some padding to separate image and text */
+  text-align: center;
+  color: #fff;
+}
+
+/* Your existing CSS code */
+
+/* ... */
+
+.inner-box-chest {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 200px;
+  border-radius: 10px;
+  margin: 10px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  color: #fff;
+  position: relative;
+}
+
+.inner-box-chest.opened {
+  animation: chestOpenAnimation 1s forwards;
+}
+
+.chest-container {
+  position: relative;
+  perspective: 1000px;
+}
+
+.chest-wrapper,
+.pokeball-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  backface-visibility: hidden;
+  transition: opacity 1s ease, transform 1s ease; /* Add transform transition */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chest-wrapper img,
+.pokeball-wrapper img {
+  max-width: 100%;
+}
+
+.opened .chest-wrapper {
+  opacity: 0;
+  transform: rotateY(180deg); /* Add this line for chest rotation */
+}
+
+.opened .pokeball-wrapper {
+  opacity: 1;
+  transform: rotateY(0); /* Add this line for pokeball rotation */
+}
+
+.pokeball-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1s ease;
+}
+
+.opened .pokeball-container {
+  opacity: 1;
+  pointer-events: initial;
+}
+
+.pokeball {
+  max-width: 70%;
+}
+
+.study {
+  max-width: 70%;
+}
+
+.chest {
+  max-width: 90%;
+}
+

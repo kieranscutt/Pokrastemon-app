@@ -15,7 +15,7 @@ class UserController {
             const result = await User.createUser(data)
             res.status(201).send(result)
         } catch (err) {
-            console.log(err)
+            //console.log(err)
             res.status(500).json({ Error: err.message})
         }
     }
@@ -44,8 +44,8 @@ class UserController {
             const users = await User.getUsers()
             res.status(200).json(users)
         } catch (err) {
-            console.log(err)
-            res.status(500).json({Error: err.message})
+            //console.log(err)
+            res.status(404).json({Error: err.message})
         }
     }
 
@@ -76,6 +76,7 @@ class UserController {
             const user_id = req.tokenObj.user_id
             const settings = req.body
             const resp = await User.updatePomodoroSettings(user_id,settings)
+            delete resp.password
             res.status(200).send(resp)
         } catch (err) {
             res.status(500).json({Error: err.message})
@@ -89,7 +90,7 @@ class UserController {
             const resp = await User.addKey(user_id)
             res.status(200).send(resp)
         } catch (err) {
-            console.log(err)
+            //console.log(err)
             res.status(500).json({Error: err.message})
         }
     }
@@ -101,7 +102,7 @@ class UserController {
             const resp = await User.addPokemon(user_id,pokemon_id)
             res.status(200).send(resp)
         } catch (err) {
-            console.log(err)
+            //console.log(err)
             res.status(500).json({Error: err.message})
         }
     }
@@ -112,19 +113,19 @@ class UserController {
             const resp = await User.getUsersPokemons(user_id)
             res.status(200).send(resp)
         } catch (err) {
-            console.log(err)
-            res.status(500).json({Error: err.message})   
+            //console.log(err)
+            res.status(404).json({Error: err.message})   
         }
     }
 
-    static async deletePokemon(req,res) {
+    static async removePokemon(req,res) {
         try{
             const user_id = req.tokenObj.user_id
             const pokemon_id = req.body.pokemon_id
-            const resp = await User.deletePokemon(pokemon_id,user_id)
+            const resp = await User.removePokemon(pokemon_id,user_id)
             res.status(200).send(resp)
         } catch (err) {
-            console.log(err)
+            //console.log(err)
             res.status(500).json({Error: err.message})
         }
     }
@@ -136,6 +137,19 @@ class UserController {
           res.status(202).json({ message: response });
         } catch (err) {
           res.status(403).json({ Error: err.message });
+        }
+    }
+
+    static async deleteUser(req,res) {
+        try {
+            const user_id = req.tokenObj.user_id
+            const tokenObj = req.tokenObj;
+            const resp = await tokenObj.deleteToken();
+            const user = await User.getOneById(user_id)
+            const resp2 = await user.deleteUser(user_id)
+            res.status(204).json(resp2);
+        } catch (err) {
+            res.status(403).json({ Error: err.message });
         }
     }
 }

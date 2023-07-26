@@ -4,6 +4,8 @@ CREATE TABLE users (
     user_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     username VARCHAR(15) UNIQUE NOT NULL,
     password VARCHAR(60) NOT NULL,
+    firstName VARCHAR NOT NULL,
+    lastName VARCHAR NOT NULL,
     profile_image_url VARCHAR,
     keys INT DEFAULT 0,
     -- pomodoro settings
@@ -16,7 +18,6 @@ CREATE TABLE users (
 CREATE TABLE pokemon (
     pokemon_id INT NOT NULL PRIMARY KEY,
     pokemon_name VARCHAR,
-    pokedex_number INT UNIQUE NOT NULL,
     front_image_url VARCHAR,
     back_image_url VARCHAR,
     types VARCHAR ARRAY,

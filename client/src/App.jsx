@@ -6,6 +6,11 @@ import { HomePage, LibraryPage, ProfilePage, StudyPage, LoginPage } from './page
 import PageWrapper from './components/pageWrapper';
 
 const App = () => {
+    const collectedPokemons = [
+      { id: 25, name: 'Pikachu', description: 'An electric-type Pokémon.' },
+      { id: 4, name: 'Charmander', description: 'A fire-type Pokémon.' },
+      // Add more Pokémon data as needed
+    ];
   return (
     <>
           <Routes>
@@ -14,8 +19,8 @@ const App = () => {
               <Route path="login" element={<LoginPage />} />
               <Route path='study' element={<StudyPage />} />
               <Route path='profile' element={<ProfilePage />} />
-              <Route path='library' element={<LibraryPage />} />
-              <Route path='library/:id' element={<LibraryPage />} />
+              <Route path='/library' element={<LibraryPage collectedPokemons={collectedPokemons} />} />
+              <Route path='/library/:id' element={<LibraryPage collectedPokemons={collectedPokemons} />} />
               <Route path='*' element={<HomePage />} />
             </Route>
           </Routes>

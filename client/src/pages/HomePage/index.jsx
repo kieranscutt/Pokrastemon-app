@@ -1,29 +1,46 @@
 import React, { useState } from 'react';
-import './styles.css';
+import './styles.css'; 
 
-const HomePage = () => {
+import timer from '../../images/timer.png';
+import openChest from '../../images/openChest.png';
+import chest from '../../images/chest.png';
+
+const HomePageWithSpinner = () => {
   const [isChestOpened, setIsChestOpened] = useState(false);
 
   const handleChestClick = () => {
-    setIsChestOpened(true);
+    setIsChestOpened(!isChestOpened);
+  };
+
+  const handlePhotoClick = () => {
+    if (isChestOpened) {
+      setIsChestOpened(false);
+    } else {
+      // Add any specific functionality here that needs to be performed when the photo is clicked (if required).
+    }
   };
 
   return (
     <main className="home-page">
       <h2>Welcome to Pokrastemon Adventures, a pokemon themed procrastination app!</h2>
       <h3>Collect pokemon, eggs and chests during study!</h3>
-      {/* <div className="outermost-box">
+      <div className="outermost-box">
         <div className="outer-box">
           <div className="box-container">
-            <div className={`inner-box-study box-content`}>
-              <a href="/study">
+            <div
+              className={`inner-box-study box-content ${isChestOpened ? 'study-collapsed' : ''}`}
+              onClick={handleChestClick}
+            >
+              <div className="study-container">
                 <img
-                  className="study"
-                  src="https://o.remove.bg/downloads/04b76f40-f411-45db-80c8-8e408ac1c934/sum844m4nqc51-removebg-preview.png"
+                  className={`study ${isChestOpened ? 'collapsed' : ''}`}
+                  src={timer}
                   alt="Study"
                 />
-                <span>Study to get keys!</span>
-              </a>
+              </div>
+              <div className="text-container">
+                <span className="study-text">Study to get keys!</span>
+              </div>
             </div>
           </div>
           <div className="box-container">
@@ -31,26 +48,31 @@ const HomePage = () => {
               className={`inner-box-chest box-content ${isChestOpened ? 'opened' : ''}`}
               onClick={handleChestClick}
             >
-              {isChestOpened ? (
-                <img
-                  className="pokeball"
-                  src="https://file.removal.ai/preview/415efc44-3d0f-4c5a-a359-ad961c61f859-pokeball.png"
-                  alt="Pokeball"
-                />
-              ) : (
-                <img
-                  className="chest"
-                  src="https://pokejungle.net/wp-content/uploads/2022/11/Chest-Tease.png"
-                  alt="Chest"
-                />
-              )} */}
-              <span>Open chests to get pokemon!</span>
-            {/* </div>
+              <div className="chest-container">
+                <div className={`chest-wrapper ${isChestOpened ? 'opened' : ''}`}>
+                  <div className="photo-container" onClick={handlePhotoClick}>
+                    <div className={`photo ${isChestOpened ? 'flipped' : ''}`}>
+                      <img
+                        src={isChestOpened ? openChest : chest}
+                        alt={isChestOpened ? 'Open Chest' : 'Chest'}
+                        className="open-chest"
+                      />
+                    </div>
+                    {isChestOpened && (
+                      <div className="pokeball">
+                        <div className="pokeball__button"></div>
+                      </div>
+                    )}
+                  </div>
+                  <span className="chest-text">Open chests to get pokemon!</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div> */}
+      </div>
     </main>
   );
 };
 
-export default HomePage;
+export default HomePageWithSpinner;

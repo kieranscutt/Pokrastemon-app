@@ -60,10 +60,15 @@ class User {
 
     static async updatePomodoroSettings(id,settings) {
         const { block_mins, block_num, short_break_mins, long_break_mins } = settings
-        const resp = await db.query('UPDATE users SET block_mins = $1, block_num=$2,short_break_mins=$3,long_break_mins=$4 WHERE user_id = $5', 
-        [block_mins,block_num,short_break_mins,long_break_mins,id])
-        const updatedUser = await User.getOneById(id)
-        return updatedUser
+        if(block_mins && block_num && short_break_mins && long_break_mins) {
+            const resp = await db.query('UPDATE users SET block_mins = $1, block_num=$2,short_break_mins=$3,long_break_mins=$4 WHERE user_id = $5', 
+            [block_mins,block_num,short_break_mins,long_break_mins,id])
+            const updatedUser = await User.getOneById(id)
+            return updatedUser
+        } else {
+            throw new Error("Invalid settings")
+        }
+        
     }
 
     static async getUsersPokemons(id){

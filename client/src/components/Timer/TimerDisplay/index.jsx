@@ -70,9 +70,9 @@ function Display({timer, setTimer, start, setStart, pause}) {
     
     <div>
       
-        <span>{start ? timer.hours: '0'}: </span>
-        <span>{start ? timer.minutes: '20'}: </span>
-        <span>{start ? timer.seconds: '00'}</span>
+        <span role='timer'>{start ? timer.hours: '0'}: </span>
+        <span role='timer'>{start ? timer.minutes: '20'}: </span>
+        <span role='timer'>{start ? timer.seconds: '00'}</span>
       
     </div>
   )

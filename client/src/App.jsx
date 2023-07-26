@@ -2,14 +2,14 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './components/nav/styles.css';
-import NavBar from './components/nav';
 import { HomePage, LibraryPage, ProfilePage, StudyPage, LoginPage } from './pages';
+import PageWrapper from './components/pageWrapper';
 
 const App = () => {
   return (
     <>
           <Routes>
-            <Route path ="/" element={<NavBar />}>
+            <Route path ="/" element={<PageWrapper />}>
               <Route index element={<HomePage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path='/study' element={<StudyPage />} />

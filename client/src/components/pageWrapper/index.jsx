@@ -10,11 +10,8 @@ const PageWrapper = () => {
     <div>
       {/* Add common elements here, such as header, navigation, etc. */}
       <NavBar/>
-      <header>
-      </header>
       {/* Content of the specific page */}
       <Outlet/>
-
       {/* Add common elements here, such as footer, etc. */}
       <footer>
         {/* Add footer content here */}

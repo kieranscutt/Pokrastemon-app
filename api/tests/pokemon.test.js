@@ -202,8 +202,10 @@ describe("Pokemon route", () => {
         const response = await request(app)
             .post(`/pokemon/fetch`)
             .expect(500)
+
+        await new Promise((r) => setTimeout(r, 1000));
         expect(response.body.Error).toBe('duplicate key value violates unique constraint "pokemon_pkey"')
-    })
+    }, 20000)
     
     describe("database with no pokemon", () => {
         

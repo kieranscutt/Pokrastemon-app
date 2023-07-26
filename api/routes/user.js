@@ -11,7 +11,8 @@ userRouter.post("/login", userController.login)
 userRouter.use(authenticator)
 
 userRouter.get("/user", userController.getUserById)
-userRouter.patch("/keys", userController.addKey)
+userRouter.patch("/add-key", userController.addKey)
+userRouter.patch("/subtract-key", userController.subtractKeys)
 
 userRouter.get("/pomodoro", userController.getPomodoroSettings)
 userRouter.patch('/pomodoro',userController.updatePomodoroSettings)

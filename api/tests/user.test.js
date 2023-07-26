@@ -197,6 +197,7 @@ describe("User route", () => {
     //pokemon
     //Add pokemon
     it("should add a pokemon to a user", async () => {
+        //await fetchPokemon()
         const id = {
             pokemon_id: 94
         }
@@ -206,7 +207,7 @@ describe("User route", () => {
             .send(id)
             .expect(200)
         expect(response.body.pokemon_id).toBe(id.pokemon_id)  
-    })
+    }, 20000)
 
     //Display all pokemon
     it("should display all user pokemon", async () => {
@@ -294,6 +295,15 @@ describe("User route", () => {
             .set({"Authorization": token2})
             .expect(204)   
     })
+
+    //Test delete error
+    // it("should return an error", async () => {
+    //     const response = await request(app)
+    //         .delete(`/users/delete`)
+    //         .set({"Authorization": "testicularToken"})
+    //         .expect(403)
+    //     console.log(response.body)
+    // })
 })
 
 

@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { Navbar, Container, Nav } from 'react-bootstrap';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Outlet } from 'react-router-dom';
 import './styles.css';
 
 const NavBar = () => {
@@ -57,6 +57,7 @@ const NavBar = () => {
   }
 
   return (
+    <>
     <Navbar expand="lg" className="navbar-container">
       <Container fluid>
         <Nav>
@@ -89,6 +90,8 @@ const NavBar = () => {
         </Navbar.Collapse>
       </Container>
     </Navbar>
+    <Outlet />
+    </>
   );
 };
 

@@ -3,7 +3,8 @@ import { useState } from 'react';
 import { Timer, LootBox } from '../../components';
 
 const StudyPage = () => {
- 
+ const [keys, setKeys] = useState(0);
+ const [chest, setChest] = useState("closed")
 
 
   

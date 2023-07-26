@@ -1,6 +1,8 @@
 import "./styles.css";
 
 export default function LootBox() {
+
+  
   return (
     <div className="loot-box">
       <div className="chest">

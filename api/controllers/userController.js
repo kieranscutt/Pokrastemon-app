@@ -95,6 +95,17 @@ class UserController {
         }
     }
 
+    static async subtractKeys(req,res) {
+        try{
+            const user_id = req.tokenObj.user_id
+            const resp = await User.subtractKeys(user_id)
+            res.status(200).send(resp)
+        } catch (err) {
+            console.log(err)
+            res.status(500).json({Error: err.message})
+        }
+    }
+
     static async addPokemon(req,res) {
         try {
             const user_id = req.tokenObj.user_id

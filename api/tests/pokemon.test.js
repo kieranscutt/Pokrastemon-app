@@ -2,9 +2,9 @@
 
 const request = require("supertest")
 const app = require("../api.js")
-const db = require("../database/connect")
+const db = require("../database/connect.js")
 const fs = require('fs');
-const sql = fs.readFileSync('/Users/Guy 1/Desktop/liskov/lap3/project/Pokrastemon-app/api/database/setup.sql').toString();
+const sql = fs.readFileSync('/Users/Guy 1/Desktop/liskov/lap3/project/Pokrastemon-app/api/tests/mockDatabase/setupMock.sql').toString();
 const fetchPokemon = require('../database/fetchPokemon')
 
 describe("Pokemon route", () => {
@@ -202,8 +202,6 @@ describe("Pokemon route", () => {
         const response = await request(app)
             .post(`/pokemon/fetch`)
             .expect(500)
-
-        await new Promise((r) => setTimeout(r, 1000));
         expect(response.body.Error).toBe('duplicate key value violates unique constraint "pokemon_pkey"')
     }, 20000)
     
@@ -211,7 +209,7 @@ describe("Pokemon route", () => {
         
         //Test database if no pokemon
         it("should return an error", async() => {
-            await new Promise((r) => setTimeout(r, 3000));
+            await new Promise((r) => setTimeout(r, 5000));
             await db.query(sql)
             const response = await request(app)
                 .get(`/pokemon`)

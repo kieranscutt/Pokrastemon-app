@@ -57,6 +57,7 @@ class UserController {
             delete user.password
             res.status(200).send(user)
         } catch (err) {
+            //console.log(err)
             res.status(404).json({Error: err.message})
         }
     }
@@ -101,7 +102,7 @@ class UserController {
             const resp = await User.subtractKeys(user_id)
             res.status(200).send(resp)
         } catch (err) {
-            console.log(err)
+            //console.log(err)
             res.status(500).json({Error: err.message})
         }
     }

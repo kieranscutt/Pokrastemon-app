@@ -304,7 +304,7 @@ describe("User route", () => {
             .expect(200)
 
         expect(response.body.length).toBeGreaterThan(1)
-        expect(response.body[0]).toBe('gengar')
+        expect(response.body[0].pokemon_name).toBe('gengar')
     })
 
     //Display all pokemon but no pokemon
@@ -330,7 +330,7 @@ describe("User route", () => {
             .get(`/users/pokemon`)
             .set({"Authorization": token})
 
-        expect(checkDel.body[0]).toBe('dragonite')
+        expect(checkDel.body[0].pokemon_name).toBe('dragonite')
     })
 
     //Delete a pokemon that doesn't exist

@@ -1,7 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { Timer, LootBox } from '../../components';
-import SettingsModal from '../../components/SettingsModal';
+import { Timer, LootBox, SettingsModal, ToDoList, ToDoForm } from '../../components';
 import './styles.css'
 
 const StudyPage = () => {
@@ -17,16 +16,20 @@ const StudyPage = () => {
   }
 
   return (
-    <div>
-      <h1>Study Page</h1>
-
-      <SettingsModal show={modalStatus} handleClose={hideModal}>
-        </SettingsModal>
-
+    <>
+    <div className="study-page">
+    <div className='pomodoro-timer'>
       <Timer />
-      {/* <LootBox /> */}
+      <LootBox />
+      <SettingsModal show={modalStatus} handleClose={hideModal} />
       <button className='settings-btn' onClick={() => showModal()}>Configure your pomodoro</button>
     </div>
+    <div className="todo">
+      <ToDoForm />
+      <ToDoList />
+    </div>
+    </div>
+    </>
   );
 };
 

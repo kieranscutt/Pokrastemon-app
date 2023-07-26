@@ -34,14 +34,9 @@ class Pokemon {
     static async addPokemon(pokemon) {
         const { id, name, front_default, back_default, moveNames, typeNames} = pokemon
         const resp = await db.query("INSERT INTO pokemon(pokemon_id,pokemon_name,front_image_url,back_image_url,moves,types) VALUES ($1,$2,$3,$4,$5,$6) RETURNING pokemon_id",[id,name,front_default,back_default,moveNames,typeNames])
-        if(resp.rows.length == 1){
-            const pokeId = resp.rows[0].pokemon_id
-            const newPokemon = await Pokemon.getPokemonByID(pokeId)
-            return newPokemon
-        } else {
-            throw new Error("Failed to add pokemon")
-        }
-        
+        const pokeId = resp.rows[0].pokemon_id
+        const newPokemon = await Pokemon.getPokemonByID(pokeId)
+        return newPokemon 
     }
 
     static async getRandomPokemon(){

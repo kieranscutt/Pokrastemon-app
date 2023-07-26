@@ -94,6 +94,47 @@ describe("Pokemon route", () => {
         expect(response.body).toMatchObject(checkPokemon.body) 
     })
 
+    const garchompToSend = {
+        id: 445,
+        name: 'garchomp',
+        front_default: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/445.gif',
+        back_default: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/back/445.gif',
+        typeNames: [ 'dragon', 'ground' ],
+        moveNames: [
+          'swords-dance',   'cut',              'sand-attack',
+          'headbutt',       'tackle',           'body-slam',
+          'take-down',      'bite',             'roar',
+          'flamethrower',   'surf',             'hyper-beam',
+          'strength',       'dragon-rage',      'earthquake',
+          'dig',            'toxic',            'double-team',
+          'fire-blast',     'swift',            'rest',
+          'rock-slide',     'slash',            'substitute',
+          'snore',          'protect',          'scary-face',
+          'mud-slap',       'spikes',           'outrage',
+          'sandstorm',      'endure',           'false-swipe',
+          'swagger',        'fury-cutter',      'attract',
+          'sleep-talk',     'return',           'frustration',
+          'dragon-breath',  'iron-tail',        'metal-claw',
+          'hidden-power',   'twister',          'rain-dance',
+          'sunny-day',      'crunch',           'rock-smash',
+          'whirlpool',      'facade',           'helping-hand',
+          'brick-break',    'secret-power',     'rock-tomb',
+          'sand-tomb',      'aerial-ace',       'dragon-claw',
+          'mud-shot',       'natural-gift',     'fling',
+          'poison-jab',     'aqua-tail',        'dragon-pulse',
+          'dragon-rush',    'power-gem',        'earth-power',
+          'giga-impact',    'shadow-claw',      'thunder-fang',
+          'fire-fang',      'rock-climb',       'draco-meteor',
+          'iron-head',      'stone-edge',       'captivate',
+          'stealth-rock',   'hone-claws',       'round',
+          'incinerate',     'bulldoze',         'dragon-tail',
+          'dual-chop',      'confide',          'laser-focus',
+          'brutal-swing',   'stomping-tantrum', 'liquidation',
+          'breaking-swipe', 'scale-shot',       'scorching-sands',
+          'tera-blast'
+        ]
+      }
+
     //Add pokemon
     it("should add a pokemon", async () => {
         const garchomp = {
@@ -136,46 +177,6 @@ describe("Pokemon route", () => {
             ],
             egg_image_url: null
           }
-        const garchompToSend = {
-            id: 445,
-            name: 'garchomp',
-            front_default: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/445.gif',
-            back_default: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/back/445.gif',
-            typeNames: [ 'dragon', 'ground' ],
-            moveNames: [
-              'swords-dance',   'cut',              'sand-attack',
-              'headbutt',       'tackle',           'body-slam',
-              'take-down',      'bite',             'roar',
-              'flamethrower',   'surf',             'hyper-beam',
-              'strength',       'dragon-rage',      'earthquake',
-              'dig',            'toxic',            'double-team',
-              'fire-blast',     'swift',            'rest',
-              'rock-slide',     'slash',            'substitute',
-              'snore',          'protect',          'scary-face',
-              'mud-slap',       'spikes',           'outrage',
-              'sandstorm',      'endure',           'false-swipe',
-              'swagger',        'fury-cutter',      'attract',
-              'sleep-talk',     'return',           'frustration',
-              'dragon-breath',  'iron-tail',        'metal-claw',
-              'hidden-power',   'twister',          'rain-dance',
-              'sunny-day',      'crunch',           'rock-smash',
-              'whirlpool',      'facade',           'helping-hand',
-              'brick-break',    'secret-power',     'rock-tomb',
-              'sand-tomb',      'aerial-ace',       'dragon-claw',
-              'mud-shot',       'natural-gift',     'fling',
-              'poison-jab',     'aqua-tail',        'dragon-pulse',
-              'dragon-rush',    'power-gem',        'earth-power',
-              'giga-impact',    'shadow-claw',      'thunder-fang',
-              'fire-fang',      'rock-climb',       'draco-meteor',
-              'iron-head',      'stone-edge',       'captivate',
-              'stealth-rock',   'hone-claws',       'round',
-              'incinerate',     'bulldoze',         'dragon-tail',
-              'dual-chop',      'confide',          'laser-focus',
-              'brutal-swing',   'stomping-tantrum', 'liquidation',
-              'breaking-swipe', 'scale-shot',       'scorching-sands',
-              'tera-blast'
-            ]
-          }
         const response = await request(app)
             .post(`/pokemon/add`)
             .send(garchompToSend)
@@ -185,6 +186,23 @@ describe("Pokemon route", () => {
             .get(`/pokemon/${id}`)
             .expect(200)
         expect(response2.body).toMatchObject(garchomp)
+    })
+
+    //Add duplicate pokemon
+    it("should throw an error for adding a duplicate", async () => {
+        const response = await request(app)
+            .post(`/pokemon/add`)
+            .send(garchompToSend)
+            .expect(500)
+        expect(response.body.Error).toBe('duplicate key value violates unique constraint "pokemon_pkey"')
+    })
+
+    //Fetch pokemon error
+    it("should return an error", async() => {
+        const response = await request(app)
+            .post(`/pokemon/fetch`)
+            .expect(500)
+        expect(response.body.Error).toBe('duplicate key value violates unique constraint "pokemon_pkey"')
     })
     
     describe("database with no pokemon", () => {

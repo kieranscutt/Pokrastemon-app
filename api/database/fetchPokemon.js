@@ -1,7 +1,7 @@
 const db = require('./connect')
 const Pokemon = require('../models/Pokemon')
 
-const fetchPokemon = async() => {
+const fetchPokemon = async(req, res) => {
     for (let i = 1; i<152; i++){
         try{
             const resp = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}`)
@@ -13,12 +13,12 @@ const fetchPokemon = async() => {
             const typeNames = types.map((t) => t.type.name)
             const moveNames = moves.map((m) => m.move.name)
             const data = { id, name, front_default, back_default, typeNames, moveNames}
-            await Pokemon.addPokemon(data)
-        } catch (err) {
-            console.log(err)
-            throw err
-        }
-    }
+            const response = await Pokemon.addPokemon(data)
+        } catch(error) {
+            res.status(500).json({Error: error.message})
+            break
+        }  
+    }   
 }
 
 

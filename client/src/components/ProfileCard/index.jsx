@@ -1,6 +1,7 @@
 import React from 'react'
 
 export default function ProfileCard({ profile }) {
+    
     return (
         <>
         <h1>{profile.username}</h1>

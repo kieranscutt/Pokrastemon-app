@@ -23,15 +23,32 @@ class Pokemon {
 
     static async getPokemonByID(id){
         const resp = await db.query("SELECT * FROM pokemon WHERE pokemon_id = $1",[id])
-        const pokemon = new Pokemon(resp.rows[0])
-        return pokemon
+        if(resp.rows.length ==1){
+            const pokemon = new Pokemon(resp.rows[0])
+            return pokemon
+        } else {
+            throw new Error("unable to locate pokemon")
+        }
+    }
+
+    static async addPokemon(pokemon) {
+        const { id, name, front_default, back_default, moveNames, typeNames} = pokemon
+        const resp = await db.query("INSERT INTO pokemon(pokemon_id,pokemon_name,front_image_url,back_image_url,moves,types) VALUES ($1,$2,$3,$4,$5,$6) RETURNING pokemon_id",[id,name,front_default,back_default,moveNames,typeNames])
+        const pokeId = resp.rows[0].pokemon_id
+        const newPokemon = await Pokemon.getPokemonByID(pokeId)
+        return newPokemon 
     }
 
     static async getRandomPokemon(){
         const allPokemon = await db.query("SELECT * FROM pokemon")
-        let pokemon = allPokemon.rows[Math.floor(Math.random()*151)]
-        pokemon = await Pokemon.getPokemonByID(pokemon.pokemon_id)
-        return pokemon
+        if(allPokemon.rows.length>0){
+            let pokemon = allPokemon.rows[Math.floor(Math.random()*151)]
+            pokemon = await Pokemon.getPokemonByID(pokemon.pokemon_id)
+            return pokemon
+        } else {
+            throw new Error("unable to get a random pokemon")
+        }
+        
     }
 }
 

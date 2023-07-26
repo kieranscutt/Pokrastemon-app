@@ -54,9 +54,9 @@ body {
 .photo img {
   width: 120%;
   height: 120%;
-  object-fit: contain; /* Add this to maintain the original aspect ratio */
+  object-fit: contain; 
   transition: transform 0.6s;
-  position: absolute; /* Add this to position the image inside .photo */
+  position: absolute;
   top: 0;
   left: 0;
 }
@@ -186,9 +186,9 @@ body {
   top: 50%;
   left: 0;
   width: 100%;
-  height: 10px; /* Adjust the height of the horizontal line */
+  height: 10px;
   background: #000;
-  content: ''; /* Add this line to ensure the pseudo-element appears */
+  content: '';
 }
 
 .pokeball::before::after {
@@ -197,7 +197,7 @@ body {
   top: 50%;
   left: 0;
   width: 100%;
-  height: 10px; /* Adjust the height of the horizontal line */
+  height: 10px;
   background: #000;
 }
 
@@ -223,7 +223,7 @@ body {
 }
 
 @keyframes shake {
-  0 { transform: translate(0, 0) rotate(0); }
+  0% { transform: translate(0, 0) rotate(0); }
   20% { transform: translate(-10px, 0) rotate(-20deg); }
   30% { transform: translate(10px, 0) rotate(20deg); }
   50% { transform: translate(-10px, 0) rotate(-10deg); }

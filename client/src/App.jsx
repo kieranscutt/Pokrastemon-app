@@ -1,8 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import PageWrapper from './components/pageWrapper';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './components/Nav/styles.css';
+import './components/nav/styles.css';
 import { HomePage, LibraryPage, ProfilePage, StudyPage, LoginPage } from './pages';
 import NavBar from './components/Nav';
 
@@ -32,6 +31,7 @@ const App = () => {
     { id: 145, name: 'Zapdos', description: 'An electric-type legendary bird Pokémon.' },
 
   ];
+
   return (
     <>
         <NavBar/>
@@ -42,7 +42,8 @@ const App = () => {
             <Route path='/study' element={<StudyPage />} />
             <Route path='/profile' element={<ProfilePage />} />
             <Route path='/library/:id'  element={<LibraryPage collectedPokemons={collectedPokemons} />} />
-            <Route path='/library' element={<LibraryPage collectedPokemons={collectedPokemons} />} />            {/* <Route path="*" element={<NotFoundPage />} /> */}
+            <Route path='/library' element={<LibraryPage collectedPokemons={collectedPokemons} />} />            
+            {/* <Route path="*" element={<NotFoundPage />} /> */}
           </Routes>
         </PageWrapper>
     </>

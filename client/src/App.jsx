@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './components/nav/styles.css';
 import { HomePage, LibraryPage, ProfilePage, StudyPage, LoginPage } from './pages';
-import NavBar from './components/Nav';
+import NavBar from './components/nav';
 
 const App = () => {
     const collectedPokemons = [
@@ -46,8 +46,7 @@ const App = () => {
           path="/library/:id"
           element={<LibraryPage collectedPokemons={collectedPokemons} isLoggedIn={isLoggedIn} />}
         />
-
-        {/* <Route path="*" element={<NotFoundPage />} /> */}
+        <Route path="/*" element ={<HomePage/>} />
       </Routes>
     </>
   );

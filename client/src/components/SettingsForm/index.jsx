@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react"
 import '../../App.css'
+import NumDropdown from "../NumDropdown"
 
 const SettingsForm = ({handleClose}) => {
 
@@ -57,20 +58,21 @@ const SettingsForm = ({handleClose}) => {
     const resp = await fetch('https://pokrastemon-api.onrender.com/users/pomodoro', options)
     const data = await resp.json()
     if (resp.ok) {
-      alert('Settings saved')
-    } else {
         console.log(data)
+        alert('Settings saved')
+        handleClose()
+    } else {
+        alert('Please log in to save your settings.')
     }
   }
 
   const handleChange = (e) => {
-    const {id, value} = e.target
+    const {name, value} = e.target
     setSettings(prev => ({
         ...prev,
-        [id]: value
+        [name]: value
     }))
   }
-
 
   return (
     <div className='auth-form-container'>
@@ -78,17 +80,13 @@ const SettingsForm = ({handleClose}) => {
 
     <form className='auth-form-settings' onSubmit={handleSubmit}>
 
-      <label htmlFor="block_mins">Pomodoro length:</label>
-      <input id='block_mins' value={settings.block_mins || 1} onChange={handleChange} />
+      {<NumDropdown name='block_num' title='Number of pomodoros:' type='' value={settings.block_num} handleChange={handleChange} min={0} max={100} />}
 
-      <label htmlFor="block_num">Number of pomodoros:</label>
-      <input id='block_num' value={settings.block_num || 2} onChange={handleChange} />
+      {<NumDropdown name='block_mins' title='Pomodoro length:' type='' value={settings.block_mins} handleChange={handleChange} min={0} max={100} />}
 
-      <label htmlFor="short_break_mins">Short break:</label>
-      <input id='short_break_mins' value={settings.short_break_mins || 3} onChange={handleChange} />
+      {<NumDropdown name='short_break_mins' title='Short break length:' type='minutes' value={settings.short_break_mins} handleChange={handleChange} min={0} max={100} />}
 
-      <label htmlFor="long_break_mins">Long break:</label>
-      <input id='long_break_mins' value={settings.long_break_mins || 4} onChange={handleChange} />
+      {<NumDropdown name='short_break_mins' title='Long break length:' type='minutes' value={settings.long_break_mins} handleChange={handleChange} min={0} max={100} />}
 
       <button type='submit'>Save</button>
       <button type="button" onClick={handleClose}>Close</button>

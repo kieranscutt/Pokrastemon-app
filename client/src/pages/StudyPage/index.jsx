@@ -24,7 +24,7 @@ const StudyPage = () => {
         </SettingsModal>
 
       <Timer />
-      <LootBox />
+      {/* <LootBox /> */}
       <button className='settings-btn' onClick={() => showModal()}>Configure your pomodoro</button>
     </div>
   );

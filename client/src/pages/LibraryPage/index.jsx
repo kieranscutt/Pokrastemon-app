@@ -1,20 +1,20 @@
 import React from 'react';
+import './styles.css';
 
 const LibraryPage = ({ collectedPokemons }) => {
-  if (!collectedPokemons || !Array.isArray(collectedPokemons) || collectedPokemons.length === 0) {
-    return (
-      <div>
-        <h1>My Pokémon Library</h1>
-        <p>Welcome, Trainer! You haven't collected any Pokémon yet. Get out there and catch 'em all by studying!</p>
-      </div>
-    );
-  }
-
   return (
-    <div>
-      <h1>My Pokémon Library</h1>
-      <p>Welcome, Trainer! Below is a list of Pokémon you have collected on your journey. Gotta catch 'em all!</p>
-      <div className="pokemon-collection">
+    <div className='pokemon-library'>
+      <h1>Welcome to Your Pokémon Library</h1>
+      <div className='pokemon-grid'>
+        <p>
+          {collectedPokemons.length === 0 ? (
+            "You haven't collected any Pokémon yet. Get out there and catch 'em all by opening chests from studying!"
+          ) : (
+            "Below is a list of Pokémon you have collected on your journey. Gotta catch 'em all by opening chests from studying!"
+          )}
+        </p>
+      </div>
+      <div className='pokemon-card-container'>
         {collectedPokemons.map((pokemon) => (
           <div key={pokemon.id} className="pokemon-card">
             <h2>{pokemon.name}</h2>

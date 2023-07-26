@@ -15,13 +15,6 @@ describe("User route", () => {
 
     let username = ""
     let password = ""
-    let profile_image_irl = ""
-    let keys = ""
-    let user_id = ""
-    let block_mins = ""
-    let block_num = ""
-    let short_break_mins = ""
-    let long_break_mins = ""
 
     const newUser = {
         username: "test",
@@ -441,13 +434,13 @@ describe("User route", () => {
         })
 
         //breaking logout
-        // it("should fail to logout", async () => {
-        //     const response = await request(app)
-        //         .delete(`/users/logout`)
-        //         .set({"Authorization": "testicularToken"})
-        //         .expect(403)
-        //     console.log(response.body)
-        // })
+        it("should fail to logout", async () => {
+            const response = await request(app)
+                .delete(`/users/logout`)
+                .set({"Authorization": "testicularToken"})
+                .expect(403)
+            expect(response.body.Error).toBe("Cannot destructure property 'user_id' of 'undefined' as it is undefined.")
+        })
 
         //breaking delete user
         it("should fail to delete user", async () => {

@@ -145,6 +145,8 @@ class UserController {
     static async logout(req, res) {
         try {
           const tokenObj = req.tokenObj;
+          const user_id = req.tokenObj.user_id
+          const user = await User.getOneById(user_id)
           const response = await tokenObj.deleteToken();
           res.status(202).json({ message: response });
         } catch (err) {

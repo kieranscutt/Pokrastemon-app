@@ -4,14 +4,14 @@
   }
 
   .navbar {
-    background-color: #0A6EBD;
+    background-color: #4682A9;
     margin-bottom: 20px;
     height: 100px;
     font-size: 1.3rem;
   }
 
   #navbar-nav {
-    background-color: #0A6EBD;
+    background-color: #4682A9;
 
   }
 
@@ -31,13 +31,14 @@
   }
 
    .navbar-container {
-    background-color: #0a6ebd;
+    background-color: #4682A9;
     margin-bottom: 20px;
     height: 100px;
     font-size: 1.3rem;
     display: flex;
-    align-items: center; /* Add this to vertically center the content */
+    align-items: center;
   }
+  
   .navbar-content {
     display: flex;
     align-items: center;
@@ -57,4 +58,7 @@
     padding-left: 100px;
 
   }
+
+
+
 

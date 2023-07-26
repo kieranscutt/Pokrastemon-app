@@ -12,6 +12,7 @@ const NavBar = () => {
     { title: 'Study', path: '/study' },
     { title: 'Profile', path: '/profile' },
     { title: 'Library', path: '/library' },
+    { title: 'Login', path: '/login' },
   ];
 
   const [keyCount,setKeyCount] = useState(0)

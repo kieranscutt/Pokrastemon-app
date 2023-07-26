@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './components/nav/styles.css';
@@ -17,35 +17,38 @@ const App = () => {
     { id: 151, name: 'Mew', description: 'A psychic-type mythical Pokémon.' },
     { id: 146, name: 'Moltres', description: 'A fire-type legendary bird Pokémon.' },
     { id: 145, name: 'Zapdos', description: 'An electric-type legendary bird Pokémon.' },
-    { id: 143, name: 'Snorlax', description: 'A normal-type Pokémon.' },
-    { id: 146, name: 'Moltres', description: 'A fire-type legendary bird Pokémon.' },
-    { id: 145, name: 'Zapdos', description: 'An electric-type legendary bird Pokémon.' },
-    { id: 143, name: 'Snorlax', description: 'A normal-type Pokémon.' },
-    { id: 146, name: 'Moltres', description: 'A fire-type legendary bird Pokémon.' },
-    { id: 145, name: 'Zapdos', description: 'An electric-type legendary bird Pokémon.' },
-    { id: 143, name: 'Snorlax', description: 'A normal-type Pokémon.' },
-    { id: 146, name: 'Moltres', description: 'A fire-type legendary bird Pokémon.' },
-    { id: 145, name: 'Zapdos', description: 'An electric-type legendary bird Pokémon.' },
-    { id: 143, name: 'Snorlax', description: 'A normal-type Pokémon.' },
-    { id: 146, name: 'Moltres', description: 'A fire-type legendary bird Pokémon.' },
-    { id: 145, name: 'Zapdos', description: 'An electric-type legendary bird Pokémon.' },
 
   ];
 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+
+  }
+
+
+
+
   return (
     <>
-        <NavBar/>
-        <PageWrapper>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path='/study' element={<StudyPage />} />
-            <Route path='/profile' element={<ProfilePage />} />
-            <Route path='/library/:id'  element={<LibraryPage collectedPokemons={collectedPokemons} />} />
-            <Route path='/library' element={<LibraryPage collectedPokemons={collectedPokemons} />} />            
-            {/* <Route path="*" element={<NotFoundPage />} /> */}
-          </Routes>
-        </PageWrapper>
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/study" element={<StudyPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route
+          path="/library"
+          element={<LibraryPage collectedPokemons={collectedPokemons} isLoggedIn={isLoggedIn} />}
+        />
+        <Route
+          path="/library/:id"
+          element={<LibraryPage collectedPokemons={collectedPokemons} isLoggedIn={isLoggedIn} />}
+        />
+
+        {/* <Route path="*" element={<NotFoundPage />} /> */}
+      </Routes>
     </>
   );
 };

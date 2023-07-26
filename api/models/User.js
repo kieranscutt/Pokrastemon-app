@@ -55,7 +55,11 @@ class User {
         const resp = await db.query(`
             SELECT block_num, block_mins, long_break_mins, short_break_mins
             FROM users WHERE user_id = $1`, [id])
-        return resp.rows[0]
+        if(resp.rows[0]) {
+            return resp.rows[0]
+        } else {
+            throw new Error("unable to get settings")
+        }
     }
 
     static async updatePomodoroSettings(id,settings) {
@@ -73,10 +77,10 @@ class User {
 
     static async getUsersPokemons(id){
         const resp = await db.query(
-            "SELECT pokemon_name FROM pokemon p LEFT JOIN users_pokemon u ON p.pokemon_id = u.pokemon_id WHERE u.user_id = $1",[id]
+            "SELECT * FROM pokemon p LEFT JOIN users_pokemon u ON p.pokemon_id = u.pokemon_id WHERE u.user_id = $1",[id]
         )
         if (resp.rows.length > 0){
-            return resp.rows.map((p) => p.pokemon_name)
+            return resp.rows.map((p) => p)
         } else {
             throw new Error('User does not have any pokemon')
         }
@@ -96,8 +100,7 @@ class User {
         let currentKeys = await db.query("SELECT keys FROM users WHERE user_id = $1", [id])
         currentKeys = currentKeys.rows[0].keys
         //only subtracts if they have at least 3 
-        let newKeys = currentKeys<=0 ? 0 : (currentKeys<3 ? currentKeys : currentKeys-3)
-        newKeys = newKeys<0 ? 0 : newKeys 
+        let newKeys = currentKeys<=0 ? 0 : (currentKeys<3 ? currentKeys : currentKeys-3) 
         await db.query("UPDATE users SET keys = $1 WHERE user_id = $2", [newKeys,id])
     
         const updatedUser = await User.getOneById(id)

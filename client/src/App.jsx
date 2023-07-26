@@ -1,17 +1,15 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import PageWrapper from './components/pageWrapper';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './components/nav/styles.css';
 import { HomePage, LibraryPage, ProfilePage, StudyPage, LoginPage } from './pages';
-// import './App.css';
-import NavBar from './components/nav/index';
+import PageWrapper from './components/pageWrapper';
 
 const App = () => {
   return (
     <>
           <Routes>
-            <Route path ="/" element={<NavBar />}>
+            <Route path ="/" element={<PageWrapper />}>
               <Route index element={<HomePage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path='/study' element={<StudyPage />} />
@@ -21,7 +19,6 @@ const App = () => {
               <Route path='/library/:id' element={<LibraryPage />} />
               <Route path='*' element={<HomePage />} />
             </Route>
-            {/* <Route path="*" element={<NotFoundPage />} /> */}
           </Routes>
     </>
   );

@@ -4,21 +4,33 @@ import { ProfileCard } from '../../components';
 
 
 const ProfilePage = () => {
-const {id} = useParams();
-const [profile, setProfile] = useState([]);
+const {user_id} = useParams();
+const [profile, setProfile] = useState({});
+const token = localStorage.getItem('token')
+const loggedIn = token ? true : false
 
 
-useEffect(() => {
-
+ 
   async function displayUser() {
-    const resp = await fetch(`https://pokrastemon-api.onrender.com/users/${id}`);
+    const options ={
+      method: 'GET',
+      headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: token
+      },
+  }
+    const resp = await fetch(`https://pokrastemon-api.onrender.com/users/${user_id}`, options);
     const data = await resp.json();
     setProfile(data)
-}
+}   
 
-displayUser();
+useEffect(() => {
+  if (loggedIn) {
+      displayUser()
+  }
+},[])
 
-}, []);
 
   return (
     <div>

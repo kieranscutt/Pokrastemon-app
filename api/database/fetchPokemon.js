@@ -1,4 +1,5 @@
 const db = require('./connect')
+const Pokemon = require('../models/Pokemon')
 
 const fetchPokemon = async() => {
     for (let i = 1; i<152; i++){
@@ -11,9 +12,11 @@ const fetchPokemon = async() => {
             const front_default = versions["generation-v"]["black-white"].animated.front_default
             const typeNames = types.map((t) => t.type.name)
             const moveNames = moves.map((m) => m.move.name)
-            await db.query("INSERT INTO pokemon(pokemon_id,pokemon_name,front_image_url,back_image_url,moves,types) VALUES ($1,$2,$3,$4,$5,$6)",[id,name,front_default,back_default,moveNames,typeNames])
+            const data = { id, name, front_default, back_default, typeNames, moveNames}
+            await Pokemon.addPokemon(data)
         } catch (err) {
-
+            console.log(err)
+            throw err
         }
     }
 }

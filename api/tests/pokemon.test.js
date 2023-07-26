@@ -76,7 +76,7 @@ describe("Pokemon route", () => {
 
     //Get one by id but bad id
     it("should return not found", async () => {
-        const id = 300
+        const id = 445
         const response = await request(app)
             .get(`/pokemon/${id}`)
             .expect(404)
@@ -93,18 +93,119 @@ describe("Pokemon route", () => {
             .get(`/pokemon/${id}`)
         expect(response.body).toMatchObject(checkPokemon.body) 
     })
+
+    //Add pokemon
+    it("should add a pokemon", async () => {
+        const garchomp = {
+            pokemon_id: 445,
+            pokemon_name: 'garchomp',
+            front_image_url: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/445.gif',
+            back_image_url: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/back/445.gif',
+            moves: [
+              'swords-dance',   'cut',              'sand-attack',
+              'headbutt',       'tackle',           'body-slam',
+              'take-down',      'bite',             'roar',
+              'flamethrower',   'surf',             'hyper-beam',
+              'strength',       'dragon-rage',      'earthquake',
+              'dig',            'toxic',            'double-team',
+              'fire-blast',     'swift',            'rest',
+              'rock-slide',     'slash',            'substitute',
+              'snore',          'protect',          'scary-face',
+              'mud-slap',       'spikes',           'outrage',
+              'sandstorm',      'endure',           'false-swipe',
+              'swagger',        'fury-cutter',      'attract',
+              'sleep-talk',     'return',           'frustration',
+              'dragon-breath',  'iron-tail',        'metal-claw',
+              'hidden-power',   'twister',          'rain-dance',
+              'sunny-day',      'crunch',           'rock-smash',
+              'whirlpool',      'facade',           'helping-hand',
+              'brick-break',    'secret-power',     'rock-tomb',
+              'sand-tomb',      'aerial-ace',       'dragon-claw',
+              'mud-shot',       'natural-gift',     'fling',
+              'poison-jab',     'aqua-tail',        'dragon-pulse',
+              'dragon-rush',    'power-gem',        'earth-power',
+              'giga-impact',    'shadow-claw',      'thunder-fang',
+              'fire-fang',      'rock-climb',       'draco-meteor',
+              'iron-head',      'stone-edge',       'captivate',
+              'stealth-rock',   'hone-claws',       'round',
+              'incinerate',     'bulldoze',         'dragon-tail',
+              'dual-chop',      'confide',          'laser-focus',
+              'brutal-swing',   'stomping-tantrum', 'liquidation',
+              'breaking-swipe', 'scale-shot',       'scorching-sands',
+              'tera-blast'
+            ],
+            egg_image_url: null
+          }
+        const garchompToSend = {
+            id: 445,
+            name: 'garchomp',
+            front_default: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/445.gif',
+            back_default: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/back/445.gif',
+            typeNames: [ 'dragon', 'ground' ],
+            moveNames: [
+              'swords-dance',   'cut',              'sand-attack',
+              'headbutt',       'tackle',           'body-slam',
+              'take-down',      'bite',             'roar',
+              'flamethrower',   'surf',             'hyper-beam',
+              'strength',       'dragon-rage',      'earthquake',
+              'dig',            'toxic',            'double-team',
+              'fire-blast',     'swift',            'rest',
+              'rock-slide',     'slash',            'substitute',
+              'snore',          'protect',          'scary-face',
+              'mud-slap',       'spikes',           'outrage',
+              'sandstorm',      'endure',           'false-swipe',
+              'swagger',        'fury-cutter',      'attract',
+              'sleep-talk',     'return',           'frustration',
+              'dragon-breath',  'iron-tail',        'metal-claw',
+              'hidden-power',   'twister',          'rain-dance',
+              'sunny-day',      'crunch',           'rock-smash',
+              'whirlpool',      'facade',           'helping-hand',
+              'brick-break',    'secret-power',     'rock-tomb',
+              'sand-tomb',      'aerial-ace',       'dragon-claw',
+              'mud-shot',       'natural-gift',     'fling',
+              'poison-jab',     'aqua-tail',        'dragon-pulse',
+              'dragon-rush',    'power-gem',        'earth-power',
+              'giga-impact',    'shadow-claw',      'thunder-fang',
+              'fire-fang',      'rock-climb',       'draco-meteor',
+              'iron-head',      'stone-edge',       'captivate',
+              'stealth-rock',   'hone-claws',       'round',
+              'incinerate',     'bulldoze',         'dragon-tail',
+              'dual-chop',      'confide',          'laser-focus',
+              'brutal-swing',   'stomping-tantrum', 'liquidation',
+              'breaking-swipe', 'scale-shot',       'scorching-sands',
+              'tera-blast'
+            ]
+          }
+        const response = await request(app)
+            .post(`/pokemon/add`)
+            .send(garchompToSend)
+            .expect(201)
+        const id = 445
+        const response2 = await request(app)
+            .get(`/pokemon/${id}`)
+            .expect(200)
+        expect(response2.body).toMatchObject(garchomp)
+    })
     
     describe("database with no pokemon", () => {
         
         //Test database if no pokemon
         it("should return an error", async() => {
-        await new Promise((r) => setTimeout(r, 4000));
-        await db.query(sql)
-        const response = await request(app)
-            .get(`/pokemon`)
-            .expect(404)
-        expect(response.body.Error).toBe('There are no pokemon')
+            await new Promise((r) => setTimeout(r, 3000));
+            await db.query(sql)
+            const response = await request(app)
+                .get(`/pokemon`)
+                .expect(404)
+            expect(response.body.Error).toBe('There are no pokemon')
         },30000)
+
+        //Random pokemon with no pokemon
+        it("should return an error", async () => {
+            const response = await request(app)
+                .get(`/pokemon/random`)
+                .expect(500)
+            expect(response.body.Error).toBe("unable to get a random pokemon")
+        })
     })
     
 })

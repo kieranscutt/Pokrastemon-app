@@ -1,28 +1,40 @@
 import React from 'react';
 import './styles.css';
 
-const LibraryPage = ({ collectedPokemons }) => {
+const LibraryPage = ({ collectedPokemons, isLoggedIn }) => {
   return (
     <div className='pokemon-library'>
       <h1>Welcome to Your Pokémon Library</h1>
-      <div className='pokemon-grid'>
-        <p>
+      {isLoggedIn ? (
+        <>
           {collectedPokemons.length === 0 ? (
-            "You haven't collected any Pokémon yet. Get out there and catch 'em all by opening chests from studying!"
+            <p>
+              You haven't collected any Pokémon yet. Get out there and catch 'em all by opening
+              chests from studying!
+            </p>
           ) : (
-            "Below is a list of Pokémon you have collected on your journey. Gotta catch 'em all by opening chests from studying!"
+            <>
+              <div className='pokemon-grid'>
+                <p>Below is a list of Pokémon you have collected on your journey.</p>
+              </div>
+              <div className='pokemon-card-container'>
+                {collectedPokemons.map((pokemon) => (
+                  <div key={pokemon.id} className='pokemon-card'>
+                    <h2>{pokemon.name}</h2>
+                    <img
+                      src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
+                      alt={pokemon.name}
+                    />
+                    <p>{pokemon.description}</p>
+                  </div>
+                ))}
+              </div>
+            </>
           )}
-        </p>
-      </div>
-      <div className='pokemon-card-container'>
-        {collectedPokemons.map((pokemon) => (
-          <div key={pokemon.id} className="pokemon-card">
-            <h2>{pokemon.name}</h2>
-            <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`} alt={pokemon.name} />
-            <p>{pokemon.description}</p>
-          </div>
-        ))}
-      </div>
+        </>
+      ) : (
+        <p> Please <a href="./login">log in</a> to view your Pokémon library!</p>
+      )}
     </div>
   );
 };

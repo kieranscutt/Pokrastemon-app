@@ -14,7 +14,7 @@ export default function LoginForm(props) {
   return (
     <div className='auth-form-container'>
       <h2 className='form-title'>Login</h2>
-    <form className='auth-form-login' onSubmit={handleSubmit}>
+    <form className='auth-form-login' onSubmit={handleSubmit}  role='loginForm'>
       <label htmlFor="email">Email:</label>
       <input type="email" id='email' value={email} onChange={(e) => setEmail(e.target.value)} />
       <label htmlFor="password">Password:</label>

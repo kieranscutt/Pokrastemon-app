@@ -34,7 +34,7 @@ export const useKeys = () => useContext(KeysContext);
 const SettingsContext = createContext()
 
 export const SettingsProvider = ({ children }) => {
-    const [settings, setSettings] = useState(0);
+    const [settings, setSettings] = useState({});
     return (
         <SettingsContext.Provider value={{settings, setSettings}}>
             {children}

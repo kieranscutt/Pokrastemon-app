@@ -52,8 +52,6 @@ const NavBar = () => {
       localStorage.removeItem('token')
       setToken()
       setKeys(0)
-      console.log(token) 
-      console.log(keys) 
       navigate('/login')
     } else {
       console.log(data)

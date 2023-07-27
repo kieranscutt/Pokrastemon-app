@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from "react"
 import '../../App.css'
 import NumDropdown from "../NumDropdown"
+import { useSettings,useAuth } from "../../contexts"
 
 const SettingsForm = ({handleClose}) => {
 
-  const [settings, setSettings] = useState({})
-  const token = localStorage.getItem('token')
-  const loggedIn = token ? true : false
+  const { settings, setSettings } = useSettings()
+  const { token } = useAuth()
 
   const getSettings = async () => {
     const options ={
@@ -33,7 +33,7 @@ const SettingsForm = ({handleClose}) => {
   }
 
   useEffect(() => {
-    if (loggedIn) {
+    if (token) {
         getSettings()
     }
   },[])

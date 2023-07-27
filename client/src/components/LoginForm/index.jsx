@@ -30,8 +30,7 @@ export default function LoginForm(props) {
     if (resp.ok) {
       localStorage.setItem("token", data.token);
       setToken(data.token)
-      console.log(token)
-      navigate('/profile')
+      navigate('/study')
     } else {
       alert('Incorrect username or password')
     }

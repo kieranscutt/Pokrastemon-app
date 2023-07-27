@@ -25,8 +25,8 @@ export default function Timer() {
                 setTimer(startTime)
             } else {
                 const startTime= {
-                    seconds: 3,
-                    minutes: 1,
+                    seconds: 30,
+                    minutes: 0,
                     hours: 0
                 }
                 setTimer(startTime)

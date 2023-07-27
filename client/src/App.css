@@ -593,3 +593,10 @@ body {
   text-decoration: line-through;
 }
 
+.todo-icon path {
+  fill: #4682A9
+}
+
+.key-icon path {
+  fill: #ffff
+}

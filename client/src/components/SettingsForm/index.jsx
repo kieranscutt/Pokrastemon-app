@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from "react"
 import '../../App.css'
 import NumDropdown from "../NumDropdown"
+import { useSettings,useAuth } from "../../contexts"
 
 const SettingsForm = ({handleClose}) => {
 
-  const [settings, setSettings] = useState({})
-  const token = localStorage.getItem('token')
-  const loggedIn = token ? true : false
+  const { settings, setSettings } = useSettings()
+  const { token } = useAuth()
 
   const getSettings = async () => {
     const options ={
@@ -14,7 +14,7 @@ const SettingsForm = ({handleClose}) => {
         headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: token
+        Authorization: token || localStorage.getItem('token')
         },
     }
     const resp = await fetch('https://pokrastemon-api.onrender.com/users/pomodoro', options)
@@ -33,7 +33,7 @@ const SettingsForm = ({handleClose}) => {
   }
 
   useEffect(() => {
-    if (loggedIn) {
+    if (token || localStorage.getItem('token')) {
         getSettings()
     }
   },[])
@@ -46,7 +46,7 @@ const SettingsForm = ({handleClose}) => {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: token
+        Authorization: token || localStorage.getItem('token')
       },
       body: JSON.stringify({
         block_num: settings.block_num,
@@ -80,13 +80,13 @@ const SettingsForm = ({handleClose}) => {
 
     <form className='auth-form-settings' onSubmit={handleSubmit}>
 
-      {<NumDropdown name='block_num' title='Number of pomodoros:' type='' value={settings.block_num} handleChange={handleChange} min={0} max={100} />}
+      {<NumDropdown name='block_num' title='Number of pomodoros:' type='' value={settings.block_num || 4} handleChange={handleChange} min={0} max={100} />}
 
-      {<NumDropdown name='block_mins' title='Pomodoro length:' type='' value={settings.block_mins} handleChange={handleChange} min={0} max={100} />}
+      {<NumDropdown name='block_mins' title='Pomodoro length:' type='' value={settings.block_mins || 20} handleChange={handleChange} min={0} max={100} />}
 
-      {<NumDropdown name='short_break_mins' title='Short break length:' type='minutes' value={settings.short_break_mins} handleChange={handleChange} min={0} max={100} />}
+      {<NumDropdown name='short_break_mins' title='Short break length:' type='minutes' value={settings.short_break_mins || 5} handleChange={handleChange} min={0} max={100} />}
 
-      {<NumDropdown name='short_break_mins' title='Long break length:' type='minutes' value={settings.long_break_mins} handleChange={handleChange} min={0} max={100} />}
+      {<NumDropdown name='short_break_mins' title='Long break length:' type='minutes' value={settings.long_break_mins || 15} handleChange={handleChange} min={0} max={100} />}
 
       <button type='submit'>Save</button>
       <button type="button" onClick={handleClose}>Close</button>

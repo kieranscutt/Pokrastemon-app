@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Outlet } from 'react-router';
 
 const PageWrapper = () => {
+  console.log('hi')
   return (
     <div>
       {/* Add common elements here, such as header, navigation, etc. */}

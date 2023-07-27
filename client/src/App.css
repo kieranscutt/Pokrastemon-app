@@ -184,6 +184,7 @@ button{
 button:hover{
   color: #d14f59;
   background-color: white;
+  border: 1px solid #d14f59 ;
 }
 
 /* form > button:hover{
@@ -572,8 +573,7 @@ body {
   display: flex;
   justify-content: center;
 }
-.study-page .chest{
-}
+
 
 .study-page .todo {
   display: block;
@@ -624,9 +624,7 @@ body {
   padding: 8px;
   
 }
-.delete-btn{
 
-}
 
 .key-icon path {
   fill: #ffff

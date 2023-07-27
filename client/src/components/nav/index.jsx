@@ -1,11 +1,14 @@
 // NavBar.js
 
 import React, { useEffect, useState } from 'react';
-import { Navbar, Container, Nav } from 'react-bootstrap';
-import { useLocation } from 'react-router-dom';
+import { Navbar, Container, Nav, } from 'react-bootstrap';
+import { useLocation, Outlet, useNavigate } from 'react-router-dom';
 import '../../App.css'
 
+import { useAuth, useKeys } from '../../contexts'
+
 const NavBar = () => {
+  const navigate = useNavigate()
   const location = useLocation();
   const navLinks = [
     { title: 'Home', path: '/' },
@@ -14,14 +17,11 @@ const NavBar = () => {
     { title: 'Library', path: '/library' },
   ];
 
-  const [keyCount,setKeyCount] = useState(0)
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-
+  const { token, setToken } = useAuth()
+  const { keys, setKeys } = useKeys()
 
   useEffect(() => {
-    setIsLoggedIn(localStorage.getItem('token') ? true : false)
-    if (isLoggedIn) {
-      const token = localStorage.getItem("token");
+    if (token) {
       const options = {
         method: "GET",
         headers: {
@@ -31,15 +31,14 @@ const NavBar = () => {
       fetch('https://pokrastemon-api.onrender.com/users/user', options)
       .then(resp => resp.json())
       .then(data => {
-        setKeyCount(data.keys)
+        setKeys(data.keys)
       })
     }
-  },[isLoggedIn])
+  },[token,keys])
 
   const key = '<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><style>svg{fill:#ffffff}</style><path d="M336 352c97.2 0 176-78.8 176-176S433.2 0 336 0S160 78.8 160 176c0 18.7 2.9 36.8 8.3 53.7L7 391c-4.5 4.5-7 10.6-7 17v80c0 13.3 10.7 24 24 24h80c13.3 0 24-10.7 24-24V448h40c13.3 0 24-10.7 24-24V384h40c6.4 0 12.5-2.5 17-7l33.3-33.3c16.9 5.4 35 8.3 53.7 8.3zM376 96a40 40 0 1 1 0 80 40 40 0 1 1 0-80z"/></svg>'
 
   const logout = async () => {
-    const token = localStorage.getItem("token");
     const options = {
       method: "DELETE",
       headers: {
@@ -50,11 +49,14 @@ const NavBar = () => {
     const data = await resp.json()
     if (resp.ok) {
       localStorage.removeItem('token')
-      window.location.href = '/login'
+      setToken()
+      navigate('/login')
     } else {
       console.log(data)
     }
   }
+  console.log(keys)
+  console.log(token)
 
   return (
     <>
@@ -62,7 +64,7 @@ const NavBar = () => {
       <Container fluid>
         <Nav>
           <div className="nav-keys"
-          dangerouslySetInnerHTML={{ __html: key.repeat(keyCount)}}
+          dangerouslySetInnerHTML={{ __html: key.repeat(keys)}}
           >
           </div>
         </Nav>
@@ -77,7 +79,7 @@ const NavBar = () => {
             ))}
           </Nav>
           <Nav>
-            {isLoggedIn ? (
+            {token ? (
               <Nav.Link className={location.pathname === '/logout' ? 'active' : ''} onClick={() => logout()}>
                 Log Out
               </Nav.Link>
@@ -90,6 +92,7 @@ const NavBar = () => {
         </Navbar.Collapse>
       </Container>
     </Navbar>
+    <Outlet />
     </>
   );
 };

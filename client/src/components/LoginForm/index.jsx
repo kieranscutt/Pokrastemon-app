@@ -1,10 +1,16 @@
 import React from 'react'
 import { useState } from 'react'
 import '../../App.css'
+import { useNavigate } from 'react-router'
+
+import { useAuth } from '../../contexts'
 
 export default function LoginForm(props) {
+  const navigate = useNavigate()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+
+  const { token,setToken } = useAuth()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -22,9 +28,10 @@ export default function LoginForm(props) {
     const resp = await fetch('https://pokrastemon-api.onrender.com/users/login', options)
     const data = await resp.json()
     if (resp.ok) {
-      console.log(data)
       localStorage.setItem("token", data.token);
-      window.location.href = '/profile'
+      setToken(data.token)
+      console.log(token)
+      navigate('/profile')
     } else {
       alert('Incorrect username or password')
     }

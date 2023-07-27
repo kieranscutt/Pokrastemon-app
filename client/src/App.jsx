@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './components/nav/styles.css';
+// import './components/nav/styles.css';
 import { HomePage, LibraryPage, ProfilePage, StudyPage, LoginPage } from './pages';
+import { AuthProvider, KeysProvider } from './contexts';
 import NavBar from './components/nav';
 
 const App = () => {
@@ -32,9 +33,11 @@ const App = () => {
 
   return (
     <>
-      <NavBar />
+      <AuthProvider>
+      <KeysProvider>
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<NavBar/>}>
+        <Route index element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/study" element={<StudyPage />} />
         <Route path="/profile" element={<ProfilePage />} />
@@ -47,7 +50,10 @@ const App = () => {
           element={<LibraryPage collectedPokemons={collectedPokemons} isLoggedIn={isLoggedIn} />}
         />
         <Route path="/*" element ={<HomePage/>} />
+        </Route>
       </Routes>
+      </KeysProvider>
+      </AuthProvider>
     </>
   );
 };

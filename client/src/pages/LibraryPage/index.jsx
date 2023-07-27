@@ -20,7 +20,6 @@ const LibraryPage = () => {
     const resp = await fetch('https://pokrastemon-api.onrender.com/users/pokemon',options)
     const data = await resp.json()
     if (resp.ok){
-      console.log(data)
       setPokemon(data)
     } else {
       console.log(data)
@@ -37,7 +36,6 @@ const LibraryPage = () => {
     const resp = await fetch('https://pokrastemon-api.onrender.com/users/subtract-key',options)
     const data = await resp.json()
     if (resp.ok){
-      console.log(data)
       setKeys(data.keys)
     }
   }

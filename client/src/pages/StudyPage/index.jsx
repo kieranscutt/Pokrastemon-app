@@ -9,23 +9,18 @@ const StudyPage = () => {
   const { token } = useAuth()
 
   const getRandomPokemon = async() => {
-    console.log('getting random pokemon')
     const resp = await fetch('https://pokrastemon-api.onrender.com/pokemon/random')
     const data = await resp.json()
     if(resp.ok){
-      console.log(data)
       return data.pokemon_id
     } else {
       const num = Math.floor(Math.random*100)
-      console.log(num)
       return num
     }
   }
 
   const addPokemon = async() => {
-    console.log('adding pokemon')
     const pokemon_id = await getRandomPokemon()
-    console.log(pokemon_id)
     const options = {
       method: 'PATCH',
       headers: {
@@ -39,7 +34,6 @@ const StudyPage = () => {
   }
     if(token || localStorage.getItem('token')){
       const resp = await fetch('https://pokrastemon-api.onrender.com/users/pokemon',options)
-      console.log(resp)
       const data = await resp.json()
       if (resp.ok){
         console.log(data)

@@ -96,11 +96,12 @@ function Display({timer, setTimer, start, setStart, pause, addPokemon}) {
     
   return (
     
-    <div>
+    <div data-testid = "timerDiv">
       
         <span role='timer'>{start ? timer.hours: (settings.block_mins - (settings.block_mins % 60))/60 || '00'}: </span>
         <span role='timer'>{start ? timer.minutes: settings.block_mins % 60 || '20'}: </span>
-        <span role='timer'>{start ? timer.seconds: '00'}</span>
+        <span data-testid="seconds" role='timer'>{start ? timer.seconds: '00'}</span>
+
       
     </div>
   )

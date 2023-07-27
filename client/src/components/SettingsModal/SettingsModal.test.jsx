@@ -59,7 +59,7 @@ describe('SettingsModal Tests', () => {
     
     render(<SettingsModal handleClose={hideModal} show={true} />);
     const formSettings = screen.getAllByTestId('settingsModalTest')
-    expect(formSettings[0]).toHaveClass('settings-modal display-block')
+    expect(formSettings[0]).toHavgit Class('settings-modal display-block')
     
     const closeButton = screen.getByRole('button', {name: /close/i})
     expect(closeButton).toBeInTheDocument()

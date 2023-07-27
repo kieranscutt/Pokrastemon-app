@@ -1,7 +1,10 @@
 import React from 'react'
-import { useEffect } from 'react'
+import { useEffect, useState} from 'react'
 
 function Display({timer, setTimer, start, setStart, pause}) {
+
+    const token = localStorage.getItem('token')
+    const [minsPassed, setMinsPassed] = useState(0)
 
     //runs when timer is updated or pause and this runs every second
     useEffect(()=>{
@@ -19,7 +22,24 @@ function Display({timer, setTimer, start, setStart, pause}) {
         }, 1000)
         return () => clearInterval(intervalId)
     }, [timer, pause, start])
-
+    
+    const addKeys = async() => {
+        const options = {
+            method: 'PATCH',
+            headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: token
+            },
+        }
+        const resp = await fetch('https://pokrastemon-api.onrender.com/users/add-key',options)
+        const data = await resp.json()
+        if (resp.ok){
+            console.log("key added: ",data.keys)
+        } else {
+            console.log('error:', data)
+        }
+    }
 
     //
     const updateTimer = () =>{
@@ -45,6 +65,10 @@ function Display({timer, setTimer, start, setStart, pause}) {
                 minutes: nextTimer.minutes -1,
                 hours: nextTimer.hours 
             }
+            setMinsPassed(prev=>prev+1)
+            if (minsPassed==1 && token){
+                addKeys()
+            }
             setTimer(updatedTimer)
         }else{
             const updatedTimer = {
@@ -60,7 +84,6 @@ function Display({timer, setTimer, start, setStart, pause}) {
     }
     const endTimer=()=>{
         alert("Time's up")
-        console.log("timer ended")
         setStart(false)
         console.log("Start is now " + start)
     }

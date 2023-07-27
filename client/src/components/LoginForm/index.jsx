@@ -39,14 +39,16 @@ export default function LoginForm(props) {
 
 
   return (
-    <div className='auth-form-container'>
+    <div className='auth-form-container' data-testid = "formContainer">
       <h2 className='form-title'>Login</h2>
-    <form className='auth-form-login' onSubmit={handleSubmit} role='loginForm'>
-      <label className='form-label' htmlFor="username">Username:</label>
-      <input className='form-input' type="username" id='username' value={username} onChange={(e) => setUsername(e.target.value)} />
-      <label className='form-label' htmlFor="password">Password:</label>
-      <input className='form-input' type="password" id='password' value={password} onChange={(e) => setPassword(e.target.value)} />
-      <button className='form-btn' type='submit'>Log in</button>
+
+    <form className='auth-form-login' onSubmit={handleSubmit} role='loginForm' data-testid="loginForm">
+      <label htmlFor="username">Username:</label>
+      <input type="username" id='username' value={username} onChange={(e) => setUsername(e.target.value)} />
+      <label htmlFor="password">Password:</label>
+      <input type="password" id='password' value={password} onChange={(e) => setPassword(e.target.value)} />
+      <button type='submit'>Log in</button>
+
     </form>
      <button className="link-btn" onClick={() => props.onFormSwitch('registerForm')}>Don't have an account? Register here.</button>
     </div>

@@ -19,9 +19,10 @@ const NavBar = () => {
 
   const { token, setToken } = useAuth()
   const { keys, setKeys } = useKeys()
+  const loggedIn = (token || localStorage.getItem('token')) 
 
   useEffect(() => {
-    if (token || localStorage.getItem('token')) {
+    if (loggedIn) {
       const options = {
         method: "GET",
         headers: {
@@ -73,7 +74,7 @@ const NavBar = () => {
         <Navbar.Collapse id="navbar-nav">
           <Nav className="ms-auto">
             {navLinks.map((link) => (
-              <Nav.Link key={link.path} href={link.path} className={location.pathname === link.path ? 'active' : ''}>
+              <Nav.Link key={link.path} onClick={()=>navigate(link.path)} className={location.pathname === link.path ? 'active' : ''}>
                 {link.title}
               </Nav.Link>
             ))}

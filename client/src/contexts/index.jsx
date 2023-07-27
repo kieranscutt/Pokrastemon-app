@@ -28,3 +28,18 @@ export const KeysProvider = ({ children }) => {
 };
 
 export const useKeys = () => useContext(KeysContext);
+
+//users pomodoro settings
+
+const SettingsContext = createContext()
+
+export const SettingsProvider = ({ children }) => {
+    const [settings, setSettings] = useState(0);
+    return (
+        <SettingsContext.Provider value={{settings, setSettings}}>
+            {children}
+        </SettingsContext.Provider>
+    );
+};
+
+export const useSettings = () => useContext(SettingsContext);

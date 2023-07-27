@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import './components/nav/styles.css';
 import { HomePage, LibraryPage, ProfilePage, StudyPage, LoginPage } from './pages';
-import { AuthProvider, KeysProvider } from './contexts';
+import { AuthProvider, KeysProvider, SettingsProvider } from './contexts';
 import NavBar from './components/nav';
 
 const App = () => {
@@ -35,6 +35,7 @@ const App = () => {
     <>
       <AuthProvider>
       <KeysProvider>
+      <SettingsProvider>
       <Routes>
         <Route path="/" element={<NavBar/>}>
         <Route index element={<HomePage />} />
@@ -52,6 +53,7 @@ const App = () => {
         <Route path="/*" element ={<HomePage/>} />
         </Route>
       </Routes>
+      </SettingsProvider>
       </KeysProvider>
       </AuthProvider>
     </>

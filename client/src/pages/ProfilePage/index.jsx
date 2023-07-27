@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { useParams } from 'react-router';
-import { ProfileCard } from '../../components';
+import { ProfileCard, PokeGarden } from '../../components';
+
 
 
 const ProfilePage = () => {
@@ -35,6 +36,7 @@ useEffect(() => {
   return (
     <div>
       <ProfileCard profile={profile}/>
+      <PokeGarden />
     </div>
   );
 };

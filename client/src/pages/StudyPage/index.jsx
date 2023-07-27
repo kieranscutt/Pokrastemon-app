@@ -22,7 +22,7 @@ const StudyPage = () => {
       <Timer />
       <LootBox />
       <SettingsModal show={modalStatus} handleClose={hideModal} />
-      <button className='settings-btn' onClick={() => showModal()}>Configure your pomodoro</button>
+      <button data-testid="settings-button" className='settings-btn' onClick={() => showModal()}>Configure your pomodoro</button>
     </div>
     <div className="todo">
       <ToDoForm />

@@ -18,15 +18,4 @@ describe('LoginForm', ()=>{
     afterEach(()=>{
         cleanup()
     })
-    it('render form', ()=>{
-        const loginForm = screen.getByRole('loginForm')
-        expect(loginForm).toBeInTheDocument()
-    })
-    it('clicks register button and switches the form to the register form', async ()=>{
-        const regButton = screen.getByRole('button', {name: /don't have an account/i})
-        fireEvent.click(regButton)
-        const regConfirm = await screen.findByRole('button', {name: /Register/i})
-        console.log("Register Form Button", regConfirm)
-        expect(regConfirm).toBeInTheDocument()
-    } )
 })

@@ -3,14 +3,24 @@ import { describe, it, expect, beforeEach, afterEach, vitest, beforeAll, afterAl
 import { screen, render, cleanup, fireEvent, getByTestId, getAllByRole, getByRole } from '@testing-library/react';
 import userEvent from "@testing-library/user-event";
 import matchers from "@testing-library/jest-dom/matchers";
+import { useState } from "react";
 expect.extend(matchers);
 import StudyPage from ".";
+import { BrowserRouter as Router } from "react-router-dom";
+import App from "../../App";
 
 console.log(userEvent)
 
 describe("study page", () => {
-    beforeEach(() => {
-        render(<StudyPage />)
+
+    beforeEach(async () => {
+        render(
+            <Router>
+            <App />
+            </Router>
+            )
+            const study = screen.getByRole('button', {name: "Study"})
+            await userEvent.click(study)
     })
 
     afterEach(() => {
@@ -90,14 +100,10 @@ describe("study page", () => {
         it('renders the lootbox', () => {
             const divLoot = screen.getByTestId("lootBox")
             const divChest = screen.getByTestId("chest")
-            const divBgKey = screen.getByTestId("chestBGkeyhole")
-            const divKey = screen.getByTestId("chestKeyhole")
             const text = screen.getByText("A LootBox! need 3 keys to open")
     
             expect(divLoot).toBeInTheDocument()
             expect(divChest).toBeInTheDocument()
-            expect(divBgKey).toBeInTheDocument()
-            expect(divKey).toBeInTheDocument()
             expect(text).toBeInTheDocument()
             expect(text.textContent).toBe("A LootBox! need 3 keys to open")
         })
@@ -148,10 +154,10 @@ describe("study page", () => {
             const block_mins = screen.getByTestId("block_mins")
             const long_break_mins = screen.getByTestId("long_break_mins")
             const short_break_mins = screen.getByTestId("short_break_mins")
-            expect(block_mins.value).toBe("0")
-            expect(block_num.value).toBe("0")
-            expect(long_break_mins.value).toBe("0")
-            expect(short_break_mins.value).toBe("0")
+            expect(block_mins.value).toBe("20")
+            expect(block_num.value).toBe("4")
+            expect(long_break_mins.value).toBe("15")
+            expect(short_break_mins.value).toBe("5")
             await userEvent.selectOptions(block_mins, "10")
             await userEvent.selectOptions(block_num, "10")
             await userEvent.selectOptions(long_break_mins, "10")

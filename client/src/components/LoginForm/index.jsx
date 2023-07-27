@@ -42,10 +42,8 @@ export default function LoginForm(props) {
       <h2 className='form-title'>Login</h2>
 
     <form className='auth-form-login' onSubmit={handleSubmit} role='loginForm' data-testid="loginForm">
-      <label htmlFor="username">Username:</label>
-      <input type="username" id='username' value={username} onChange={(e) => setUsername(e.target.value)} />
-      <label htmlFor="password">Password:</label>
-      <input type="password" id='password' value={password} onChange={(e) => setPassword(e.target.value)} />
+      <input placeholder='username' type="username" id='username' value={username} onChange={(e) => setUsername(e.target.value)} />
+      <input placeholder='password' type="password" id='password' value={password} onChange={(e) => setPassword(e.target.value)} />
       <button data-testid = "logInLogIn" type='submit'>Log in</button>
 
 

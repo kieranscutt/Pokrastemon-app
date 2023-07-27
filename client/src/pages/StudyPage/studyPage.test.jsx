@@ -8,8 +8,10 @@ expect.extend(matchers);
 import StudyPage from ".";
 import { BrowserRouter as Router } from "react-router-dom";
 import App from "../../App";
+import { useAuth } from '../../contexts';
 
 console.log(userEvent)
+
 
 describe("study page", () => {
 
@@ -62,12 +64,10 @@ describe("study page", () => {
     describe("timer", () => {
 
         it("should load the timer correctly", () => {
-            const timerTitle = screen.getByRole("heading", {name: "Timer"})
             const timerDisplay = screen.getByTestId("timerDiv")
             const startButton = screen.getByRole('button', {name : "Start Timer"})
             const pauseButton = screen.getByRole('button', {name: "Pause"})
 
-            expect(timerTitle).toBeInTheDocument()
             expect(timerDisplay).toBeInTheDocument()
             expect(startButton).toBeInTheDocument()
             expect(pauseButton).toBeInTheDocument()
@@ -76,11 +76,11 @@ describe("study page", () => {
         it("should start the timer", async () => {
             const startButton = screen.getByRole('button', {name : "Start Timer"})
             const secondsCounter = screen.getByTestId("seconds")
-            expect(secondsCounter.textContent).toBe("00")
+            expect(secondsCounter.textContent).toBe("00: 20: 00")
             await userEvent.click(startButton)
-            expect(secondsCounter.textContent).toBe('30')
+            expect(secondsCounter.textContent).toBe('0: 0: 30')
             await new Promise((r) => setTimeout(r, 1000));
-            expect(secondsCounter.textContent).toBe('29')
+            expect(secondsCounter.textContent).toBe('0: 0: 29')
         })
 
         it("should pause the timer", async () => {

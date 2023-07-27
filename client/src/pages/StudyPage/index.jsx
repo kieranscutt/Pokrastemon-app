@@ -42,7 +42,7 @@ const StudyPage = () => {
       }
     }
   }
-
+  
   const [modalStatus, setModalStatus] = useState(false)
   const showModal = () => {
     setModalStatus(true)

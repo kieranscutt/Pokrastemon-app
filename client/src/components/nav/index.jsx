@@ -21,11 +21,11 @@ const NavBar = () => {
   const { keys, setKeys } = useKeys()
 
   useEffect(() => {
-    if (token) {
+    if (token || localStorage.getItem('token')) {
       const options = {
         method: "GET",
         headers: {
-          authorization: token,
+          authorization: token || localStorage.getItem('token'),
         },
       }
       fetch('https://pokrastemon-api.onrender.com/users/user', options)
@@ -42,7 +42,7 @@ const NavBar = () => {
     const options = {
       method: "DELETE",
       headers: {
-        authorization: token,
+        authorization: token || localStorage.getItem('token'),
       },
     }
     const resp = await fetch('https://pokrastemon-api.onrender.com/users/logout', options)
@@ -79,7 +79,7 @@ const NavBar = () => {
             ))}
           </Nav>
           <Nav>
-            {token ? (
+            {token || localStorage.getItem('token') ? (
               <Nav.Link className={location.pathname === '/logout' ? 'active' : ''} onClick={() => logout()}>
                 Log Out
               </Nav.Link>

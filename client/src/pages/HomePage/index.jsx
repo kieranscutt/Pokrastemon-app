@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-// import './styles.css'; 
+import '../../App.css'; 
 
 import timer from '../../images/timer.png';
 // import openChest from '../../images/openChest.png';

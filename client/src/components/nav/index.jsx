@@ -13,20 +13,20 @@ const NavBar = () => {
   const navLinks = [
     { title: 'Home', path: '/' },
     { title: 'Study', path: '/study' },
-    { title: 'Profile', path: '/profile' },
+    // { title: 'Profile', path: '/profile' },
     { title: 'Library', path: '/library' },
   ];
 
   const { token, setToken } = useAuth()
   const { keys, setKeys } = useKeys()
-  const loggedIn = (token || localStorage.getItem('token')) 
+  const loggedIn = (token || localStorage.getItem('token'))
 
   useEffect(() => {
     if (loggedIn) {
       const options = {
         method: "GET",
         headers: {
-          authorization: token || localStorage.getItem('token'),
+          authorization: token,
         },
       }
       fetch('https://pokrastemon-api.onrender.com/users/user', options)
@@ -51,25 +51,23 @@ const NavBar = () => {
     if (resp.ok) {
       localStorage.removeItem('token')
       setToken()
+      setKeys(0)
+      console.log(token) 
+      console.log(keys) 
       navigate('/login')
     } else {
       console.log(data)
     }
   }
-  console.log(keys)
-  console.log(token)
 
   return (
     <>
     <Navbar expand="lg" className="navbar-container">
       <Container fluid>
-        <Nav>
-          <div className="nav-keys"
-          dangerouslySetInnerHTML={{ __html: key.repeat(keys)}}
-          >
-          </div>
+        <Nav> 
+          <div className="nav-keys" dangerouslySetInnerHTML={{ __html: key.repeat(keys)}} /> 
         </Nav>
-        <Navbar.Brand href="/">Pokrastemon Adventures</Navbar.Brand>
+        <Navbar.Brand onClick={()=>navigate('/')}>Pokrastemon Adventures</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbar-nav" />
         <Navbar.Collapse id="navbar-nav">
           <Nav className="ms-auto">
@@ -80,12 +78,12 @@ const NavBar = () => {
             ))}
           </Nav>
           <Nav>
-            {token || localStorage.getItem('token') ? (
+            {loggedIn ? (
               <Nav.Link className={location.pathname === '/logout' ? 'active' : ''} onClick={() => logout()}>
                 Log Out
               </Nav.Link>
             ) : (
-              <Nav.Link href="/login" className={location.pathname === '/login' ? 'active' : ''}>
+              <Nav.Link onClick={()=>navigate('/login')} className={location.pathname === '/login' ? 'active' : ''}>
                 Log In
               </Nav.Link>
             )}

@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import '../../App.css'; 
 
 import timer from '../../images/timer.png';
-import openChest from '../../images/openChest.png';
-import chest from '../../images/chest.png';
+// import openChest from '../../images/openChest.png';
+// import chest from '../../images/chest.png';
+
+import openChest from '../../images/openChest2.png'
+import chest from '../../images/closedChest2.png'
 
 const HomePageWithSpinner = () => {
   const [isChestOpened, setIsChestOpened] = useState(false);

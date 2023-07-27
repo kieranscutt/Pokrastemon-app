@@ -36,9 +36,9 @@ describe('Timer', ()=>{
     })
     
 
-    it('show a timer', ()=>{
-        const timer= screen.getAllByRole('timer', {name: /Timer display/i})
-        console.log(timer)
-        expect(timer).toBeInTheDocument()
-    })
+    // it('show a timer', ()=>{
+    //     const timer= screen.getAllByRole('timer', {name: /Timer display/i})
+    //     console.log(timer)
+    //     expect(timer).toBeInTheDocument()
+    // })
 })

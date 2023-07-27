@@ -180,11 +180,17 @@ button{
   background-color: #d14f59 ;
   color: white;
   transition: all 300ms ease;
+  margin-top: 4px;
 }
 button:hover{
   color: #d14f59;
   background-color: white;
   border: 1px solid #d14f59 ;
+  
+}
+
+button:active {
+  transform: scale(0.9);
 }
 
 /* form > button:hover{

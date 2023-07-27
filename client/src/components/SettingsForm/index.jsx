@@ -75,10 +75,10 @@ const SettingsForm = ({handleClose}) => {
   }
 
   return (
-    <div className='auth-form-container'>
-      <h2 className='form-title'>Pomodoro Settings</h2>
+    <div className='auth-form-container' data-testid = "settingsForm">
+      <h2 className='form-title' data-testid = "pomodoroTitle">Pomodoro Settings</h2>
 
-    <form className='auth-form-settings' onSubmit={handleSubmit}>
+    <form className='auth-form-settings' data-testid = "pomodoroForm" onSubmit={handleSubmit}>
 
       {<NumDropdown name='block_num' title='Number of pomodoros:' type='' value={settings.block_num} handleChange={handleChange} min={0} max={100} />}
 
@@ -86,10 +86,10 @@ const SettingsForm = ({handleClose}) => {
 
       {<NumDropdown name='short_break_mins' title='Short break length:' type='minutes' value={settings.short_break_mins} handleChange={handleChange} min={0} max={100} />}
 
-      {<NumDropdown name='short_break_mins' title='Long break length:' type='minutes' value={settings.long_break_mins} handleChange={handleChange} min={0} max={100} />}
+      {<NumDropdown name='long_break_mins' title='Long break length:' type='minutes' value={settings.long_break_mins} handleChange={handleChange} min={0} max={100} />}
 
-      <button type='submit'>Save</button>
-      <button type="button" onClick={handleClose}>Close</button>
+      <button data-testid ="save" type='submit'>Save</button>
+      <button data-testid = "close" type="button" onClick={handleClose}>Close</button>
     </form>
     </div>
   ) 

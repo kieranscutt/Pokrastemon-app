@@ -68,11 +68,11 @@ function Display({timer, setTimer, start, setStart, pause}) {
     
   return (
     
-    <div>
+    <div data-testid = "timerDiv">
       
         <span role='timer'>{start ? timer.hours: '0'}: </span>
         <span role='timer'>{start ? timer.minutes: '20'}: </span>
-        <span role='timer'>{start ? timer.seconds: '00'}</span>
+        <span data-testid="seconds" role='timer'>{start ? timer.seconds: '00'}</span>
       
     </div>
   )

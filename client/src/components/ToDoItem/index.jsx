@@ -19,12 +19,12 @@ const ToDoItem = ({task, setTodos, todos}) => {
     }
 
     return(
-        <li className="todo">
-        <span className={`todo-item ${task.completed ? "completed" : ""}`}>
+        <li className="todo" data-testid = "todoItem">
+        <span data-testid = "todoSpan" className={`todo-item ${task.completed ? "completed" : ""}`}>
         {task.text}
         </span>
-        <button className="delete-btn" >Delete</button>
-        <button className="complete-btn" onClick={()=>completeTask(task)}>
+        <button data-testid = "todoDelete" className="delete-btn">Delete</button>
+        <button data-testid = "todoComplete" className="complete-btn" onClick={()=>completeTask(task)}>
         Complete
         </button>
         </li>

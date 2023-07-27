@@ -12,7 +12,7 @@ export default function Timer() {
             setPause(false)
             e.preventDefault()
             const startTime= {
-                seconds: 3,
+                seconds: 30,
                 minutes: 0,
                 hours: 0
             }
@@ -33,7 +33,7 @@ export default function Timer() {
     }
 
   return (
-    <div className='timer_div'>
+    <div className='timer_div' data-testid="timer">
 
         <h3>Timer</h3>
         <Display timer={timer} setTimer={setTimer} start={start}  setStart={setStart} pause={pause}/>

@@ -28,7 +28,7 @@ const NavBar = () => {
           authorization: token,
         },
       }
-      fetch('https://pokrastemon-api.onrender.com/users/user', options)
+     // fetch('https://pokrastemon-api.onrender.com/users/user', options)
       .then(resp => resp.json())
       .then(data => {
         setKeyCount(data.keys)

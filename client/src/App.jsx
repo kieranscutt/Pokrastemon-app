@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './components/nav/styles.css';
 import { HomePage, LibraryPage, ProfilePage, StudyPage, LoginPage } from './pages';
 import NavBar from './components/Nav';
+import PokemonLibrary from './components/PokemonLibrary';
 
 const App = () => {
     const collectedPokemons = [
@@ -20,7 +21,7 @@ const App = () => {
 
   ];
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   const handleLogin = () => {
     setIsLoggedIn(true);
@@ -47,8 +48,11 @@ const App = () => {
           element={<LibraryPage collectedPokemons={collectedPokemons} isLoggedIn={isLoggedIn} />}
         />
 
+
         {/* <Route path="*" element={<NotFoundPage />} /> */}
       </Routes>
+      <PokemonLibrary/>
+
     </>
   );
 };

@@ -1,10 +1,21 @@
 import React from 'react'
 import { useEffect, useState} from 'react'
+import { useAuth, useSettings } from '../../../contexts'
 
 function Display({timer, setTimer, start, setStart, pause}) {
 
-    const token = localStorage.getItem('token')
     const [minsPassed, setMinsPassed] = useState(0)
+
+    const { token } = useAuth()
+    const { settings } = useSettings()
+
+    if (token){
+        setTimer({
+            seconds: 0,
+            minutes: settings.block_mins % 60,
+            hours: (settings.block_mins - (settings.block_mins % 60))/60
+        })
+    }
 
     //runs when timer is updated or pause and this runs every second
     useEffect(()=>{
@@ -93,7 +104,7 @@ function Display({timer, setTimer, start, setStart, pause}) {
     
     <div>
       
-        <span role='timer'>{start ? timer.hours: '0'}: </span>
+        <span role='timer'>{start ? timer.hours: '00'}: </span>
         <span role='timer'>{start ? timer.minutes: '20'}: </span>
         <span role='timer'>{start ? timer.seconds: '00'}</span>
       

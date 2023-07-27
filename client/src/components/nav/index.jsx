@@ -26,7 +26,7 @@ const NavBar = () => {
       const options = {
         method: "GET",
         headers: {
-          authorization: token,
+          authorization: token || localStorage.getItem('token'),
         },
       }
       fetch('https://pokrastemon-api.onrender.com/users/user', options)

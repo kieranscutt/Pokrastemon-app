@@ -14,7 +14,7 @@ const SettingsForm = ({handleClose}) => {
         headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: token
+        Authorization: token || localStorage.getItem('token')
         },
     }
     const resp = await fetch('https://pokrastemon-api.onrender.com/users/pomodoro', options)
@@ -33,7 +33,7 @@ const SettingsForm = ({handleClose}) => {
   }
 
   useEffect(() => {
-    if (token) {
+    if (token || localStorage.getItem('token')) {
         getSettings()
     }
   },[])
@@ -46,7 +46,7 @@ const SettingsForm = ({handleClose}) => {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: token
+        Authorization: token || localStorage.getItem('token')
       },
       body: JSON.stringify({
         block_num: settings.block_num,

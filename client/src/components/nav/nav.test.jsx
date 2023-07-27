@@ -4,15 +4,29 @@ import { screen, render, cleanup } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import matchers from '@testing-library/jest-dom/matchers';
 expect.extend(matchers);
+import { AuthProvider, KeysProvider, SettingsProvider, PokemonProvider } from '../../contexts';
 
 import NavBar from '.';
+import App from '../../App';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 describe('Navbar', () => {
   beforeEach(() => {
     render(
-      <MemoryRouter>
-        <NavBar />
-      </MemoryRouter>
+      <Router>
+      <AuthProvider>
+        <KeysProvider>
+          <SettingsProvider>
+            <PokemonProvider>
+      <Routes>
+        <Route path="/" element={<NavBar/>}/>
+      </Routes> 
+      </PokemonProvider>
+      </SettingsProvider>
+      </KeysProvider>
+      </AuthProvider>  
+      </Router>
     );
   });
 

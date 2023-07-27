@@ -80,13 +80,13 @@ const SettingsForm = ({handleClose}) => {
 
     <form className='auth-form-settings' data-testid = "pomodoroForm" onSubmit={handleSubmit}>
 
-      {<NumDropdown name='block_num' title='Number of pomodoros:' type='' value={settings.block_num || 4} handleChange={handleChange} min={0} max={100} />}
+      {<NumDropdown data-testid='block_num' name='block_num' title='Number of pomodoros:' type='' value={settings.block_num || 4} handleChange={handleChange} min={0} max={100} />}
 
-      {<NumDropdown name='block_mins' title='Pomodoro length:' type='' value={settings.block_mins || 20} handleChange={handleChange} min={0} max={100} />}
+      {<NumDropdown data-testid='block_mins' name='block_mins' title='Pomodoro length:' type='' value={settings.block_mins || 20} handleChange={handleChange} min={0} max={100} />}
 
-      {<NumDropdown name='short_break_mins' title='Short break length:' type='minutes' value={settings.short_break_mins || 5} handleChange={handleChange} min={0} max={100} />}
+      {<NumDropdown data-testid='short_break_mins' name='short_break_mins' title='Short break length:' type='minutes' value={settings.short_break_mins || 5} handleChange={handleChange} min={0} max={100} />}
 
-      {<NumDropdown name='short_break_mins' title='Long break length:' type='minutes' value={settings.long_break_mins || 15} handleChange={handleChange} min={0} max={100} />}
+      {<NumDropdown data-testid='long_break_mins' name='long_break_mins' title='Long break length:' type='minutes' value={settings.long_break_mins || 15} handleChange={handleChange} min={0} max={100} />}
 
 
       <button data-testid ="save" type='submit'>Save</button>

@@ -6,13 +6,15 @@ import "../../App.css";
 export default function LootBox() {
   return (
     <>
-    <div className="loot-box">
-    {/* <p>A LootBox! need 3 keys to open</p> */}
+
+    <div className="loot-box" data-testid = "lootBox">
+    <p>A LootBox! need 3 keys to open</p>
+
       {/* <div className="chest">
         <div className="chest_keyholeBG">
           <div className="chest_keyhole"></div>
         </div> */}
-      <img src={chest} alt="chest" style={{height:"200px"}}/>
+      <img data-testid = "chest" src={chest} alt="chest" style={{height:"200px"}}/>
       </div>
     </>
   );

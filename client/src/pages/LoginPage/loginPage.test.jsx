@@ -3,13 +3,25 @@ import { describe, it, expect, beforeEach, afterEach, vitest, beforeAll, afterAl
 import { screen, render, cleanup, fireEvent, getByTestId, getAllByRole, getByRole } from '@testing-library/react';
 import userEvent from "@testing-library/user-event";
 import matchers from "@testing-library/jest-dom/matchers";
+import { createContext } from "react";
 expect.extend(matchers);
 import LoginPage from "../Loginpage/index.jsx";
+import { useState } from "react";
+import TestRenderer from 'react-test-renderer'
+import { AuthContext } from "../../contexts/index.jsx";
+import { BrowserRouter as Router } from "react-router-dom";
+import App from "../../App.jsx";
 
 describe("Login Page", () => {
 
-    beforeEach(() => {
-        render(<LoginPage/ >)
+    beforeEach( async () => {
+        render(
+        <Router>
+        <App />
+        </Router>
+        )
+        const logIn = screen.getByRole('button', {name: "Log In"})
+        await userEvent.click(logIn)
     })
 
     afterEach(() => {
@@ -24,7 +36,7 @@ describe("Login Page", () => {
         const passLabel = screen.getByText("Password:")
         const inputU = screen.getByRole('textbox', {type: /username/})
         const inputP = screen.getByRole('textbox', {type: /password/})
-        const button1 = screen.getByRole('button', {name: /Log in/i})
+        const button1 = screen.getByTestId("logInLogIn")
         const button2 = screen.getByRole('button', {name: "Don't have an account? Register here."})
 
         expect(formDiv).toBeInTheDocument()
@@ -43,7 +55,7 @@ describe("Login Page", () => {
         const inputP = screen.getByRole('textbox', {type: /password/})
         await userEvent.type(inputU, "cheese")
         await userEvent.type(inputP, "burger")
-        const button = screen.getByRole('button', {name: /Log in/i})
+        const button = screen.getByTestId("logInLogIn")
         await userEvent.click(button)
     })
 

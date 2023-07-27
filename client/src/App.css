@@ -1,3 +1,13 @@
+/*FONT*/
+
+@font-face {
+  font-family: "Pocket-Monk";
+  src: local("Pocket-Monk"),
+    url("./assets/PocketMonk-15ze.ttf") format("truetype");
+  font-weight: normal;
+}
+
+
 /* NAV */
 .nav-link.active {
   text-decoration: underline;
@@ -25,10 +35,12 @@
   color: #fff;
   font-size: 2rem;
   padding-left: 20%;
+  font-family: "Pocket-Monk";
+  
 }
 
 .navbar-brand:hover {
-  color: #fff;
+  color: #d6899d;
 }
 
  .navbar-container {
@@ -92,29 +104,25 @@
 }
 
 .auth-form-container {
-  padding: 4rem;
+  text-align: center;
+  padding: 1rem;
   border: 1px solid white;
   border-radius: 10px;
   margin: 0.5 rem;
-  background-image: linear-gradient(79deg, #7439db, #c66fcb 48%, #f7944d);
+  background-image: linear-gradient(79deg, #d14f59, #d6899d 48%);
   width: 100%;
 }
 
-.form-label {
-  text-align: left;
-  padding: 0.25rem 0;
-  color: white;
-}
-
-.form-input {
+input{
   margin: 0.5rem 0;
-  padding: 1rem;
+  padding: 0.5rem;
   border: none;
   border-radius: 10px;
-  color: #7439db
+  color: black
 }
 
-.form-input:focus {
+
+input:focus {
   outline: #fffefd;
 }
 
@@ -131,6 +139,7 @@
    background: none;
    color: white;
    text-decoration: underline;
+   border: none;
 }
 
 .form-title {
@@ -144,6 +153,44 @@ form {
   max-width: 300px;
   margin: 0 auto;
 }
+
+
+
+.background-image{
+  background-image: url('./images/background.png');
+  background-size: 100%;
+  background-attachment: fixed;
+}
+
+/* form > button{
+  margin: 0 auto;
+  border-radius: 10px;
+  width: 100px;
+  border: 1px solid white;
+  background-color: #d14f59 ;
+  color: white;
+  transition: all 300ms ease;
+} */
+
+button{
+  margin: 0 auto;
+  border-radius: 10px;
+  width: auto;
+  border: 1px solid white;
+  background-color: #d14f59 ;
+  color: white;
+  transition: all 300ms ease;
+}
+button:hover{
+  color: #d14f59;
+  background-color: white;
+}
+
+/* form > button:hover{
+  color: #d14f59;
+  background-color: white;
+} */
+
 
 /* Not sure what this is for
 
@@ -165,6 +212,12 @@ button {
 }
 
 */
+
+/* Study Page */
+
+.todo-form > form{
+  display: block;
+}
 
 /* LIBRARY PAGE */
 .pokemon-library {
@@ -238,9 +291,9 @@ body {
   a:hover {
     color: #fff;
   }
-  button {
+  /* button {
     background-color: #f9f9f9;
-  }
+  } */
 }
 
 .home-page {
@@ -470,77 +523,12 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding-top: 35px;
 }
 
-.chest {
-  --gold: #feb21f;
-  --beige: #f4e2c8;
-  --black: #101010;
-  --blackLight: #707696;
-  --blackAlpha: rgba(0, 0, 0, 0.2);
 
-  position: relative;
-  width: 14rem;
-  height: 10rem;
-  border: solid var(--gold);
-  border-width: 0 1rem;
-  border-radius: 0.25rem;
-  display: flex;
-  justify-content: center;
-  background: linear-gradient(
-    var(--blackLight) 0%,
-    var(--blackLight) 30%,
-    var(--gold) 30%,
-    var(--gold) 40%,
-    var(--blackLight) 40%,
-    var(--blackLight) 100%
-  );
-  box-shadow: 0.25rem 0.25rem var(--blackAlpha);
-}
 /*shadow*/
-.chest::after {
-  content: "";
-  display: block;
-  position: absolute;
-  top: 0;
-  right: -1rem;
-  bottom: 0;
-  left: 50%;
-  border-radius: 0 0.25rem 0.25rem 0;
-  background-color: var(--blackAlpha);
-}
-.chest_keyholeBG {
-  position: absolute;
-  top: 40%;
-  width: 4rem;
-  height: 2rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--gold);
-  border-radius: 0 0 50% 50% / 0 0 100% 100%;
-}
-.chest_keyhole {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.chest_keyhole::before {
-  content: "";
-  display: block;
-  width: 0.75rem;
-  height: 0.75rem;
-  border-radius: 50%;
-  background-color: var(--black);
-}
-.chest_keyhole::after {
-  content: "";
-  display: block;
-  width: 0.25rem;
-  height: 0.75rem;
-  margin-top: -0.25rem;
-  background-color: var(--black);
-}
+
 
 /* STUDY PAGE */
 .settings-modal {
@@ -572,17 +560,30 @@ body {
   display: none;
 }
 
-.study-page{
+.study-column{
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
+  align-items: center;
+  
+  margin: 100px;
 }
 
 .study-page .pomodoro-timer {
-  display: block;
+  display: flex;
+  justify-content: center;
+}
+.study-page .chest{
 }
 
 .study-page .todo {
   display: block;
+  justify-content: space-between;
+  background-color:  rgba(255, 255, 255, 0.452);
+  border-color: white;
+  border: 5px solid white;
+  border-radius: 10px;
+  padding: 50px;
+  
 }
 
 .todo-form{
@@ -597,6 +598,68 @@ body {
   fill: #4682A9
 }
 
+.todo-list {
+  min-width: 50%;
+  list-style: none;
+}
+.todo-btn{
+  width: 70px;
+  margin-left: 10px;
+}
+.todo-item{
+  display: inline-block;
+  background-color: white;
+  border-radius: 10px;
+  padding: 5px;
+  margin-right: 20px;
+  
+  width: 60%;
+  
+}
+
+.delete-btn, .complete-btn{
+  margin: 4px;
+  border: none;
+  border-radius: 10px;
+  padding: 8px;
+  
+}
+.delete-btn{
+
+}
+
 .key-icon path {
   fill: #ffff
+}
+
+.timer-element{
+  position: relative;
+  text-align: center;
+}
+.timer-text{
+  text-align: center;
+  position: absolute;
+  width: auto;
+  top: 60%;
+  bottom: 40%;
+  transform: translate(-50%,-50%);
+  left: 50%;
+  font-size: 27px;
+  font-weight: bold;
+  background-color: #e74c3c;
+}
+
+.timerImage{
+  display: block;
+  width: 200px;
+  height: 200px;
+}
+
+.settings-btn{
+  display: flex;
+  justify-content: center;
+}
+
+.timer_div > button{
+  margin: 10px;
 }

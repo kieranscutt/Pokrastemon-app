@@ -7,7 +7,7 @@ export default function LootBox() {
   return (
     <>
     <div className="loot-box">
-    <p>A LootBox! need 3 keys to open</p>
+    {/* <p>A LootBox! need 3 keys to open</p> */}
       {/* <div className="chest">
         <div className="chest_keyholeBG">
           <div className="chest_keyhole"></div>

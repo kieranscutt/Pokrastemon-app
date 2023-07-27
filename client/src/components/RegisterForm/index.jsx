@@ -34,13 +34,13 @@ export default function RegisterForm(props) {
    }
 
     return (
-        <div className="auth-form-container">
+        <div className="auth-form-container" data-testid = "formContainer">
             <h2 className="form-title">Register</h2>
-        <form className="auth-form-register" onSubmit={handleSubmit}>
-          <input placeholder="First Name" type="text" id='firstName' value={firstName} required onChange={(e) => setFirstName(e.target.value)} />
-          <input placeholder="Last Name" type="text" id='lastName' value={lastName} required onChange={(e) => setLastName(e.target.value)} />
-          <input placeholder="Username" type="username" id="username" value={username} required onChange={(e) => setUsername(e.target.value)} />
-          <input placeholder="Password" type="password" id='password' value={password} required onChange={(e) => setPassword(e.target.value)} />
+        <form className="auth-form-register" onSubmit={handleSubmit} data-testid="loginForm">
+          <input placeholder="First Name" type="text" id='firstName' data-testid='firstName' value={firstName} required onChange={(e) => setFirstName(e.target.value)} />
+          <input placeholder="Last Name" type="text" id='lastName' data-testid='lastName' value={lastName} required onChange={(e) => setLastName(e.target.value)} />
+          <input placeholder="Username" type="username" id="username" data-testid="username" value={username} required onChange={(e) => setUsername(e.target.value)} />
+          <input placeholder="Password" type="password" id='password' data-testid='password' value={password} required onChange={(e) => setPassword(e.target.value)} />
           <button type='submit'>Register</button>
         </form>
          <button className="link-btn" onClick={() => props.onFormSwitch('LoginForm')}>Have an account? Log in here.</button>

@@ -26,6 +26,9 @@
   .display-none {
     display: none;
   }
+  .visibility-hidden {
+    visibility: hidden;
+  }
 
   .study-page{
     display: flex;

@@ -43,3 +43,18 @@ export const SettingsProvider = ({ children }) => {
 };
 
 export const useSettings = () => useContext(SettingsContext);
+
+//users pokemon settings
+
+const PokemonContext = createContext()
+
+export const PokemonProvider = ({ children }) => {
+    const [pokemon, setPokemon] = useState({});
+    return (
+        <PokemonContext.Provider value={{pokemon, setPokemon}}>
+            {children}
+        </PokemonContext.Provider>
+    );
+};
+
+export const usePokemon = () => useContext(PokemonContext);

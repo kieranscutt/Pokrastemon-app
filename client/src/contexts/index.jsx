@@ -49,7 +49,7 @@ export const useSettings = () => useContext(SettingsContext);
 const PokemonContext = createContext()
 
 export const PokemonProvider = ({ children }) => {
-    const [pokemon, setPokemon] = useState({});
+    const [pokemon, setPokemon] = useState([]);
     return (
         <PokemonContext.Provider value={{pokemon, setPokemon}}>
             {children}

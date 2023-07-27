@@ -24,7 +24,7 @@ describe('Navbar', () => {
     expect(homeLink).toBeInTheDocument();
   })
   it('renders the login link', () =>{
-    const loginLink = screen.getByRole('link', { name: /Login/i });
+    const loginLink = screen.getByRole('link', { name: /Log In/i });
     expect(loginLink).toBeInTheDocument();
   })
   it('renders the study link', () =>{

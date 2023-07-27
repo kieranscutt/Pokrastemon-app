@@ -3,6 +3,8 @@ const request = require("supertest")
 const app = require("../api.js")
 const db = require("../database/connect")
 const bcrypt = require('bcrypt')
+const fs = require('fs');
+const tokenSql = fs.readFileSync('/Users/Guy 1/Desktop/liskov/lap3/project/Pokrastemon-app/api/tests/mockDatabase/userTest.sql').toString()
 
 describe("User route", () => {
 
@@ -13,13 +15,6 @@ describe("User route", () => {
 
     let username = ""
     let password = ""
-    let profile_image_irl = ""
-    let keys = ""
-    let user_id = ""
-    let block_mins = ""
-    let block_num = ""
-    let short_break_mins = ""
-    let long_break_mins = ""
 
     const newUser = {
         username: "test",
@@ -77,6 +72,19 @@ describe("User route", () => {
         
         token = response.body.token
         expect(token).toBeTruthy()
+    })
+
+    //login with wrong password
+    it("should say wrong credentials", async () => {
+        const user = {
+            username: username,
+            password: "balls"
+        }
+        const response = await request(app)
+            .post("/users/login")
+            .send(user)
+            .expect(403)
+        expect(response.body.Error).toBe('Wrong username or password')
     })
 
     //Get all users
@@ -153,14 +161,60 @@ describe("User route", () => {
     //Add a key
     it("should add a key", async() => {
         const response = await request(app)
-            .patch(`/users/keys`)
+            .patch(`/users/add-key`)
             .set({"Authorization": token})
             .expect(200)
-        
         expect(response.body.keys).toBeGreaterThan(0)
     })
 
-    //Subtract a key?
+    //Subtract a key
+    it("should subtract a key", async () => {
+        //will not subtract at one key
+        const response1 = await request(app)
+            .patch(`/users/subtract-key`)
+            .set({"Authorization": token})
+            .expect(200)
+        expect(response1.body.keys).toBe(1)
+
+        const addKey1 = await request(app)
+            .patch(`/users/add-key`)
+            .set({"Authorization": token})
+            .expect(200)
+
+        //will not subtract at two keys
+        const response2 = await request(app)
+        .patch(`/users/subtract-key`)
+        .set({"Authorization": token})
+        .expect(200)
+        expect(response2.body.keys).toBe(2)
+
+        const addKey2 = await request(app)
+            .patch(`/users/add-key`)
+            .set({"Authorization": token})
+            .expect(200)
+        
+        //will subtract at three keys to zero
+        const response3 = await request(app)
+        .patch(`/users/subtract-key`)
+        .set({"Authorization": token})
+        .expect(200)
+        expect(response3.body.keys).toBe(0)
+    })
+
+    //Try to break keys function
+    it("should deal with negative keys", async () => {
+        await db.query("UPDATE users SET keys = -10 WHERE user_id = 2")
+            .then(async () => {
+                //return user to zero keys
+                const response2 = await request(app)
+                .patch(`/users/subtract-key`)
+                .set({"Authorization": token2})
+                .expect(200)
+                expect(response2.body.keys).toBe(0)
+            })
+    })
+
+    
 
     //pomodoro
     //get
@@ -194,10 +248,22 @@ describe("User route", () => {
             expect(response.body.long_break_mins).toBe(settings.long_break_mins)
     })
 
+    //update with stupid settings
+    it("should fail to update settings", async () => {
+        const settings = {
+            cheeseBurger: "beans"
+        }
+        const response = await request(app)
+            .patch(`/users/pomodoro`)
+            .set({"Authorization": token})
+            .send(settings)
+            .expect(500)
+        expect(response.body.Error).toBe("Invalid settings")
+    })
+
     //pokemon
     //Add pokemon
     it("should add a pokemon to a user", async () => {
-        //await fetchPokemon()
         const id = {
             pokemon_id: 94
         }
@@ -208,6 +274,19 @@ describe("User route", () => {
             .expect(200)
         expect(response.body.pokemon_id).toBe(id.pokemon_id)  
     }, 20000)
+
+    //add a pokemon that isn't there
+    it("should fail to add a pokemon", async () => {
+        const id = {
+            pokemon_id: "cheese"
+        }
+        const response = await request(app)
+            .patch(`/users/pokemon`)
+            .set({"Authorization": token})
+            .send(id)
+            .expect(500)
+        expect(response.body.Error).toBe('invalid input syntax for type integer: "cheese"')
+    })
 
     //Display all pokemon
     it("should display all user pokemon", async () => {
@@ -225,7 +304,7 @@ describe("User route", () => {
             .expect(200)
 
         expect(response.body.length).toBeGreaterThan(1)
-        expect(response.body[0]).toBe('gengar')
+        expect(response.body[0].pokemon_name).toBe('gengar')
     })
 
     //Display all pokemon but no pokemon
@@ -251,7 +330,20 @@ describe("User route", () => {
             .get(`/users/pokemon`)
             .set({"Authorization": token})
 
-        expect(checkDel.body[0]).toBe('dragonite')
+        expect(checkDel.body[0].pokemon_name).toBe('dragonite')
+    })
+
+    //Delete a pokemon that doesn't exist
+    it("should return an error", async () => {
+        const id = {
+            pokemon_id: "burger"
+        }
+        const response = await request(app)
+            .delete(`/users/pokemon`)
+            .set({"Authorization": token})
+            .send(id)
+            .expect(500)
+        expect(response.body.Error).toBe('invalid input syntax for type integer: "burger"')
     })
 
     //Logout
@@ -293,17 +385,72 @@ describe("User route", () => {
         const response2 = await request(app)
             .delete(`/users/delete`)
             .set({"Authorization": token2})
-            .expect(204)   
+            .expect(204)  
+        
     })
 
-    //Test delete error
-    // it("should return an error", async () => {
-    //     const response = await request(app)
-    //         .delete(`/users/delete`)
-    //         .set({"Authorization": "testicularToken"})
-    //         .expect(403)
-    //     console.log(response.body)
-    // })
+    //weird user tests
+    describe("user route testing with tokens not associated to any user", () => {
+
+        beforeAll(async () => {
+            db.query(tokenSql)
+        })
+
+        //breaking get one by id
+        it("should fail to get a user by id due to no users", async () => {
+            const response = await request(app)
+                .get(`/users/user`)
+                .set({"Authorization": "testicularToken"})
+                .expect(404)
+
+            expect(response.body.Error).toBe("Cannot destructure property 'user_id' of 'undefined' as it is undefined.")
+        })
+
+        //breaking get pomodoro settings
+        it("should fail to get pomodoro settings", async () => {
+            const response = await request(app)
+                .get('/users/pomodoro')
+                .set({"Authorization": "testicularToken"})
+                .expect(500)
+            expect(response.body.Error).toBe('unable to get settings')
+        })
+
+        //breaking add key
+        it("should fail to add a key", async () => {
+            const response = await request(app)
+                .patch(`/users/add-key`)
+                .set({"Authorization": "testicularToken"})
+                .expect(500)
+            expect(response.body.Error).toBe("Cannot read properties of undefined (reading 'keys')")
+        })
+
+        //breaking subtract key
+        it("should fail to subtract a key", async () => {
+            const response = await request(app)
+                .patch(`/users/subtract-key`)
+                .set({"Authorization": "testicularToken"})
+                .expect(500)
+            expect(response.body.Error).toBe("Cannot read properties of undefined (reading 'keys')")
+        })
+
+        //breaking logout
+        it("should fail to logout", async () => {
+            const response = await request(app)
+                .delete(`/users/logout`)
+                .set({"Authorization": "testicularToken"})
+                .expect(403)
+            expect(response.body.Error).toBe("Cannot destructure property 'user_id' of 'undefined' as it is undefined.")
+        })
+
+        //breaking delete user
+        it("should fail to delete user", async () => {
+            const response = await request(app)
+                .delete(`/users/delete`)
+                .set({"Authorization": "testicularToken"})
+                .expect(403) 
+            expect(response.body.Error).toBe("Cannot destructure property 'user_id' of 'undefined' as it is undefined.")
+        })
+    })
 })
 
 

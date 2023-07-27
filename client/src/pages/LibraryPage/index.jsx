@@ -1,28 +1,40 @@
 import React from 'react';
+import './styles.css';
 
-const LibraryPage = ({ collectedPokemons }) => {
-  if (!collectedPokemons || !Array.isArray(collectedPokemons) || collectedPokemons.length === 0) {
-    return (
-      <div>
-        <h1>My Pokémon Library</h1>
-        <p>Welcome, Trainer! You haven't collected any Pokémon yet. Get out there and catch 'em all by studying!</p>
-      </div>
-    );
-  }
-
+const LibraryPage = ({ collectedPokemons, isLoggedIn }) => {
   return (
-    <div>
-      <h1>My Pokémon Library</h1>
-      <p>Welcome, Trainer! Below is a list of Pokémon you have collected on your journey. Gotta catch 'em all!</p>
-      <div className="pokemon-collection">
-        {collectedPokemons.map((pokemon) => (
-          <div key={pokemon.id} className="pokemon-card">
-            <h2>{pokemon.name}</h2>
-            <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`} alt={pokemon.name} />
-            <p>{pokemon.description}</p>
-          </div>
-        ))}
-      </div>
+    <div className='pokemon-library'>
+      <h1>Welcome to Your Pokémon Library</h1>
+      {isLoggedIn ? (
+        <>
+          {collectedPokemons.length === 0 ? (
+            <p>
+              You haven't collected any Pokémon yet. Get out there and catch 'em all by opening
+              chests from studying!
+            </p>
+          ) : (
+            <>
+              <div className='pokemon-grid'>
+                <p>Below is a list of Pokémon you have collected on your journey.</p>
+              </div>
+              <div className='pokemon-card-container'>
+                {collectedPokemons.map((pokemon) => (
+                  <div key={pokemon.id} className='pokemon-card'>
+                    <h2>{pokemon.name}</h2>
+                    <img
+                      src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
+                      alt={pokemon.name}
+                    />
+                    <p>{pokemon.description}</p>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+        </>
+      ) : (
+        <p> Please <a href="./login">log in</a> to view your Pokémon library!</p>
+      )}
     </div>
   );
 };

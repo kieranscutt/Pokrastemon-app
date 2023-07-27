@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { Timer, LootBox, SettingsModal, ToDoList, ToDoForm } from '../../components';
-import './styles.css'
+import '../../App.css'
 
 const StudyPage = () => {
 

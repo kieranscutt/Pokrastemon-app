@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import Display from './TimerDisplay'
 import { useAuth, useSettings } from '../../contexts'
 
-export default function Timer() {
+export default function Timer({addPokemon}) {
     const [start, setStart] = useState(false)
     const [pause, setPause] = useState(false)
     const [timer, setTimer] = useState({})
@@ -50,7 +50,7 @@ export default function Timer() {
     <div className='timer_div'>
 
         <h3>Timer</h3>
-        <Display timer={timer} setTimer={setTimer} start={start}  setStart={setStart} pause={pause}/>
+        <Display timer={timer} setTimer={setTimer} start={start}  setStart={setStart} pause={pause} addPokemon={addPokemon}/>
         <button onClick={handleStart}>Start Timer</button>
         <button onClick={handlePause}>Pause</button>
         

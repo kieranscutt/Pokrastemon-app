@@ -2,7 +2,7 @@ import React from 'react'
 import { useEffect, useState} from 'react'
 import { useAuth, useSettings, useKeys } from '../../../contexts'
 
-function Display({timer, setTimer, start, setStart, pause}) {
+function Display({timer, setTimer, start, setStart, pause, addPokemon}) {
 
     const [minsPassed, setMinsPassed] = useState(0)
     const { token } = useAuth()
@@ -40,6 +40,7 @@ function Display({timer, setTimer, start, setStart, pause}) {
         if (resp.ok){
             if(3%data.keys==0){
                 alert('You received 3 keys and opened the chest! Check out your new pokemon in the library page.')
+                addPokemon()
             }
             setKeys(data.keys)
         } else {

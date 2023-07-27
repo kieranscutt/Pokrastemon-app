@@ -32,9 +32,9 @@ export default function LoginForm(props) {
 
 
   return (
-    <div className='auth-form-container'>
+    <div className='auth-form-container' data-testid = "formContainer">
       <h2 className='form-title'>Login</h2>
-    <form className='auth-form-login' onSubmit={handleSubmit} role='loginForm'>
+    <form className='auth-form-login' onSubmit={handleSubmit} role='loginForm' data-testid="loginForm">
       <label htmlFor="username">Username:</label>
       <input type="username" id='username' value={username} onChange={(e) => setUsername(e.target.value)} />
       <label htmlFor="password">Password:</label>

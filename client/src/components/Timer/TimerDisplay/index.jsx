@@ -38,7 +38,7 @@ function Display({timer, setTimer, start, setStart, pause, addPokemon}) {
         const resp = await fetch('https://pokrastemon-api.onrender.com/users/add-key',options)
         const data = await resp.json()
         if (resp.ok){
-            if(3%data.keys==0){
+            if(data.keys%3==0){
                 alert('You received 3 keys and opened the chest! Check out your new pokemon in the library page.')
                 addPokemon()
             }

@@ -15,13 +15,6 @@ describe("User route", () => {
 
     let username = ""
     let password = ""
-    let profile_image_irl = ""
-    let keys = ""
-    let user_id = ""
-    let block_mins = ""
-    let block_num = ""
-    let short_break_mins = ""
-    let long_break_mins = ""
 
     const newUser = {
         username: "test",
@@ -311,7 +304,7 @@ describe("User route", () => {
             .expect(200)
 
         expect(response.body.length).toBeGreaterThan(1)
-        expect(response.body[0]).toBe('gengar')
+        expect(response.body[0].pokemon_name).toBe('gengar')
     })
 
     //Display all pokemon but no pokemon
@@ -337,7 +330,7 @@ describe("User route", () => {
             .get(`/users/pokemon`)
             .set({"Authorization": token})
 
-        expect(checkDel.body[0]).toBe('dragonite')
+        expect(checkDel.body[0].pokemon_name).toBe('dragonite')
     })
 
     //Delete a pokemon that doesn't exist
@@ -441,13 +434,13 @@ describe("User route", () => {
         })
 
         //breaking logout
-        // it("should fail to logout", async () => {
-        //     const response = await request(app)
-        //         .delete(`/users/logout`)
-        //         .set({"Authorization": "testicularToken"})
-        //         .expect(403)
-        //     console.log(response.body)
-        // })
+        it("should fail to logout", async () => {
+            const response = await request(app)
+                .delete(`/users/logout`)
+                .set({"Authorization": "testicularToken"})
+                .expect(403)
+            expect(response.body.Error).toBe("Cannot destructure property 'user_id' of 'undefined' as it is undefined.")
+        })
 
         //breaking delete user
         it("should fail to delete user", async () => {

@@ -1,13 +1,13 @@
-import "./styles.css";
+import "../../App.css";
 
 export default function LootBox() {
 
   
   return (
-    <div className="loot-box">
-      <div className="chest">
-        <div className="chest_keyholeBG">
-          <div className="chest_keyhole"></div>
+    <div data-testid="lootBox" className="loot-box">
+      <div data-testid="chest" className="chest">
+        <div data-testid="chestBGkeyhole" className="chest_keyholeBG">
+          <div data-testid="chestKeyhole" className="chest_keyhole"></div>
         </div>
       </div>
       <p>A LootBox! need 3 keys to open</p>

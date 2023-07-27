@@ -1,6 +1,7 @@
 import React from 'react'
 import { useEffect, useState} from 'react'
 import { useAuth, useSettings, useKeys } from '../../../contexts'
+import pokeball from '../../../images/pokeballTimer.png'
 
 function Display({timer, setTimer, start, setStart, pause, addPokemon}) {
 
@@ -96,13 +97,11 @@ function Display({timer, setTimer, start, setStart, pause, addPokemon}) {
     
   return (
     
-    <div data-testid = "timerDiv">
-      
-        <span role='timer'>{start ? timer.hours: (settings.block_mins - (settings.block_mins % 60))/60 || '00'}: </span>
-        <span role='timer'>{start ? timer.minutes: settings.block_mins % 60 || '20'}: </span>
-        <span data-testid="seconds" role='timer'>{start ? timer.seconds: '00'}</span>
-
-      
+    <div className='timer-element'>
+        <img className='timerImage' src={pokeball}/>
+        <div className='timer-text' data-testid = "timerDiv">
+            <p role='timer'>{start ? timer.hours: (settings.block_mins - (settings.block_mins % 60))/60 || '00'}: {start ? timer.minutes: settings.block_mins % 60 || '20'}: {start ? timer.seconds: '00'}</p>
+        </div>
     </div>
   )
 }

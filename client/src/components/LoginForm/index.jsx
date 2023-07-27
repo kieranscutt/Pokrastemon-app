@@ -48,6 +48,7 @@ export default function LoginForm(props) {
       <input type="password" id='password' value={password} onChange={(e) => setPassword(e.target.value)} />
       <button data-testid = "logInLogIn" type='submit'>Log in</button>
 
+
     </form>
      <button className="link-btn" onClick={() => props.onFormSwitch('registerForm')}>Don't have an account? Register here.</button>
     </div>

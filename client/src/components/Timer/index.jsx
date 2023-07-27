@@ -49,8 +49,7 @@ export default function Timer({addPokemon}) {
 
   return (
     <div className='timer_div' data-testid="timer">
-
-        <h3>Timer</h3>
+        
         <Display timer={timer} setTimer={setTimer} start={start}  setStart={setStart} pause={pause} addPokemon={addPokemon}/>
         <button onClick={handleStart}>Start Timer</button>
         <button onClick={handlePause}>Pause</button>

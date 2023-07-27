@@ -6,8 +6,10 @@ import "../../App.css";
 export default function LootBox() {
   return (
     <>
+
     <div className="loot-box" data-testid = "lootBox">
     <p>A LootBox! need 3 keys to open</p>
+
       {/* <div className="chest">
         <div className="chest_keyholeBG">
           <div className="chest_keyhole"></div>

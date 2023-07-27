@@ -1,6 +1,7 @@
 // import "./styles.css";
 // import chest from '../../images/chest.png';
 import chest from '../../images/closedChest2.png'
+import "../../App.css";
 
 export default function LootBox() {
   return (

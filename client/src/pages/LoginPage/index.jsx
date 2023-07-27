@@ -1,6 +1,6 @@
 import { LoginForm, RegisterForm } from "../../components";
 import React, {useState} from "react";
-import './styles.css';
+import '../../App.css';
 
 
 

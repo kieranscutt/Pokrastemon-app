@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { Timer, LootBox, SettingsModal, ToDoList, ToDoForm } from '../../components';
-import './styles.css'
+import '../../App.css'
 
 const StudyPage = () => {
 
@@ -22,7 +22,7 @@ const StudyPage = () => {
       <Timer />
       <LootBox />
       <SettingsModal show={modalStatus} handleClose={hideModal} />
-      <button className='settings-btn' onClick={() => showModal()}>Configure your pomodoro</button>
+      <button data-testid="settings-button" className='settings-btn' onClick={() => showModal()}>Configure your pomodoro</button>
     </div>
     <div className="todo">
       <ToDoForm />

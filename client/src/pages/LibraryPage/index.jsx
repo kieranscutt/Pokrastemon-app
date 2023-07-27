@@ -1,5 +1,5 @@
 import React from 'react';
-import './styles.css';
+import '../../App.css';
 
 const LibraryPage = ({ collectedPokemons, isLoggedIn }) => {
   return (
@@ -33,7 +33,7 @@ const LibraryPage = ({ collectedPokemons, isLoggedIn }) => {
           )}
         </>
       ) : (
-        <p> Please <a href="./login">log in</a> to view your Pokémon library!</p>
+        <p> Please <a className='login-link' href="./login">log in</a> to view your Pokémon library!</p>
       )}
     </div>
   );

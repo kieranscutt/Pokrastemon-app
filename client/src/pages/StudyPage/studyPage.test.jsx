@@ -11,8 +11,8 @@ import App from "../../App";
 import { MockAuthProvider, KeysProvider, SettingsProvider, PokemonProvider } from '../../contexts';
 import { Routes, Route } from 'react-router-dom';
 
-console.log(userEvent)
-
+//console.log(userEvent)
+window.alert = () => {};
 
 describe("study page", () => {
 
@@ -330,6 +330,27 @@ describe("study page with tokens", () => {
             expect(secondsCounter.textContent).toBe('0: 19: 59')
         })
 
+        it("should decrement hours", async() => {
+            const settingsButton = screen.getByTestId("settings-button")
+            await userEvent.click(settingsButton)
+            const block_mins = screen.getByTestId("block_mins")
+            await userEvent.selectOptions(block_mins, "60")
+            const saveButton = screen.getByTestId("save")
+            await userEvent.click(saveButton)
+            const startButton = screen.getByRole('button', {name : "Start Timer"})
+            const secondsCounter = screen.getByTestId("seconds")
+            await userEvent.click(startButton)
+            expect(secondsCounter.textContent).toBe("1: 0: 0")
+            await new Promise((r) => setTimeout(r, 1000));
+            expect(secondsCounter.textContent).toBe('0: 59: 59')
+        })
+
+        it("should add a key", async () => {
+            const startButton = screen.getByRole('button', {name : "Start Timer"})
+            const secondsCounter = screen.getByTestId("seconds")
+            await new Promise((r) => setTimeout(r, 15000));
+        }, 20000)
+
         it("should pause the timer", async () => {
             const startButton = screen.getByRole('button', {name : "Start Timer"})
             const secondsCounter = screen.getByTestId("seconds")
@@ -444,6 +465,7 @@ describe("study page with tokens", () => {
         })
 
         it("should add a todo and the todo should display correctly", async () => {
+            window.alert = () => {};
             const todoInput = screen.getByTestId("todoInput")
             const todoButton = screen.getByTestId("todoButton")
             expect(screen.queryByTestId("todoItem")).not.toBeInTheDocument()

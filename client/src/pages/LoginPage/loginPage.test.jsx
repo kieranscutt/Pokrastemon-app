@@ -45,17 +45,41 @@ describe("Login Page", () => {
         expect(button2).toBeInTheDocument()
     })
 
-    it("should handle submit", async () => {
+    it("should handle submit login but wrong username", async () => {
         const inputU = screen.getByRole('textbox', {type: /username/})
         const inputP = screen.getByRole('textbox', {type: /password/})
-        await userEvent.type(inputU, "glime")
+        await userEvent.type(inputU, "balls")
         await userEvent.type(inputP, "glime")
         const button = screen.getByTestId("logInLogIn")
-        await userEvent.click(button)
-        // await new Promise((r) => setTimeout(r, 3000));
+        try{
+            await userEvent.click(button)
+            await new Promise((r) => setTimeout(r, 5000));
+        } catch(err) {
+            console.log(err)
+            expect(err.Error).toBe('User with this username does not exist.')
+        }
+        
         // const studyDiv = screen.getByTestId("studypage")
         // expect(studyDiv).toBeInTheDocument()
-    })
+    }, 50000)
+
+    it("should handle submit login but correct username", async () => {
+        const inputU = screen.getByRole('textbox', {type: /username/})
+        const inputP = screen.getByRole('textbox', {type: /password/})
+        await userEvent.type(inputU, 'glime')
+        await userEvent.type(inputP, 'glime')
+        const button = screen.getByTestId("logInLogIn")
+        try{
+            await userEvent.click(button)
+            await new Promise((r) => setTimeout(r, 5000));
+        } catch(err) {
+            console.log(err)
+            expect(err.Error).toBe('User with this username does not exist.')
+        }
+        
+        // const studyDiv = screen.getByTestId("studypage")
+        // expect(studyDiv).toBeInTheDocument()
+    }, 50000)
 
     it("should switch forms", async () => {
         const button = screen.getByRole('button', {name: "Don't have an account? Register here."})
@@ -88,7 +112,8 @@ describe("Login Page", () => {
         expect(button2).toBeInTheDocument()
     })
 
-    it("should handle submit", async () => {
+    it("should handle submit register and fail to submit repeat user", async () => {
+        //window.alert = () => {};
         const switchButton = screen.getByRole('button', {name: "Don't have an account? Register here."})
         await userEvent.click(switchButton)
         const inputU = screen.getByTestId("username")
@@ -100,8 +125,15 @@ describe("Login Page", () => {
         await userEvent.type(inputF, "cheese")
         await userEvent.type(inputL, "burger")
         const button = screen.getByRole('button', {name: /Register/i})
-        await userEvent.click(button)
-    })
+        try{
+            await userEvent.click(button)
+            await new Promise((r) => setTimeout(r, 5000));
+        } catch(err) {
+            console.log(err)
+            expect(err.Error).toBe('duplicate key value violates unique constraint "users_username_key"')
+        }
+        
+    }, 20000)
 
     it("should switch forms again", async () => {
         const switchButton = screen.getByRole('button', {name: "Don't have an account? Register here."})

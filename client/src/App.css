@@ -732,6 +732,11 @@ body {
   padding: 50px;
 }
 
+.todo h3{
+  color: #D14F59;
+  text-align: center;
+}
+
 .study-page .todo{
   /* display: flex; */
   /* float: right; */

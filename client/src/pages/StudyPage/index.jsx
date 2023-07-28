@@ -6,6 +6,8 @@ import { useAuth, useMockAuth } from '../../contexts';
 
 const StudyPage = () => {
 
+  const [username, setUsername] = useState()
+
   let token = ""
   let tokenObj = useAuth()
   if(tokenObj){
@@ -14,7 +16,30 @@ const StudyPage = () => {
     token = useMockAuth().token
   }
   
-  
+  const getUsername = async() => {
+    const options = {
+      method: 'GET',
+      headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: token || localStorage.getItem('token')
+      }
+    }
+    const resp = await fetch('https://pokrastemon-api.onrender.com/users/user',options)
+    const data = await resp.json()
+    if (resp.ok){
+      console.log(data)
+      setUsername(data.username)
+    } else {
+      console.log(data)
+    }
+  }
+
+  useEffect(() => {
+    if (token||localStorage.getItem('token')){
+      getUsername()
+    }
+  },[])
 
   const getRandomPokemon = async() => {
     const resp = await fetch('https://pokrastemon-api.onrender.com/pokemon/random')
@@ -39,7 +64,7 @@ const StudyPage = () => {
       body: JSON.stringify({
         pokemon_id: pokemon_id
       })
-  }
+    }
     if(token || localStorage.getItem('token')){
       const resp = await fetch('https://pokrastemon-api.onrender.com/users/pokemon',options)
       const data = await resp.json()
@@ -51,6 +76,7 @@ const StudyPage = () => {
     }
   }
   
+
   const [modalStatus, setModalStatus] = useState(false)
   const showModal = () => {
     setModalStatus(true)
@@ -76,6 +102,7 @@ const StudyPage = () => {
 
       <div className="todo-section">
       <div className="todo" data-testid = "todo overall">
+      <h3><b>{username ? `${username}'s` : 'Your'} To Do List:</b></h3>
         <ToDoForm/>
       </div>
       <SettingsModal show={modalStatus} handleClose={hideModal} />

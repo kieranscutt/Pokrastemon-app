@@ -1,13 +1,12 @@
 import React from "react";
-import { describe, it, expect, beforeEach, afterEach, vitest, beforeAll, afterAll } from "vitest";
+import { describe, it, expect, beforeEach, afterEach, vitest, beforeAll, afterAll,vi } from "vitest";
 import { screen, render, cleanup, fireEvent, getByTestId, getAllByRole, getByRole } from '@testing-library/react';
 import userEvent from "@testing-library/user-event";
 import matchers from "@testing-library/jest-dom/matchers";
 import { createContext } from "react";
 expect.extend(matchers);
-import LoginPage from "../Loginpage/index.jsx";
+import LoginPage from ".";
 import { useState } from "react";
-import TestRenderer from 'react-test-renderer'
 import { AuthContext } from "../../contexts/index.jsx";
 import { BrowserRouter as Router } from "react-router-dom";
 import App from "../../App.jsx";

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import './styles.css'; 
+import '../../App.css'; 
 
 import timer from '../../images/timer.png';
-import openChest from '../../images/openChest.png';
-import chest from '../../images/chest.png';
+import openChest from '../../images/openChest2.png'
+import chest from '../../images/closedChest2.png'
 
 const HomePageWithSpinner = () => {
   const [isChestOpened, setIsChestOpened] = useState(false);
@@ -20,10 +20,13 @@ const HomePageWithSpinner = () => {
     }
   };
 
+
   return (
     <main className="home-page">
-      <h2>Welcome to Pokrastemon Adventures, a pokemon themed procrastination app!</h2>
-      <h3>Collect pokemon, eggs and chests during study!</h3>
+      <div className='welcome'>
+        <h2>Welcome to Pokrastémon Adventures, a Pokémon themed procrastination app!</h2>
+        <p>Collect Pokémon, eggs and chests during study!</p>
+      </div>
       <div className="outermost-box">
         <div className="outer-box">
           <div className="box-container">
@@ -32,14 +35,16 @@ const HomePageWithSpinner = () => {
               onClick={handleChestClick}
             >
               <div className="study-container">
-                <img
-                  className={`study ${isChestOpened ? 'collapsed' : ''}`}
-                  src={timer}
-                  alt="Study"
-                />
-              </div>
-              <div className="text-container">
-                <span className="study-text">Study to get keys!</span>
+                <a href='/study'>
+                  <img
+                    className={`study ${isChestOpened ? 'collapsed' : ''}`}
+                    src={timer}
+                    alt="Study"
+                  />
+                </a>
+                <div className="text-container">
+                  <span className="study-text">Study to get keys!</span>
+                </div>
               </div>
             </div>
           </div>
@@ -55,7 +60,6 @@ const HomePageWithSpinner = () => {
                       <img
                         src={isChestOpened ? openChest : chest}
                         alt={isChestOpened ? 'Open Chest' : 'Chest'}
-                        className="open-chest"
                       />
                     </div>
                     {isChestOpened && (
@@ -64,8 +68,12 @@ const HomePageWithSpinner = () => {
                       </div>
                     )}
                   </div>
-                  <span className="chest-text">Open chests to get pokemon!</span>
                 </div>
+                {!isChestOpened && (
+                 <div className="text-container">
+                   <span className="chest-text">Open chests to get Pokémon!</span>
+                  </div>
+                 )}
               </div>
             </div>
           </div>

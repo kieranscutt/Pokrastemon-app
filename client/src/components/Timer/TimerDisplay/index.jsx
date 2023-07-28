@@ -1,7 +1,14 @@
 import React from 'react'
-import { useEffect } from 'react'
+import { useEffect, useState} from 'react'
+import { useAuth, useSettings, useKeys } from '../../../contexts'
+import pokeball from '../../../images/pokeballTimer.png'
 
-function Display({timer, setTimer, start, setStart, pause}) {
+function Display({timer, setTimer, start, setStart, pause, addPokemon}) {
+
+    const [minsPassed, setMinsPassed] = useState(0)
+    const { token } = useAuth()
+    const { settings } = useSettings()
+    const { keys, setKeys } = useKeys()
 
     //runs when timer is updated or pause and this runs every second
     useEffect(()=>{
@@ -19,7 +26,28 @@ function Display({timer, setTimer, start, setStart, pause}) {
         }, 1000)
         return () => clearInterval(intervalId)
     }, [timer, pause, start])
-
+    
+    const addKeys = async() => {
+        const options = {
+            method: 'PATCH',
+            headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: token || localStorage.getItem('token')
+            },
+        }
+        const resp = await fetch('https://pokrastemon-api.onrender.com/users/add-key',options)
+        const data = await resp.json()
+        if (resp.ok){
+            if(data.keys%3==0){
+                alert('You received 3 keys and opened the chest! Check out your new pokemon in the library page.')
+                addPokemon()
+            }
+            setKeys(data.keys)
+        } else {
+            console.log('error:', data)
+        }
+    }
 
     //
     const updateTimer = () =>{
@@ -52,6 +80,10 @@ function Display({timer, setTimer, start, setStart, pause}) {
                 minutes: nextTimer.minutes,
                 hours: nextTimer.hours 
             }
+            setMinsPassed(prev=>prev+1)
+            if ((minsPassed%5==0) && (minsPassed!=0) && (token||localStorage.getItem('token'))){
+                addKeys()
+            }
             setTimer(updatedTimer)
             nextTimer=updatedTimer
         }
@@ -60,20 +92,16 @@ function Display({timer, setTimer, start, setStart, pause}) {
     }
     const endTimer=()=>{
         alert("Time's up")
-        console.log("timer ended")
         setStart(false)
-        console.log("Start is now " + start)
     }
-
     
   return (
     
-    <div>
-      
-        <span role='timer'>{start ? timer.hours: '0'}: </span>
-        <span role='timer'>{start ? timer.minutes: '20'}: </span>
-        <span role='timer'>{start ? timer.seconds: '00'}</span>
-      
+    <div className='timer-element'>
+        <img className='timerImage' src={pokeball}/>
+        <div className='timer-text' data-testid = "timerDiv">
+            <p role='timer'>{start ? timer.hours: (settings.block_mins - (settings.block_mins % 60))/60 || '00'}: {start ? timer.minutes: settings.block_mins % 60 || '20'}: {start ? timer.seconds: '00'}</p>
+        </div>
     </div>
   )
 }

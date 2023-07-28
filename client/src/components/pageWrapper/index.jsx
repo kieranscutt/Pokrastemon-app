@@ -1,11 +1,12 @@
 // PageWrapper.jsx
 import React from 'react';
 import NavBar from '../nav/index';
-import '../nav/styles.css'
+import '../../App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Outlet } from 'react-router';
 
 const PageWrapper = () => {
+  console.log('hi')
   return (
     <div>
       {/* Add common elements here, such as header, navigation, etc. */}

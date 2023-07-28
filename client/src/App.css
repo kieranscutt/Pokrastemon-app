@@ -1,5 +1,4 @@
 /*FONT*/
-
 @font-face {
   font-family: "Pocket-Monk";
   src: local("Pocket-Monk"),
@@ -160,6 +159,7 @@ form {
   background-image: url('./images/background.png');
   background-size: 100%;
   background-attachment: fixed;
+  padding-bottom: 35px;
 }
 
 /* form > button{
@@ -226,6 +226,9 @@ button {
   flex-direction: column;
   align-items: center;
   padding: 20px;
+  background-color: #eee;
+  border-radius: 10px;
+  margin: 0 30px;
 }
 
 .pokemon-grid {
@@ -284,6 +287,15 @@ body {
   background-color: #f6f4eb;
 }
 
+.welcome {
+  color: #000;
+  border-radius: 10px;
+  margin: 20px 0;
+  padding: 30px;
+  background-color:#fff;
+
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -299,7 +311,7 @@ body {
 
 .home-page {
   text-align: center;
-  padding: 5px 50px;
+  padding: 0px 30px;
 }
 
 
@@ -329,43 +341,64 @@ body {
 }
 
 .photo img {
-  width: 120%;
-  height: 120%;
-  object-fit: contain; 
+  width: 280px;
+  height: 280px; 
   transition: transform 0.6s;
   position: absolute;
-  top: 0;
   left: 0;
+  top: 0;
+  padding-top: 20px;
+  margin-left: -40px
 }
 
 .study {
-  max-width: 60%;
+  max-width: 55%;
 }
 
-.flipped {
-  transform: rotateY(180deg);
+.study-container {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px 0;
+  height: 60vh;  
+  width: 72vh;
+  margin-right: 15px;
+
 }
+
+.chest-container {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px 0;
+  height: 60vh; 
+  width: 72vh;
+  margin-left: 15px;
+}
+
+.chest-text {
+  margin-top: 70px;
+  padding-top: 10px;
+}
+
 
 .outer-box {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 65vh;
-  width: 190vh;
+  height: 80vh;
+  width: 180vh;
   background-color: #91c8e4;
   border-radius: 10px;
-  padding: 10px;
-}
+  padding: 40px 10px;
+  }
 
 .outermost-box {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 80vh;
+  height: 100vh;
   background-color: #749bc2;
   border-radius: 10px;
-  padding: 100px;
-  margin-bottom: 50px;
+  padding: 40px 70px;
 }
 
 :root {
@@ -424,6 +457,7 @@ a, .open {
   margin: 10px;
 }
 
+
 /* pokeball */
 *, *:before, *:after {
   -webkit-box-sizing: border-box;
@@ -439,12 +473,15 @@ body {
   position: relative;
   width: 200px;
   height: 200px;
-  background: red;
   border: 10px solid #000;
   border-radius: 50%;
   overflow: hidden;
   animation: fall .25s ease-in-out,
              shake 1.25s cubic-bezier(.36,.07,.19,.97) 3;
+  margin-top: -70px;
+  background: linear-gradient(180deg, #ff0000 50%, #ffffff 50%);
+
+
 }
 .pokeball::before,
 .pokeball::after {
@@ -482,7 +519,7 @@ body {
 .pokeball__button {
   position: absolute;
   top: calc(50% - 30px);
-  left: calc(50% - 30px);
+  left: calc(45% - 30px);
   width: 60px;
   height: 60px;
   background: #7f8c8d;
@@ -514,8 +551,6 @@ body {
   80% { top: -20px }
   100% { top: 0 }
 }
-
-
 
 
 /*LOOTBOX */
@@ -561,11 +596,11 @@ body {
   display: none;
 }
 
+
 .study-column{
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  
   margin: 100px;
 }
 

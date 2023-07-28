@@ -65,7 +65,7 @@ const NavBar = () => {
         <Nav> 
           <div className="nav-keys" dangerouslySetInnerHTML={{ __html: key.repeat(keys)}} /> 
         </Nav>
-        <Navbar.Brand onClick={()=>navigate('/')}>Pokrastemon Adventures</Navbar.Brand>
+        <Navbar.Brand onClick={()=>navigate('/')}>Pokrastémon Adventures</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbar-nav" />
         <Navbar.Collapse id="navbar-nav">
           <Nav className="ms-auto">

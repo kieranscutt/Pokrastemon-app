@@ -10,6 +10,7 @@ import NavBar from '.';
 import App from '../../App';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
+import userEvent from '@testing-library/user-event';
 
 describe('Navbar', () => {
   beforeEach(() => {
@@ -78,9 +79,9 @@ describe("navbar with tokens", () => {
     const homeLink = screen.getByRole('button', { name: /Home/i });
     expect(homeLink).toBeInTheDocument();
   })
-  it('renders the login link', () =>{
-    const loginLink = screen.getByRole('button', { name: /Log Out/i });
-    expect(loginLink).toBeInTheDocument();
+  it('renders the log out link', () =>{
+    const logoutLink = screen.getByRole('button', { name: /Log Out/i });
+    expect(logoutLink).toBeInTheDocument();
   })
   it('renders the study link', () =>{
     const studyLink = screen.getByRole('button', { name: /Study/i });
@@ -91,7 +92,8 @@ describe("navbar with tokens", () => {
     expect(libraryLink).toBeInTheDocument();
   })
 
-  it("should logout upon logout being clicked", () => {
-    
+  it("should logout upon logout being clicked", async () => {
+    const logoutLink = screen.getByRole('button', { name: /Log Out/i });
+    await userEvent.click(logoutLink)
   })
 })

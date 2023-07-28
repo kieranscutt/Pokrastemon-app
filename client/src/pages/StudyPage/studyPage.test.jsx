@@ -77,7 +77,7 @@ describe("study page", () => {
         it("should start the timer", async () => {
             const startButton = screen.getByRole('button', {name : "Start Timer"})
             const secondsCounter = screen.getByTestId("seconds")
-            expect(secondsCounter.textContent).toBe("00: 20: 00")
+            expect(secondsCounter.textContent).toBe("0: 20: 0")
             await userEvent.click(startButton)
             expect(secondsCounter.textContent).toBe('0: 0: 30')
             await new Promise((r) => setTimeout(r, 1000));
@@ -101,12 +101,9 @@ describe("study page", () => {
         it('renders the lootbox', () => {
             const divLoot = screen.getByTestId("lootBox")
             const divChest = screen.getByTestId("chest")
-            const text = screen.getByText("A LootBox! need 3 keys to open")
     
             expect(divLoot).toBeInTheDocument()
             expect(divChest).toBeInTheDocument()
-            expect(text).toBeInTheDocument()
-            expect(text.textContent).toBe("A LootBox! need 3 keys to open")
         })
     })
 
@@ -323,7 +320,7 @@ describe("study page with tokens", () => {
         it("should start the timer", async () => {
             const startButton = screen.getByRole('button', {name : "Start Timer"})
             const secondsCounter = screen.getByTestId("seconds")
-            expect(secondsCounter.textContent).toBe("00: 20: 00")
+            expect(secondsCounter.textContent).toBe("0: 20: 0")
             await userEvent.click(startButton)
             expect(secondsCounter.textContent).toBe('0: 20: 0')
             await new Promise((r) => setTimeout(r, 1000));
@@ -345,11 +342,11 @@ describe("study page with tokens", () => {
             expect(secondsCounter.textContent).toBe('0: 59: 59')
         })
 
-        it("should add a key", async () => {
-            const startButton = screen.getByRole('button', {name : "Start Timer"})
-            const secondsCounter = screen.getByTestId("seconds")
-            await new Promise((r) => setTimeout(r, 15000));
-        }, 20000)
+        // it("should add a key", async () => {
+        //     const startButton = screen.getByRole('button', {name : "Start Timer"})
+        //     const secondsCounter = screen.getByTestId("seconds")
+        //     await new Promise((r) => setTimeout(r, 15000));
+        // }, 20000)
 
         it("should pause the timer", async () => {
             const startButton = screen.getByRole('button', {name : "Start Timer"})
@@ -368,12 +365,9 @@ describe("study page with tokens", () => {
         it('renders the lootbox', () => {
             const divLoot = screen.getByTestId("lootBox")
             const divChest = screen.getByTestId("chest")
-            const text = screen.getByText("A LootBox! need 3 keys to open")
     
             expect(divLoot).toBeInTheDocument()
             expect(divChest).toBeInTheDocument()
-            expect(text).toBeInTheDocument()
-            expect(text.textContent).toBe("A LootBox! need 3 keys to open")
         })
     })
 

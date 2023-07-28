@@ -6,7 +6,6 @@
   font-weight: normal;
 }
 
-
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa&family=Inconsolata:wght@500&display=swap');
 
 
@@ -52,7 +51,10 @@
   font-size: 1.3rem;
   display: flex;
   align-items: center;
+}
 
+.nav-container{
+  position: sticky;
 }
 
 .navbar-content {
@@ -312,6 +314,7 @@ body {
   min-width: 320px;
   min-height: 100vh;
   background-color: #f6f4eb;
+  padding-top: 120px;
 }
 
 .welcome {
@@ -805,6 +808,7 @@ body {
   display: block;
   width: 200px;
   height: 200px;
+  position: relative;
 }
 
 .settings-btn{

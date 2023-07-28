@@ -70,7 +70,8 @@ const NavBar = () => {
 
   return (
     <>
-    <Navbar expand="lg" className="navbar-container">
+    <div className="nav-container">
+    <Navbar expand="lg" className="navbar-container fixed-top">
       <Container fluid>
         <Nav> 
           <div className="nav-keys" dangerouslySetInnerHTML={{ __html: key.repeat(keys)}} /> 
@@ -99,6 +100,7 @@ const NavBar = () => {
         </Navbar.Collapse>
       </Container>
     </Navbar>
+    </div>
     <Outlet />
     </>
   );

@@ -63,21 +63,42 @@ const StudyPage = () => {
     <>
 
     <div className="study-page" data-testid = "studypage">
-    <div className='pomodoro-timer' data-testid = "pomodoro-timer">
-      <Timer addPokemon={addPokemon}/>
+
+      <div className="study-column">
+        <div className="timer-section">
+            <div className='pomodoro-timer' data-testid = "pomodoro-timer">
+              <Timer addPokemon={addPokemon}/>
+            </div>
+          <button data-testid="settings-button" className='settings-btn' onClick={() => showModal()}>Configure your pomodoro</button>
+        </div>
+        <LootBox />
+      </div>
+
+      <div className="todo-section">
+      <div className="todo" data-testid = "todo overall">
+        <ToDoForm/>
+      </div>
+      <SettingsModal show={modalStatus} handleClose={hideModal} />
+      </div>
+
     </div>
-    <button data-testid="settings-button" className='settings-btn' onClick={() => showModal()}>Configure your pomodoro</button>
-    <div className='study-column'>
-    <div className='chest'>
-      
-      <LootBox />
+
+    {/* <div className='study-column'>
+
+      <div className="timer-section">
+        <div className='pomodoro-timer' data-testid = "pomodoro-timer">
+          <Timer addPokemon={addPokemon}/>
+        </div>
+      <button data-testid="settings-button" className='settings-btn' onClick={() => showModal()}>Configure your pomodoro</button>
+      </div>
+        <LootBox />
     </div>
+
     <div className="todo" data-testid = "todo overall">
       <ToDoForm/>
     </div>
-    </div>
-    </div>
-    <SettingsModal show={modalStatus} handleClose={hideModal} />
+    <SettingsModal show={modalStatus} handleClose={hideModal} /> */}
+
     </>
   );
 };

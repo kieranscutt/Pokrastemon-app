@@ -8,13 +8,12 @@ export default function LootBox() {
     <>
 
     <div className="loot-box" data-testid = "lootBox">
-    <p>A LootBox! need 3 keys to open</p>
 
       {/* <div className="chest">
         <div className="chest_keyholeBG">
           <div className="chest_keyhole"></div>
         </div> */}
-      <img data-testid = "chest" src={chest} alt="chest" style={{height:"200px"}}/>
+      <img data-testid = "chest" src={chest} alt="chest" style={{width:"215.98px"}}/>
       </div>
     </>
   );

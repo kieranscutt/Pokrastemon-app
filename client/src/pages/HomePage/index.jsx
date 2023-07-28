@@ -5,8 +5,12 @@ import timer from '../../images/timer.png';
 import openChest from '../../images/openChest2.png'
 import chest from '../../images/closedChest2.png'
 
+import { useNavigate } from 'react-router';
+
 const HomePageWithSpinner = () => {
   const [isChestOpened, setIsChestOpened] = useState(false);
+
+  const navigate = useNavigate()
 
   const handleChestClick = () => {
     setIsChestOpened(!isChestOpened);
@@ -30,25 +34,32 @@ const HomePageWithSpinner = () => {
       <div className="outermost-box">
         <div className="outer-box">
           <div className="box-container">
+          <div className="text-container">
+                  <h3 className="study-text">Study to get keys!</h3>
+                </div>
             <div
               className={`inner-box-study box-content ${isChestOpened ? 'study-collapsed' : ''}`}
               onClick={handleChestClick}
             >
               <div className="study-container">
-                <a href='/study'>
+
+                {/* <a href='/study'> */}
                   <img
                     className={`study ${isChestOpened ? 'collapsed' : ''}`}
                     src={timer}
                     alt="Study"
+                    onClick={()=>navigate('/study')}
                   />
-                </a>
-                <div className="text-container">
-                  <span className="study-text">Study to get keys!</span>
-                </div>
+                
               </div>
             </div>
           </div>
           <div className="box-container">
+          {/* {!isChestOpened && ( */}
+                 <div className="text-container">
+                   <h3 className="chest-text">Open chests to get Pokémon!</h3>
+                  </div>
+                 
             <div
               className={`inner-box-chest box-content ${isChestOpened ? 'opened' : ''}`}
               onClick={handleChestClick}
@@ -69,11 +80,7 @@ const HomePageWithSpinner = () => {
                     )}
                   </div>
                 </div>
-                {!isChestOpened && (
-                 <div className="text-container">
-                   <span className="chest-text">Open chests to get Pokémon!</span>
-                  </div>
-                 )}
+
               </div>
             </div>
           </div>

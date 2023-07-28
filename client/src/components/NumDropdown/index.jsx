@@ -9,7 +9,7 @@ const NumDropdown = ({name,title,htmlFor,value,handleChange,min,max,type}) => {
 
     return (
         <>
-            <label  htmlFor={htmlFor}>{title}:</label>
+            <label  htmlFor={htmlFor}>{title}</label>
             <select data-testid= {name} name={name} value={value} onChange={handleChange} >
             {numbers.map((i) => <option key={i} value={i}>{i} {type}</option>)}
             </select>

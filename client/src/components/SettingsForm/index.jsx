@@ -81,7 +81,7 @@ const SettingsForm = ({handleClose}) => {
   }
 
   return (
-    <div className='auth-form-container' data-testid = "settingsForm">
+    <div className='auth-form-container settings-form' data-testid = "settingsForm">
       <h2 className='form-title' data-testid = "pomodoroTitle">Pomodoro Settings</h2>
 
     <form className='auth-form-settings' data-testid = "pomodoroForm" onSubmit={handleSubmit}>

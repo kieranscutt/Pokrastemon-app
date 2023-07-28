@@ -1,12 +1,18 @@
 import React, {useState, useEffect} from "react"
 import '../../App.css'
 import NumDropdown from "../NumDropdown"
-import { useSettings,useAuth } from "../../contexts"
+import { useSettings,useAuth, useMockAuth } from "../../contexts"
 
 const SettingsForm = ({handleClose}) => {
 
   const { settings, setSettings } = useSettings()
-  const { token } = useAuth()
+  let token = ""
+    let tokenObj = useAuth()
+    if(tokenObj){
+      token = useAuth().token
+    } else {
+      token = useMockAuth().token
+    }
 
   const getSettings = async () => {
     const options ={

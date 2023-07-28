@@ -15,6 +15,19 @@ export const AuthProvider = ({ children }) => {
 
 export const useAuth = () => useContext(AuthContext);
 
+export const MockAuthContext = createContext()
+
+export const MockAuthProvider = ({ children }) => {
+    const [token, setToken] = useState("beans");
+    return (
+        <MockAuthContext.Provider value={{ token, setToken }}>
+            {children}
+        </MockAuthContext.Provider>
+    );
+};
+
+export const useMockAuth = () => useContext(MockAuthContext);
+
 //users keys
 
 const KeysContext = createContext()
@@ -35,7 +48,7 @@ export const useKeys = () => useContext(KeysContext);
 const SettingsContext = createContext()
 
 export const SettingsProvider = ({ children }) => {
-    const [settings, setSettings] = useState({});
+    const [settings, setSettings] = useState({block_mins:20});
     return (
         <SettingsContext.Provider value={{settings, setSettings}}>
             {children}

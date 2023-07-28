@@ -1,12 +1,18 @@
 import React from 'react'
 import { useEffect, useState} from 'react'
-import { useAuth, useSettings, useKeys } from '../../../contexts'
+import { useAuth, useMockAuth, useSettings, useKeys } from '../../../contexts'
 import pokeball from '../../../images/pokeballTimer.png'
 
 function Display({timer, setTimer, start, setStart, pause, addPokemon}) {
 
     const [minsPassed, setMinsPassed] = useState(0)
-    const { token } = useAuth()
+    let token = ""
+    let tokenObj = useAuth()
+    if(tokenObj){
+      token = useAuth().token
+    } else {
+      token = useMockAuth().token
+    }
     const { settings } = useSettings()
     const { keys, setKeys } = useKeys()
 

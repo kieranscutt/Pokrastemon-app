@@ -1,12 +1,20 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { Timer, LootBox, SettingsModal, ToDoForm } from '../../components';
 import '../../App.css'
-import { useAuth } from '../../contexts';
+import { useAuth, useMockAuth } from '../../contexts';
 
 const StudyPage = () => {
 
-  const { token } = useAuth()
+  let token = ""
+  let tokenObj = useAuth()
+  if(tokenObj){
+    token = useAuth().token
+  } else {
+    token = useMockAuth().token
+  }
+  
+  
 
   const getRandomPokemon = async() => {
     const resp = await fetch('https://pokrastemon-api.onrender.com/pokemon/random')

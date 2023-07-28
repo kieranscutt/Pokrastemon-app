@@ -19,10 +19,10 @@ const ToDoForm = () => {
 
     return (
         <>
-        <div className="todo-form">
-        <form onSubmit={handleSubmit}>
-            <input type="text" className='todo-input' value={inputText} onChange={handleInput}/>
-            <button type="submit" className="todo-btn">Add</button>
+        <div className="todo-form"  data-testid="todo start">
+        <form onSubmit={handleSubmit} data-testid = "todoForm">
+            <input data-testid = "todoInput" type="text" className='todo-input' value={inputText} onChange={handleInput}/>
+            <button data-testid ="todoButton" type="submit" className="todo-btn">Add</button>
         </form>
         </div>
         <ToDoList todos={todos} setTodos={setTodos}/>

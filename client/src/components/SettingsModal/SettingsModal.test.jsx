@@ -27,9 +27,7 @@ describe('StudyPage has settings configure button', () => {
     const settingsButton = screen.getByTestId('settings-button');
     expect(settingsButton).toBeInTheDocument();
 
-    // TODO: Test that clicking the button shows the settings modal
-    // await userEvent.click(settingsButton)
-    // expect(screen.queryByText('Pomodoro Settings')).toBeInTheDocument();
+    
   });
 });
 

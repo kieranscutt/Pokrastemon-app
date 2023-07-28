@@ -7,8 +7,8 @@ const SettingsModal = ({handleClose, show}) => {
     const showHideClassName = show ? "settings-modal display-block" : "settings-modal display-none"
 
     return(
-        <div data-testid='settingsModalTest' className={showHideClassName}>
-            <section className="modal-main">
+        <div className={showHideClassName} data-testid="settings settingsModalTest">
+            <section className="modal-main" data-testid = "modalMain">
                 <SettingsForm handleClose={handleClose}/>
             </section>
         </div>

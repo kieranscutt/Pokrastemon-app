@@ -1,10 +1,16 @@
 import React from 'react'
 import { useState } from 'react'
 import '../../App.css'
+import { useNavigate } from 'react-router'
+
+import { useAuth } from '../../contexts'
 
 export default function LoginForm(props) {
+  const navigate = useNavigate()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+
+  const { token,setToken } = useAuth()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -22,9 +28,9 @@ export default function LoginForm(props) {
     const resp = await fetch('https://pokrastemon-api.onrender.com/users/login', options)
     const data = await resp.json()
     if (resp.ok) {
-      console.log(data)
       localStorage.setItem("token", data.token);
-      window.location.href = '/profile'
+      setToken(data.token)
+      navigate('/study')
     } else {
       alert('Incorrect username or password')
     }
@@ -36,11 +42,10 @@ export default function LoginForm(props) {
       <h2 className='form-title'>Login</h2>
 
     <form className='auth-form-login' onSubmit={handleSubmit} role='loginForm' data-testid="loginForm">
-      <label htmlFor="username">Username:</label>
-      <input type="username" id='username' value={username} onChange={(e) => setUsername(e.target.value)} />
-      <label htmlFor="password">Password:</label>
-      <input type="password" id='password' value={password} onChange={(e) => setPassword(e.target.value)} />
-      <button type='submit'>Log in</button>
+      <input placeholder='username' type="username" id='username' value={username} onChange={(e) => setUsername(e.target.value)} />
+      <input placeholder='password' type="password" id='password' value={password} onChange={(e) => setPassword(e.target.value)} />
+      <button data-testid = "logInLogIn" type='submit'>Log in</button>
+
 
     </form>
      <button className="link-btn" onClick={() => props.onFormSwitch('registerForm')}>Don't have an account? Register here.</button>

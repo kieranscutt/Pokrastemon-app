@@ -115,7 +115,7 @@
   border: 3px solid white;
   border-radius: 10px;
   margin: 0.5 rem;
-  background-color: #d6899d;
+  background-image: linear-gradient(79deg, #D14F59, #D6899D 48%);
   width: 100%;
 }
 
@@ -260,7 +260,8 @@ button {
 }
 
 .library-title, .empty-message, .grid-text, .please {
-  background-color: #ffffffbc;
+
+  background-color:  rgba(255, 255, 255, 0.452);
   padding: 20px;
   width: 1250px;
   text-align: center;
@@ -295,7 +296,8 @@ button {
   display: flex;
   flex-wrap: wrap; 
   justify-content: center; 
-  background-color: #ffffffbc;
+  background-color:  rgba(255, 255, 255, 0.452);
+  
   border-radius: 10px;
   width: 1250px;
   border: 5px solid #fff;
@@ -307,15 +309,18 @@ button {
   flex: 0 0 250px; 
   margin: 10px;
   padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  background-color: #d6899d;
+  border-radius: 5px;
+  box-shadow: 0 2px 6px rgb(44, 12, 12);
+  /* background-color: #d6899d; */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.7);
+  background-image: linear-gradient(79deg, #D14F59, #D6899D 48%);
   text-align: center;
-  border: 5px solid #fff;
+  /* border: 5px solid #fff; */
 }
 
 .pokemon-card h2 {
   margin-top: 0;
+  color: white;
 }
 
 .pokemon-card img {
@@ -326,7 +331,8 @@ button {
 }
 
 .pokemon-card p {
-  font-size: 14px;
+  font-size: 16px;
+  color: white;
 }
 
 /* .pokemon-card:hover {
@@ -348,7 +354,7 @@ body {
   min-width: 320px;
   min-height: 100vh;
   background-color: #f6f4eb;
-  padding-top: 120px;
+  /* padding-top: 120px; */
 }
 
 .welcome {
@@ -830,6 +836,7 @@ body {
   font-size: 23px;
   font-weight: bold;
   background-color: #e74c3c;
+  
 }
 
 .timerImage{

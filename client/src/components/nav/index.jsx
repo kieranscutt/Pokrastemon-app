@@ -71,7 +71,7 @@ const NavBar = () => {
   return (
     <>
     <div className="nav-container">
-    <Navbar expand="lg" className="navbar-container fixed-top">
+    <Navbar expand="lg" className="navbar-container">
       <Container fluid>
         <Nav> 
           <div className="nav-keys" dangerouslySetInnerHTML={{ __html: key.repeat(keys)}} /> 

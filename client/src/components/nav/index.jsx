@@ -5,7 +5,7 @@ import { Navbar, Container, Nav, } from 'react-bootstrap';
 import { useLocation, Outlet, useNavigate } from 'react-router-dom';
 import '../../App.css'
 
-import { useAuth, useKeys } from '../../contexts'
+import { useAuth, useKeys, useMockAuth } from '../../contexts'
 
 const NavBar = () => {
   const navigate = useNavigate()
@@ -17,7 +17,17 @@ const NavBar = () => {
     { title: 'Library', path: '/library' },
   ];
 
-  const { token, setToken } = useAuth()
+    let token
+    let setToken
+    let tokenObj = useAuth()
+    if(tokenObj){
+      token = useAuth().token
+      setToken = useAuth().setToken
+    } else {
+      token = useMockAuth().token
+      setToken = useMockAuth().setToken
+    }
+  
   const { keys, setKeys } = useKeys()
   const loggedIn = (token || localStorage.getItem('token'))
 

@@ -49,10 +49,13 @@ describe("Login Page", () => {
     it("should handle submit", async () => {
         const inputU = screen.getByRole('textbox', {type: /username/})
         const inputP = screen.getByRole('textbox', {type: /password/})
-        await userEvent.type(inputU, "cheese")
-        await userEvent.type(inputP, "burger")
+        await userEvent.type(inputU, "glime")
+        await userEvent.type(inputP, "glime")
         const button = screen.getByTestId("logInLogIn")
         await userEvent.click(button)
+        // await new Promise((r) => setTimeout(r, 3000));
+        // const studyDiv = screen.getByTestId("studypage")
+        // expect(studyDiv).toBeInTheDocument()
     })
 
     it("should switch forms", async () => {

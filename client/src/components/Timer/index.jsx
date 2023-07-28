@@ -1,14 +1,21 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import Display from './TimerDisplay'
-import { useAuth, useSettings } from '../../contexts'
+import { useAuth,useMockAuth, useSettings } from '../../contexts'
 
 export default function Timer({addPokemon}) {
     const [start, setStart] = useState(false)
     const [pause, setPause] = useState(false)
     const [timer, setTimer] = useState({})
 
-    const { token } = useAuth()
+    let token = ""
+    let tokenObj = useAuth()
+    if(tokenObj){
+      token = useAuth().token
+    } else {
+      token = useMockAuth().token
+    }
+    
     const { settings } = useSettings()
 
     const handleStart = (e) =>{

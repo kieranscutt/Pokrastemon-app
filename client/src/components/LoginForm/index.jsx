@@ -32,6 +32,7 @@ export default function LoginForm(props) {
       setToken(data.token)
       navigate('/study')
     } else {
+      console.log(data)
       alert('Incorrect username or password')
     }
   }

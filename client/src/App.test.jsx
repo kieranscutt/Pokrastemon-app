@@ -25,7 +25,7 @@ describe ('App', ()=>{
         expect(header).toBeInTheDocument()
     })
     it('goes to homepage automatically', ()=>{
-        const homePageText= screen.getByText(/Welcome to Pokrastemon Adventures/i)
+        const homePageText= screen.getByText(/Welcome to Pokrastémon Adventures, a Pokémon themed procrastination app!/i)
         expect(homePageText).toBeInTheDocument()
     })
     // it('navigates to login page', async () => {

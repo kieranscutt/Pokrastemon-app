@@ -1,10 +1,16 @@
 import React, { useEffect } from 'react';
 import '../../App.css';
-import { usePokemon, useAuth, useKeys} from '../../contexts';
+import { usePokemon, useAuth, useKeys, useMockAuth} from '../../contexts';
 
 const LibraryPage = () => {
 
-  const { token } = useAuth()
+  let token = ""
+  let tokenObj = useAuth()
+  if(tokenObj){
+    token = useAuth().token
+  } else {
+    token = useMockAuth().token
+  }
   const { pokemon, setPokemon } = usePokemon()
   const { setKeys } = useKeys()
 
@@ -53,13 +59,13 @@ const LibraryPage = () => {
       {isLoggedIn ? (
         <>
           {pokemon.length === 0 ? (
-            <p>
+            <p data-testid='noPokemons'>
               You haven't collected any Pokémon yet. Get out there and catch 'em all by opening
               chests from studying!
             </p>
           ) : (
             <>
-              <div className='pokemon-grid'>
+              <div className='pokemon-grid' data-testid='libraryGrid'>
                 <p>Below is a list of Pokémon you have collected on your journey.</p>
               </div>
               <div className='pokemon-card-container'>
@@ -78,7 +84,7 @@ const LibraryPage = () => {
           )}
         </>
       ) : (
-        <p> Please <a className='login-link' href="./login">log in</a> to view your Pokémon library!</p>
+        <p data-testid='notLoggedInMessage'> Please <a className='login-link' href="./login">log in</a> to view your Pokémon library!</p>
       )}
     </div>
   );
